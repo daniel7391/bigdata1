@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>Grid</title>
+
+        <!-- 모바일 웹 페이지 설정 -->
+        <link rel="shortcut icon" href="assets/ico/favicon.ico" />
+        <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-144-precomposed.png" />
+
+        <link rel="stylesheet" type="text/css" href="plugins/jquery-comments-master/css/jquery-comments.css">
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+        <!-- bootstrap -->
+        <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" />
+
+        <!-- 나눔고딕 웹 폰트 적용 -->
+        <link rel="stylesheet" type="text/css" href="assets/css/nanumfont.css" />
+
+        <!-- 반응형 웹을 지원하지 않을 경우 -->
+        <!-- <link rel="stylesheet" href="assets/css/non-responsive.css" /> -->
+
+        <!-- IE8 이하 버전 지원 -->
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="assets/js/html5shiv.js"></script>
+        <script type="text/javascript" src="assets/js/respond.min.js"></script>
+        <![endif]-->
+
+        <!-- IE10 반응형 웹 버그 보완 -->
+        <!--[if gt IE 9]>
+        <link rel="stylesheet" type="text/css" href="assets/css/ie10.css" />
+        <script type="text/javascript" src="assets/js/ie10.js"></script>
+        <![endif]-->
+
+        <!-- 시각적 확인을 위한 CSS 적용 -->
+        <style type="text/css">
+            *{
+                list-style: none;
+            }
+            body{
+                padding-top: 0px;
+                padding-bottom: 20px;
+            }
+            #content-box .summary {
+                margin-top: 10px;
+                margin-left: -9px;
+                width: 700px;
+            }
+            #content-box .summary > h3 {
+                margin-top: 2px;
+                padding-top: 2px;
+            }
+            .photo {
+                margin-left: -9px;
+                width: 700px;
+                height: 500px;
+            }
+            .container {
+                width: 1011px;
+            }
+            .status {
+                background: white;
+                width: 287px;
+                margin-top: 10px;
+                margin-left: 3px;
+                position: relative;
+                right: -9px;
+                height: 602px;
+            }
+            #back {
+                background: #EBEBEB;
+                margin-top: -20px; 
+            }
+            .nav-tabs {
+                background: white;
+            }
+            .review {
+                padding-top: 0;
+                background: white;
+            }
+            #review-box {
+                margin-top: 20px;
+                width: 1000px;
+                background: white;
+            }
+            .summary {
+                height: 60px;
+                background: white;
+            }
+            .summary .btn {
+                position: relative;
+                left: 580px;
+                bottom: 60px;
+                width: 100px;
+                height: 50px;
+            }
+            .filterLabel {
+                 height: 20px;
+            }
+            #gmap { width: 700px; height: 500px; background: black;}
+            #like {
+                background: white;
+                border: 0.5px solid gainsboro;
+            }
+            #entry {
+                position: relative;
+                right: -880px;
+            }
+        </style>
+    </head>
+
+    <body>
+      <div class="container" style="width: 1030px;">
+        <a href="#"><img src="img/logo.png" /></a>
+      </div>
+      <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+            <div class="container" style="width: 1030px;">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">메뉴열기</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#">추천여행지</a></li>
+                        <li><a href="#">여행 일정 만들기</a></li>
+                        <li><a href="#">여행 후기</a></li>
+                    </ul>
+                </div>
+                <div class="input-group">
+                  <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">어디에서<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">강남구</a></li>
+                        <li><a href="#">강북구</a></li>
+                        <li><a href="#">강서구</a></li>
+                    </ul>
+                  </div>
+                <input type="text" class="form-control">
+                <div class="input-group-btn">
+                  <button type="submit" class="btn btn-primary">검색</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <!-- 본문 영역 -->
+        <div id="back">
+            <div class="container" id="contents">
+                <div class="content-box pull-left" id="content-box">
+                    <div class="summary">
+                        
+                            <h3>&nbsp;<strong>경복궁</strong></h3>
+                            <p>&nbsp;&nbsp;조선왕조의 어쩌구저쩌구</p>
+                        <div id="rating">
+                            <button class="btn like" id="like" style="height: 45px;">좋아요! (<span class="likes">0</span>)</button>
+                        </div>
+                        
+                    </div>
+                    <div class="photo">
+                        <div class="tab-content">
+                            <div class="tab-pane" id="picture">
+                                <!-- 캐러셀 영역 구성 -->
+                                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                    <!-- 현재 위치 표시 -->
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                                    </ol>
+
+                                    <!-- 내용 영역 -->
+                                    <div class="carousel-inner">
+                                        <!-- 항목 (1) -->
+                                        <div class="item active">
+                                            <img src="img/Kyung.jpg" alt="슬라이더(1)">
+                                        </div>
+
+                                        <!-- 항목 (2) -->
+                                        <div class="item">
+                                            <img src="img/Kyungyuk.jpg" alt="슬라이더(2)">
+                                        </div>
+
+                                        <!-- 항목 (3) -->
+                                        <div class="item">
+                                            <img src="img/Kyung2.jpg" alt="슬라이더(3)">
+                                        </div>
+                                    </div>
+                                    <!-- // 내용영역 구성 -->
+
+                                    <!-- 이동 버튼 -->
+                                    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev"> <span class="icon-prev"></span> </a>
+                                    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next"> <span class="icon-next"></span> </a>
+                                </div>
+                                <!-- 캐러셀 영역 끝 -->
+                            </div>
+
+                            <div class="tab-pane active" id="map">
+                                <div id="gmap"></div>
+                            </div>
+                        </div>
+                        <!-- 탭 메뉴 시작 -->
+                        <ul class="nav nav-tabs">
+                            <li><a href="#picture" data-toggle="tab">사진</a></li>
+                            <li class="active"><a href="#map" data-toggle="tab">지도</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="status pull-left">
+                    <h3>&nbsp;&nbsp;<strong>기본정보</strong></h3>
+                    <hr />
+                    <h5>&nbsp;&nbsp;주소</h5>
+                    <p>&nbsp;&nbsp;대한민국 서울특별시 종로구 세종로 1-57</p>
+                    <br />
+                    <h5>&nbsp;&nbsp;비용</h5>
+                    <p>&nbsp;&nbsp;3000원(만 24세 이하, 65세 이상 무료)</p>
+                    <br />
+                    <h5>&nbsp;&nbsp;가는 방법</h5>
+                    <p>&nbsp;&nbsp;지하철 3호선 경복궁역 5번 출구</p>
+                    <br />
+                    <h5>&nbsp;&nbsp;휴무</h5>
+                    <p>&nbsp;&nbsp;화요일</p>
+                </div>
+            </div>
+
+            <div class="container" id="review-box">
+                <div class="review">
+                    <h3><strong>리 뷰</strong></h3>
+                    <form class="col-md-4">
+                        <ul style="padding-left: 0px;">
+                            <li class="filterItem">
+                                
+                                    <span class="toggle pull-left">
+                                        <input type="radio" name="filterRating" value="4" class="filterInput"/>
+                                    </span>
+                                    <label class="filterLabel" style="width: 90%;">
+                                        <label class="pull-left" style="width: 30%;">&nbsp;아주 좋음</label>
+                                        <div class="progress pull-left" style="width: 55%;  border: 1px solid black; height: 15px; margin-top: 5px;">
+                                            <!-- 진행상태를 위한 그래픽 박스 >> style 속성으로 넓이를 지정해 준 것에 주의 합시다. -->
+                                            <div class="progress-bar pull-left" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                                <!-- 웹 접근성을 위한 스크린 리더 전용 부분 처리 -->
+                                                <span class="sr-only">60% Complete</span>
+                                            </div>
+                                        </div>
+                                        <span class="pull-left">&nbsp;&nbsp;600</span>  
+                                    </label>
+                                
+                            </li>
+                            <li class="filterItem">
+                                <span class="toggle pull-left">
+                                    <input type="radio" name="filterRating" value="3" class="filterInput" />
+                                </span>
+                                <label class="filterLabel" style="width: 90%;">
+                                    <label class="pull-left" style="width: 30%;">&nbsp;좋음</label>
+                                    <div class="progress pull-left" style="width: 55%; border: 1px solid black; height: 15px; margin-top: 5px;">
+                                        <!-- 진행상태를 위한 그래픽 박스 >> style 속성으로 넓이를 지정해 준 것에 주의 합시다. -->
+                                        <div class="progress-bar pull-left" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                            <!-- 웹 접근성을 위한 스크린 리더 전용 부분 처리 -->
+                                            <span class="sr-only">60% Complete</span>
+                                        </div>
+                                    </div>
+                                    <span class="pull-left">&nbsp;&nbsp;600</span>  
+                                </label>
+                            </li>
+                            <li class="filterItem">
+                                <span class="toggle pull-left">
+                                    <input type="radio" name="filterRating" value="2" class="filterInput" />
+                                </span>
+                                <label class="filterLabel" style="width: 90%;">
+                                    <label class="pull-left" style="width: 30%;">&nbsp;보통</label>
+                                    <div class="progress pull-left" style="width: 55%; border: 1px solid black; height: 15px; margin-top: 5px;">
+                                        <!-- 진행상태를 위한 그래픽 박스 >> style 속성으로 넓이를 지정해 준 것에 주의 합시다. -->
+                                        <div class="progress-bar pull-left" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                            <!-- 웹 접근성을 위한 스크린 리더 전용 부분 처리 -->
+                                            <span class="sr-only">60% Complete</span>
+                                        </div>
+                                    </div>
+                                    <span class="pull-left">&nbsp;&nbsp;600</span>  
+                                </label>
+                            </li>
+                            <li class="filterItem">
+                                <span class="toggle pull-left">
+                                    <input type="radio" name="filterRating" value="1" class="filterInput" />
+                                </span>
+                                <label class="filterLabel" style="width: 90%;">
+                                    <label class="pull-left" style="width: 30%;">&nbsp;별로</label>
+                                    <div class="progress pull-left" style="width: 55%; border: 1px solid black; height: 15px; margin-top: 5px;">
+                                        <!-- 진행상태를 위한 그래픽 박스 >> style 속성으로 넓이를 지정해 준 것에 주의 합시다. -->
+                                        <div class="progress-bar pull-left" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                            <!-- 웹 접근성을 위한 스크린 리더 전용 부분 처리 -->
+                                            <span class="sr-only">60% Complete</span>
+                                        </div>
+                                    </div>
+                                    <span class="pull-left">&nbsp;&nbsp;600</span>  
+                                </label>
+                            </li>
+                        </ul>
+                    </form>
+                    <form class="col-md-4">
+                        <ul style="padding-left: 0px;">
+                            <li class="filterItem">
+                                <span class="toggle pull-left">
+                                    <input type="radio" name="filterRating" value="4" class="filterInput" />
+                                </span>
+                                <label class="filterLabel" style="width: 90%;">
+                                    <label class="pull-left" style="width: 30%;">&nbsp;가족</label>
+                                    <div class="progress pull-left" style="width: 55%; border: 1px solid black; height: 15px; margin-top: 5px;">
+                                        <!-- 진행상태를 위한 그래픽 박스 >> style 속성으로 넓이를 지정해 준 것에 주의 합시다. -->
+                                        <div class="progress-bar pull-left" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                            <!-- 웹 접근성을 위한 스크린 리더 전용 부분 처리 -->
+                                            <span class="sr-only">60% Complete</span>
+                                        </div>
+                                    </div>
+                                    <span class="pull-left">&nbsp;&nbsp;600</span>  
+                                </label>
+                            </li>
+                            <li class="filterItem">
+                                <span class="toggle pull-left">
+                                    <input type="radio" name="filterRating" value="3" class="filterInput" />
+                                </span>
+                                <label class="filterLabel" style="width: 90%;">
+                                    <label class="pull-left" style="width: 30%;">&nbsp;커플</label>
+                                    <div class="progress pull-left" style="width: 55%; border: 1px solid black; height: 15px; margin-top: 5px;">
+                                        <!-- 진행상태를 위한 그래픽 박스 >> style 속성으로 넓이를 지정해 준 것에 주의 합시다. -->
+                                        <div class="progress-bar pull-left" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                            <!-- 웹 접근성을 위한 스크린 리더 전용 부분 처리 -->
+                                            <span class="sr-only">60% Complete</span>
+                                        </div>
+                                    </div>
+                                    <span class="pull-left">&nbsp;&nbsp;600</span>  
+                                </label>
+                            </li>
+                            <li class="filterItem">
+                                <span class="toggle pull-left">
+                                    <input type="radio" name="filterRating" value="2" class="filterInput" />
+                                </span>
+                                <label class="filterLabel" style="width: 90%;">
+                                    <label class="pull-left" style="width: 30%;">&nbsp;친구</label>
+                                    <div class="progress pull-left" style="width: 55%; border: 1px solid black; height: 15px; margin-top: 5px;">
+                                        <!-- 진행상태를 위한 그래픽 박스 >> style 속성으로 넓이를 지정해 준 것에 주의 합시다. -->
+                                        <div class="progress-bar pull-left" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                            <!-- 웹 접근성을 위한 스크린 리더 전용 부분 처리 -->
+                                            <span class="sr-only">60% Complete</span>
+                                        </div>
+                                    </div>
+                                    <span class="pull-left">&nbsp;&nbsp;600</span>  
+                                </label>
+                            </li>
+                            <li class="filterItem">
+                                <span class="toggle pull-left">
+                                    <input type="radio" name="filterRating" value="1" class="filterInput" />
+                                </span>
+                                <label class="filterLabel" style="width: 90%;">
+                                    <label class="pull-left" style="width: 30%;">&nbsp;혼자</label>
+                                    <div class="progress pull-left" style="width: 55%; border: 1px solid black; height: 15px; margin-top: 5px;">
+                                        <!-- 진행상태를 위한 그래픽 박스 >> style 속성으로 넓이를 지정해 준 것에 주의 합시다. -->
+                                        <div class="progress-bar pull-left" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                            <!-- 웹 접근성을 위한 스크린 리더 전용 부분 처리 -->
+                                            <span class="sr-only">60% Complete</span>
+                                        </div>
+                                    </div>
+                                    <span class="pull-left">&nbsp;&nbsp;600</span>  
+                                </label>
+                            </li>
+                        </ul>
+                    </form>
+                    <form class="col-md-4">
+                        <ul style="padding-left: 0px;">
+                            <li class="filterItem">
+                                <span class="toggle pull-left">
+                                    <input type="radio" name="filterRating" value="4" class="filterInput" />
+                                </span>
+                                <label class="filterLabel" style="width: 90%;">
+                                    <label class="pull-left" style="width: 30%;">&nbsp;3~5월</label>
+                                    <div class="progress pull-left" style="width: 55%; border: 1px solid black; height: 15px; margin-top: 5px;">
+                                        <!-- 진행상태를 위한 그래픽 박스 >> style 속성으로 넓이를 지정해 준 것에 주의 합시다. -->
+                                        <div class="progress-bar pull-left" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                            <!-- 웹 접근성을 위한 스크린 리더 전용 부분 처리 -->
+                                            <span class="sr-only">60% Complete</span>
+                                        </div>
+                                    </div>
+                                    <span class="pull-left">&nbsp;&nbsp;600</span>  
+                                </label>
+                            </li>
+                            <li class="filterItem">
+                                <span class="toggle pull-left">
+                                    <input type="radio" name="filterRating" value="3" class="filterInput" />
+                                </span>
+                                <label class="filterLabel" style="width: 90%;">
+                                    <label class="pull-left" style="width: 30%;">&nbsp;6~8월</label>
+                                    <div class="progress pull-left" style="width: 55%; border: 1px solid black; height: 15px; margin-top: 5px;">
+                                        <!-- 진행상태를 위한 그래픽 박스 >> style 속성으로 넓이를 지정해 준 것에 주의 합시다. -->
+                                        <div class="progress-bar pull-left" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                            <!-- 웹 접근성을 위한 스크린 리더 전용 부분 처리 -->
+                                            <span class="sr-only">60% Complete</span>
+                                        </div>
+                                    </div>
+                                    <span class="pull-left">&nbsp;&nbsp;600</span>  
+                                </label>
+                            </li>
+                            <li class="filterItem">
+                                <span class="toggle pull-left">
+                                    <input type="radio" name="filterRating" value="2" class="filterInput" />
+                                </span>
+                                <label class="filterLabel" style="width: 90%;">
+                                    <label class="pull-left" style="width: 30%;">&nbsp;9~11월</label>
+                                    <div class="progress pull-left" style="width: 55%; border: 1px solid black; height: 15px; margin-top: 5px;">
+                                        <!-- 진행상태를 위한 그래픽 박스 >> style 속성으로 넓이를 지정해 준 것에 주의 합시다. -->
+                                        <div class="progress-bar pull-left" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                            <!-- 웹 접근성을 위한 스크린 리더 전용 부분 처리 -->
+                                            <span class="sr-only">60% Complete</span>
+                                        </div>
+                                    </div>
+                                    <span class="pull-left">&nbsp;&nbsp;600</span>  
+                                </label>
+                            </li>
+                            <li class="filterItem">
+                                <span class="toggle pull-left">
+                                    <input type="radio" name="filterRating" value="1" class="filterInput" />
+                                </span>
+                                <label class="filterLabel" style="width: 90%;">
+                                    <label class="pull-left" style="width: 30%;">&nbsp;12~2월</label>
+                                    <div class="progress pull-left" style="width: 55%; border: 1px solid black; height: 15px; margin-top: 5px;">
+                                        <!-- 진행상태를 위한 그래픽 박스 >> style 속성으로 넓이를 지정해 준 것에 주의 합시다. -->
+                                        <div class="progress-bar pull-left" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                            <!-- 웹 접근성을 위한 스크린 리더 전용 부분 처리 -->
+                                            <span class="sr-only">60% Complete</span>
+                                        </div>
+                                    </div>
+                                    <span class="pull-left">&nbsp;&nbsp;600</span>  
+                                </label>
+                            </li>
+                        </ul>
+                    </form>
+                    <div><button type="submit" id="entry" class="btn btn-primary">리뷰등록</button></div>
+                </div>
+
+                <h3><strong>댓 글</strong></h3>
+
+                <div id="comments-container">
+                </div>
+
+                <h3><strong>이 명소가 포함된 인기 여행일정</strong></h3>
+                <hr />
+
+                <div class="row">
+                    <!-- 게시물 하나 시작 -->
+                    <div class="col-sm-6 col-md-4">
+                        <div class="thumbnail">
+                            <img alt="엔틱 자전거 - my wish list" src="img/mapKyung.jpg">
+                            
+                                <h3>엔틱 자전거</h3>
+                                <p>my wish list~!!</p>
+                            
+                        </div>
+                    </div>
+                    <!-- 게시물 하나 끝 -->
+                    <!-- 게시물 하나 시작 -->
+                    <div class="col-sm-6 col-md-4">
+                        <div class="thumbnail">
+                            <img alt="느낌 아니까!!" src="img/Kyung2.jpg">
+                            
+                                <h3>느낌 아니까!!</h3>
+                                <p>추워도 핫팬츠를 입는 센스!!</p>
+                            
+                        </div>
+                    </div>
+                    <!--// 게시물 하나 끝 -->
+                    <!-- 게시물 하나 시작 -->
+                    <div class="col-sm-6 col-md-4">
+                        <div class="thumbnail">
+                            <img alt="그림자놀이" src="img/Kyungyuk.jpg">
+                            
+                                <h3>그림자놀이</h3>
+                                <p>마음을 담아서...</p>
+                            
+                        </div>
+                    </div>
+                    <!--// 게시물 하나 끝 -->
+                    <!-- 게시물 하나 시작 -->
+                    <div class="col-sm-6 col-md-4">
+                        <div class="thumbnail">
+                            <img alt="캐리비안의 해적" src="img/Kyung.jpg">
+                            
+                                <h3>캐리비안의 해적</h3>
+                                <p>보물찾기 대장정2</p>
+                            
+                        </div>
+                    </div>
+                    <!--// 게시물 하나 끝 -->
+                </div>
+                
+            </div>
+        </div> <!-- back end -->
+
+
+        <footer>
+            <hr>
+            <address>
+                Copyright&copy;2018. <a href="http://www.itpaper.co.kr">gazua.co.kr</a>. All rights resurved
+            </address>
+        </footer>
+        <!-- Javascript -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADQrU-P9ctHF0Qmtq1py2L3d3-l8a_2Ig"></script>
+        <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    
+        <!-- Libraries -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.textcomplete/1.8.0/jquery.textcomplete.js"></script>
+        <script type="text/javascript" src="plugins/jquery-comments-master/js/jquery-comments.js"></script>
+        <script type="text/javascript" src="plugins/gmaps/gmaps.min.js"></script>
+        <script src="plugins/like-dislike-master/js/like-dislike.min.js"></script>
+
+        <!-- Data -->
+        <script type="text/javascript" src="plugins/jquery-comments-master/data/comments-data.js"></script>
+
+        <script type="text/javascript">
+            $(function(){
+                /** 표시할 위치에 대한 위도,경도 */
+                var lat_value = 37.500674;
+                var lng_value = 127.026683;
+
+                /** 지도 표시하기 */
+                var map = new GMaps({
+                    el: '#gmap',        // 지도를 표시할 div의 id값.
+                    lat: lat_value,     // 지도가 표시될 위도
+                    lng: lng_value,     // 지도가 표시될 경도
+                    zoomControl: true   // 줌 컨트롤 사용 여부
+                });
+
+                /** 표시중인 위치에 마커 추가 */
+                // 필요한 만큼 반복하면 마커가 여러 개 표시된다.
+                map.addMarker({
+                    // 마우스 오버시 노란 박스
+                    title: '그린컴퓨터아트학원 강남캠퍼스(본관)',
+                    lat: lat_value,     // 마커가 표시될 위도
+                    lng: lng_value,     // 마커가 표시될 경도
+                    icon: {             // 사용자 정의 아이콘
+                        url: "img/marker.png",
+                        scaledSize: new google.maps.Size(50, 50)
+                    },
+                    infoWindow: {       // 클릭시 표시될 말풍선 <-- HTML 코딩 가능함.
+                        content: '<img src="img/green.jpg" width="320" /><h4>그린컴퓨터아트학원 강남캠퍼스(본관)</h4><p>서울특별시 강남구 역삼동 강남대로 815-4</p><a href="#">상세보기</a>'
+                    }
+                });
+
+                var saveComment = function(data) {
+                    
+
+                    // Convert pings to human readable format
+                    $(data.pings).each(function(index, id) {
+                        var user = usersArray.filter(function(user){return user.id == id})[0];
+                        data.content = data.content.replace('@' + id, '@' + user.fullname);
+                    });
+
+                    return data;
+                }
+                $('#comments-container').comments({
+                    profilePictureURL: 'https://viima-app.s3.amazonaws.com/media/user_profiles/user-icon.png',
+                    currentUserId: 1,
+                    roundProfilePictures: true,
+                    textareaRows: 1,
+                    enableAttachments: true,
+                    enableHashtags: true,
+                    enablePinging: true,
+                    getUsers: function(success, error) {
+                        setTimeout(function() {
+                            success(usersArray);
+                        }, 500);
+                    },
+                    getComments: function(success, error) {
+                        setTimeout(function() {
+                            success(commentsArray);
+                        }, 500);
+                    },
+                    postComment: function(data, success, error) {
+                        setTimeout(function() {
+                            success(saveComment(data));
+                        }, 500);
+                    },
+                    putComment: function(data, success, error) {
+                        setTimeout(function() {
+                            success(saveComment(data));
+                        }, 500);
+                    },
+                    deleteComment: function(data, success, error) {
+                        setTimeout(function() {
+                            success();
+                        }, 500);
+                    },
+                    upvoteComment: function(data, success, error) {
+                        setTimeout(function() {
+                            success(data);
+                        }, 500);
+                    },
+                    uploadAttachments: function(dataArray, success, error) {
+                        setTimeout(function() {
+                            success(dataArray);
+                        }, 500);
+                    },
+                });
+
+                
+            });
+            $('#rating').likeDislike({
+                initialValue: 0,
+                click: function (value, l, d, event) {
+                    var likes = $(this.element).find('.likes');
+                    var dislikes = $(this.element).find('.dislikes');
+
+                    likes.text(parseInt(likes.text()) + l);
+                    dislikes.text(parseInt(dislikes.text()) + d);
+
+                    // $.ajax({
+                    //     url: 'url',
+                    //     type: 'post',
+                    //     data: 'value=' + value,
+                    // });
+                }
+            });
+        </script>
+    </body>
+</html>
