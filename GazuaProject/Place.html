@@ -108,6 +108,14 @@
                 position: relative;
                 right: -880px;
             }
+            #summary {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .status p {
+                color: #888;
+            }
         </style>
     </head>
 
@@ -155,13 +163,11 @@
             <div class="container" id="contents">
                 <div class="content-box pull-left" id="content-box">
                     <div class="summary">
-                        
-                            <h3>&nbsp;<strong>경복궁</strong></h3>
-                            <p>&nbsp;&nbsp;조선왕조의 어쩌구저쩌구</p>
+                        <h3>&nbsp;<strong>경복궁</strong></h3>
+                        <p id="summary" style="width: 550px; color: #888">&nbsp;&nbsp;조선 왕조의 법궁, 조선의 중심지 조선시대에 만들어진 다섯 개의 궁궐 중 첫 번째로 만들어진 곳으로, 조</p>
                         <div id="rating">
                             <button class="btn like" id="like" style="height: 45px;">좋아요! (<span class="likes">0</span>)</button>
                         </div>
-                        
                     </div>
                     <div class="photo">
                         <div class="tab-content">
@@ -215,16 +221,16 @@
                 <div class="status pull-left">
                     <h3>&nbsp;&nbsp;<strong>기본정보</strong></h3>
                     <hr />
-                    <h5>&nbsp;&nbsp;주소</h5>
+                    <h5>&nbsp;&nbsp;<strong>주소</strong></h5>
                     <p>&nbsp;&nbsp;대한민국 서울특별시 종로구 세종로 1-57</p>
                     <br />
-                    <h5>&nbsp;&nbsp;비용</h5>
+                    <h5>&nbsp;&nbsp;<strong>비용</strong></h5>
                     <p>&nbsp;&nbsp;3000원(만 24세 이하, 65세 이상 무료)</p>
                     <br />
-                    <h5>&nbsp;&nbsp;가는 방법</h5>
+                    <h5>&nbsp;&nbsp;<strong>가는 방법</strong></h5>
                     <p>&nbsp;&nbsp;지하철 3호선 경복궁역 5번 출구</p>
                     <br />
-                    <h5>&nbsp;&nbsp;휴무</h5>
+                    <h5>&nbsp;&nbsp;<strong>휴무</strong></h5>
                     <p>&nbsp;&nbsp;화요일</p>
                 </div>
             </div>
@@ -524,8 +530,8 @@
         <script type="text/javascript">
             $(function(){
                 /** 표시할 위치에 대한 위도,경도 */
-                var lat_value = 37.500674;
-                var lng_value = 127.026683;
+                var lat_value = 37.5801859611;
+                var lng_value = 126.9767235747;
 
                 /** 지도 표시하기 */
                 var map = new GMaps({
