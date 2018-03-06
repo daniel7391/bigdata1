@@ -113,9 +113,15 @@
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
+            p {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
             .status p {
                 color: #888;
             }
+            
         </style>
     </head>
 
@@ -458,46 +464,46 @@
                 <div class="row">
                     <!-- 게시물 하나 시작 -->
                     <div class="col-sm-6 col-md-4">
-                        <div class="thumbnail">
-                            <img alt="엔틱 자전거 - my wish list" src="img/mapKyung.jpg">
-                            
-                                <h3>엔틱 자전거</h3>
-                                <p>my wish list~!!</p>
-                            
-                        </div>
+                        <a href="#" style="color: black;">
+                            <div class="thumbnail">
+                                <img alt="경복궁 찾아가기" src="img/mapKyung.jpg">
+                                    <h3><strong>경복궁 찾아가기</strong></h3>
+                                    <p>뚜벅이는 웁니다 ㅠㅠ</p>
+                            </div>
+                        </a>
                     </div>
                     <!-- 게시물 하나 끝 -->
                     <!-- 게시물 하나 시작 -->
                     <div class="col-sm-6 col-md-4">
-                        <div class="thumbnail">
-                            <img alt="느낌 아니까!!" src="img/Kyung2.jpg">
-                            
-                                <h3>느낌 아니까!!</h3>
-                                <p>추워도 핫팬츠를 입는 센스!!</p>
-                            
-                        </div>
+                        <a href="#" style="color: black;">
+                            <div class="thumbnail">
+                                <img alt="야간의 경복궁" src="img/Kyung2.jpg">
+                                    <h3><strong>야간에 이쁜 경복궁</strong></h3>
+                                    <p>야간에도 아름다운 경복궁에서 연인과 데이트를...!</p>
+                            </div>
+                        </a>
                     </div>
                     <!--// 게시물 하나 끝 -->
                     <!-- 게시물 하나 시작 -->
                     <div class="col-sm-6 col-md-4">
-                        <div class="thumbnail">
-                            <img alt="그림자놀이" src="img/Kyungyuk.jpg">
-                            
-                                <h3>그림자놀이</h3>
-                                <p>마음을 담아서...</p>
-                            
-                        </div>
+                        <a href="#" style="color: black;">
+                            <div class="thumbnail">
+                                <img alt="경복궁역에서" src="img/Kyungyuk.jpg">
+                                    <h3><strong>경복궁역에서</strong></h3>
+                                    <p>지옥철을 뚫고 도착한 3호선 경복궁역!</p>
+                            </div>
+                        </a>
                     </div>
                     <!--// 게시물 하나 끝 -->
                     <!-- 게시물 하나 시작 -->
                     <div class="col-sm-6 col-md-4">
-                        <div class="thumbnail">
-                            <img alt="캐리비안의 해적" src="img/Kyung.jpg">
-                            
-                                <h3>캐리비안의 해적</h3>
-                                <p>보물찾기 대장정2</p>
-                            
-                        </div>
+                        <a href="#" style="color: black;">
+                            <div class="thumbnail">
+                                <img alt="경복궁 견학" src="img/Kyung.jpg">
+                                    <h3><strong>경복궁 견학</strong></h3>
+                                    <p>우리나라 최고의 궁궐에서 견학을 하게 되었다.</p>
+                            </div>
+                        </a>
                     </div>
                     <!--// 게시물 하나 끝 -->
                 </div>
@@ -545,7 +551,7 @@
                 // 필요한 만큼 반복하면 마커가 여러 개 표시된다.
                 map.addMarker({
                     // 마우스 오버시 노란 박스
-                    title: '그린컴퓨터아트학원 강남캠퍼스(본관)',
+                    title: '경복궁',
                     lat: lat_value,     // 마커가 표시될 위도
                     lng: lng_value,     // 마커가 표시될 경도
                     icon: {             // 사용자 정의 아이콘
@@ -553,7 +559,7 @@
                         scaledSize: new google.maps.Size(50, 50)
                     },
                     infoWindow: {       // 클릭시 표시될 말풍선 <-- HTML 코딩 가능함.
-                        content: '<img src="img/green.jpg" width="320" /><h4>그린컴퓨터아트학원 강남캠퍼스(본관)</h4><p>서울특별시 강남구 역삼동 강남대로 815-4</p><a href="#">상세보기</a>'
+                        content: '<img src="img/Kyung2.jpg" width="160" /><h4>경복궁</h4><p>서울특별시 종로구 사직로 161</p><a href="#">상세보기</a>'
                     }
                 });
 
