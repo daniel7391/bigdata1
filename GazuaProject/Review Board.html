@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>Grid</title>
+
+        <!-- 모바일 웹 페이지 설정 -->
+        <link rel="shortcut icon" href="assets/ico/favicon.ico" />
+        <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-144-precomposed.png" />
+        <link rel="stylesheet" type="text/css" href="plugins/jquery-comments-master/css/jquery-comments.css">
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        
+      
+
+        <!-- bootstrap -->
+        <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" />
+
+        <!-- 나눔고딕 웹 폰트 적용 -->
+        <link rel="stylesheet" type="text/css" href="assets/css/nanumfont.css" />
+
+        <!-- 반응형 웹을 지원하지 않을 경우 -->
+        <!-- <link rel="stylesheet" href="assets/css/non-responsive.css" /> -->
+
+        <!-- IE8 이하 버전 지원 -->
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="assets/js/html5shiv.js"></script>
+        <script type="text/javascript" src="assets/js/respond.min.js"></script>
+        <![endif]-->
+
+        <!-- IE10 반응형 웹 버그 보완 -->
+        <!--[if gt IE 9]>
+        <link rel="stylesheet" type="text/css" href="assets/css/ie10.css" />
+        <script type="text/javascript" src="assets/js/ie10.js"></script>
+        <![endif]-->
+
+        <!-- 시각적 확인을 위한 CSS 적용 -->
+
+       <style type="text/css">
+			/* btn-ttc라는 사용자 정의 버튼 만들기
+			 -------------------------------------------------- */
+			/* 버튼의 기본 텍스트 색상, 기본배경, 마우스오버, 클릭시 배경색상 정의 */
+			
+             body {
+                
+            }
+            
+            /** 캐러셀의 높이와 하단 여백 확보 */
+            .titlebar {
+                height: 200px;
+               
+            }
+            
+            /** 캐러셀 내부의 이미지에 대한 높이와 넓이 확보 */
+            .carousel-inner > .item > img {
+                min-width: 100%;
+                height: 200px;
+            }
+            
+            /** 캐러셀 내부 내용 영역에 대한 배경 색상과 좌우 여백 확보 */
+            .carousel-inner .carousel-caption {
+                background-color: rgba(0,0,0,0.5) !important;
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+            .box2{
+                background-color: white;
+                height: 250px;
+                width: 200px;
+                border-radius: 10px;
+               
+            }
+            
+            .main{
+                background-color: #EBEBEB;
+                position: relative; bottom:20px;
+            }
+            .box3{
+                width: 200px;
+                background-color: #EBEBEB;
+                padding:8px 1px 1px 1px;
+            }
+            .container{
+                width: 1030px;
+               
+            }
+
+            .btn-ttc:hover, .btn-ttc:active {
+               color: orange;
+                
+                
+            }
+
+            /* 기본 배경 색상 정의 - gradient 색상을 적용할 수도 있다. */
+            .btn-ttc {
+                background-color: white;
+                width: 96px;
+                 border:1px solid #EBEBEB;
+                 color:gray;
+                
+            }
+
+            /* 마우스 올렸을 때, 약간의 위치 이동효과 */
+            .btn-ttc:hover {
+                background-position: 0 -15px;
+            }
+            .box4{
+                width: 192px;
+
+            }
+               .btn-ttc:hover, .btn-ttc:active {
+               color: orange;
+                
+                
+            }
+
+            /* 기본 배경 색상 정의 - gradient 색상을 적용할 수도 있다. */
+            .btn-ttc2 {
+                background-color: white;
+                width: 198px;
+                 border:1px solid #EBEBEB;
+                 color:gray;
+                
+            }
+
+            /* 마우스 올렸을 때, 약간의 위치 이동효과 */
+            .btn-ttc:hover {
+                background-position: 0 -15px;
+            }
+           
+            .profile{
+                position: relative;top:10px;
+            }
+            .box5{
+                width:95%;
+                min-height: 150px;
+               
+                background-color: white;
+                position: relative; top:8px; left:40px;
+                border-radius: 10px;
+                
+                }
+            .sidebar{
+                 padding:8px 1px 1px 1px;
+            }
+            .box5 .subtit{
+                font-size: 15px;
+                 padding:20px  20px;
+            }
+             .box5 .submain{
+                font-size: 10px;
+                 padding:  20px;
+            }
+            .tabbar{
+               
+                position: relative; top:8px; left:40px;
+                 padding:20px 1px 1px 1px;
+                 width:95%;
+            }
+            .navbar-default{
+                background-color: orange;
+            }
+
+/* 방문하지 않은 링크 */
+.tabbar .nav li a:link{
+  color: black;
+  background-color: white;
+}
+/* 방문한 링크 */
+.tabbar .nav li a:hover{
+  color: orange;
+  background-color: white;
+}
+/* 링크를 활성화 할 때 */
+.tabbar .nav li a:active{
+  color: orange;
+}
+.comment{
+	position: relative;  left:40px;
+                 padding:50px 1px 1px 1px;
+                 width:95%;
+}
+.tab-content .tab-pane img{
+	width: 95%;
+	position: relative; top:8px; left:40px;
+                 padding:20px 1px 1px 1px;
+}
+
+
+
+
+
+
+			
+		</style>
+    </head>
+    <!-- 내용물시작-->
+    <body>
+    	<!-- 헤더부분(공통)-->
+      <div class="container">
+        <a href="#"><img src="img/logo.png" /></a>
+      </div>
+      <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">메뉴열기</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav ">
+                        <li><a href="#">추천여행지</a></li>
+                        <li><a href="#">여행 일정 만들기</a></li>
+                        <li><a href="#">여행 후기</a></li>
+                    </ul>
+                </div>
+                <div class="input-group" style="position: relative; bottom:5px;">
+                  <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">어디에서<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">강남구</a></li>
+                        <li><a href="#">강북구</a></li>
+                        <li><a href="#">강서구</a></li>
+                    </ul>
+                  </div>
+                <input type="text" class="form-control">
+                <div class="input-group-btn">
+                  <button type="submit" class="btn btn-primary">검색</button>
+                </div>
+
+            </div>
+            
+
+        </div>
+    </div>
+    <!-- 헤더부분끝-->
+    <!-- 내용물 컨테이너 시작-->
+    <div class="main col-md-12">
+        <div class="container">
+        	<!-- 제목 틀 시작-->
+        <div class="box1">
+         <div id="carousel-example-generic" class="titlebar">
+         
+
+            <!-- 내용 영역 -->
+            <div class="carousel-inner">
+                <!-- 항목 (1) -->
+                <div class="item active">
+                    <img src="img/img1.jpg" alt="배경사진">
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <h1>게시물 제목</h1>
+                            <p class="visible-md visible-lg">
+                                게시물 속성(여행 인원 유형 기간 게시물 게시 날짜 등등)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!-- 제목 틀 끝-->
+        <!-- 사이드 바 시작-->
+        <div class="sidebar" style="float:left;width: 20%">
+        <!-- 프로필 시작-->
+        <div class="box2">
+              <div class="profile" style="text-align: center;">
+               <img src="img/4.png" class="img-circle" width="100"> 
+
+              </div>
+              <div style="text-align: center;">
+              
+              <h3>남호형</h3> 
+              <br>
+              <div style="color: orange">
+              <h5>야스오 장인</h5>
+            </div>
+
+               </div>         
+            </div>
+            <!-- 프로필 끝-->
+              <!-- 버튼 시작-->
+        <div class="box3">
+        <button type="button" class="btn btn-ttc "><span class="glyphicon glyphicon-thumbs-up"></span><span class="goodnum">300</span> <div>추천</div> </button>
+        <button type="button" class="btn btn-ttc "><span class="glyphicon glyphicon-bookmark"></span><span class="booknum">100</span> <div>북마크</div> </button>
+        <button type="button" class="btn btn-ttc2 "><span class="glyphicon glyphicon-flag"></span>  방문명소: <span class="tripnum">5</span></button>
+        </div>
+          <!-- 버튼 끝--> 
+        </div>
+          <!-- 사이드 바 끝-->
+
+          <!-- 메인 컨탠트 시작-->
+        <div class="content" style="float:left;width: 80%">
+               <!-- ㅇ내용 요약 시작-->
+             <div class="box5">
+                <br>
+                <span class="subtit"><strong>고궁 나들이, 우리나라 으뜸 궁궐 경복궁</strong></span>
+                <br>
+                <span class="submain">금강산도 식후경이라 했던가. 감각적인 맛집과 카페들이 즐비하고 있는 경복궁 주변. 프라이빗 다이닝에서 일본의 정갈한 감성을 담은 식당까지 나열해 보았다. 이제는 고궁도 식후경이다</span>
+               
+             </div>
+               <!-- 내용 요약  끝-->
+                 <!-- 메인 컨텐츠 시작(중훈이 폼 부분이라 이미지 대체했습니다)-->
+             <div class="tabbar">
+             <ul class="nav nav-tabs nav-justified" id="custom">
+
+                <li><a href="#story" data-toggle="tab"><span class="glyphicon glyphicon-tasks "></span>스토리</a></li>
+                <li class="active"><a href="#mapplan" data-toggle="tab"><span class="glyphicon glyphicon-calendar "></span>일정/지도</a></li>
+               
+            </ul>
+            </div>  
+            	    <!-- 내비 바  끝-->
+
+           <div class="tab-content">
+            <div class="tab-pane" id="story">
+                <img src="img/2222.png" />
+            </div>
+            <div class="tab-pane active" id="mapplan">
+                <img src="img/3333.png" />
+            </div>
+           </div>
+           		  <!-- 버튼 끝-->
+           		    <!-- 댓글 창 시작-->
+             <div class="comment" id="comments-container">
+             </div>
+             	  <!-- 댓글 창  끝끝-->
+
+            
+
+            
+
+
+
+
+
+
+   
+    
+        
+
+
+
+        </div>
+    </div>
+</div>
+
+    
+  
+        
+        <footer>
+            <hr>
+            <address>
+                Copyright&copy;2013. <a href="http://www.itpaper.co.kr">itpaper.co.kr</a>. All rights resurved
+            </address>
+        </footer>
+         <!-- 스크립트 시작-->
+      <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.textcomplete/1.8.0/jquery.textcomplete.js"></script>
+        <script type="text/javascript" src="plugins/jquery-comments-master/js/jquery-comments.js"></script>
+        <script type="text/javascript" src="plugins/jquery-comments-master/data/comments-data.js"></script>
+        <script type="text/javascript">
+        	$(function(){
+        		var saveComment = function(data) {
+                    
+
+                    // Convert pings to human readable format
+                    $(data.pings).each(function(index, id) {
+                        var user = usersArray.filter(function(user){return user.id == id})[0];
+                        data.content = data.content.replace('@' + id, '@' + user.fullname);
+                    });
+
+                    return data;
+                }
+                $('#comments-container').comments({
+                    profilePictureURL: 'https://viima-app.s3.amazonaws.com/media/user_profiles/user-icon.png',
+                    currentUserId: 1,
+                    roundProfilePictures: true,
+                    textareaRows: 1,
+                    enableAttachments: true,
+                    enableHashtags: true,
+                    enablePinging: true,
+                    getUsers: function(success, error) {
+                        setTimeout(function() {
+                            success(usersArray);
+                        }, 500);
+                    },
+                    getComments: function(success, error) {
+                        setTimeout(function() {
+                            success(commentsArray);
+                        }, 500);
+                    },
+                    postComment: function(data, success, error) {
+                        setTimeout(function() {
+                            success(saveComment(data));
+                        }, 500);
+                    },
+                    putComment: function(data, success, error) {
+                        setTimeout(function() {
+                            success(saveComment(data));
+                        }, 500);
+                    },
+                    deleteComment: function(data, success, error) {
+                        setTimeout(function() {
+                            success();
+                        }, 500);
+                    },
+                    upvoteComment: function(data, success, error) {
+                        setTimeout(function() {
+                            success(data);
+                        }, 500);
+                    },
+                    uploadAttachments: function(dataArray, success, error) {
+                        setTimeout(function() {
+                            success(dataArray);
+                        }, 500);
+                    },
+                });
+        	});
+        </script>
+
+          <!-- 스크립트 끝-->
+
+        
+
+       
+    
+    </body>
+</html>
