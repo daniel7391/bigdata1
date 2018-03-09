@@ -36,7 +36,12 @@
         <![endif]-->
 
         <!-- 시각적 확인을 위한 CSS 적용 -->
-
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.textcomplete/1.8.0/jquery.textcomplete.js"></script>
+        <script type="text/javascript" src="plugins/jquery-comments-master/js/jquery-comments.js"></script>
+        <script type="text/javascript" src="plugins/jquery-comments-master/data/comments-data.js"></script>
        <style type="text/css">
 			/* btn-ttc라는 사용자 정의 버튼 만들기
 			 -------------------------------------------------- */
@@ -74,7 +79,7 @@
             
             .main{
                 background-color: #EBEBEB;
-                position: relative; bottom:20px;
+               
             }
             .box3{
                 width: 200px;
@@ -121,6 +126,7 @@
                 width: 198px;
                  border:1px solid #EBEBEB;
                  color:gray;
+                 margin-top: 2px;
                 
             }
 
@@ -130,14 +136,15 @@
             }
            
             .profile{
-                position: relative;top:10px;
+                
             }
             .box5{
                 width:95%;
                 min-height: 150px;
-               
+                margin-left: 20px;
+                margin-top: 8px;
                 background-color: white;
-                position: relative; top:8px; left:40px;
+                
                 border-radius: 10px;
                 
                 }
@@ -154,7 +161,7 @@
             }
             .tabbar{
                
-                position: relative; top:8px; left:40px;
+                margin-left: 20px;
                  padding:20px 1px 1px 1px;
                  width:95%;
             }
@@ -177,17 +184,19 @@
   color: orange;
 }
 .comment{
-	position: relative;  left:40px;
+	           margin-left: 20px;
                  padding:50px 1px 1px 1px;
                  width:95%;
 }
 .tab-content .tab-pane img{
 	width: 95%;
-	position: relative; top:8px; left:40px;
+	               margin-left: 20px;
                  padding:20px 1px 1px 1px;
 }
 
-
+.comment,.by-current-user{
+    padding-top:0px;
+}
 
 
 
@@ -206,7 +215,7 @@
         <a href="#"><img src="img/logo.png" /></a>
         
       </div>
-      <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+      <div class="navbar navbar-inverse navbar-static-top" role="navigation" style="margin-bottom: 0px">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -361,12 +370,7 @@
             </address>
         </footer>
          <!-- 스크립트 시작-->
-      <script src="assets/js/jquery.min.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
-        <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.textcomplete/1.8.0/jquery.textcomplete.js"></script>
-        <script type="text/javascript" src="plugins/jquery-comments-master/js/jquery-comments.js"></script>
-        <script type="text/javascript" src="plugins/jquery-comments-master/data/comments-data.js"></script>
+   
         <script type="text/javascript">
         	$(function(){
         		var saveComment = function(data) {
