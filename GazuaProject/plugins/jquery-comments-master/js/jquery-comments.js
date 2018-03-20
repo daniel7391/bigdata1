@@ -133,7 +133,7 @@
                 popularText: '인기 순',
                 attachmentsText: 'Attachments',
                 sendText: '입력완료',
-                replyText: 'Reply',
+               
                 editText: 'Edit',
                 editedText: 'Edited',
                 youText: 'You',

@@ -217,7 +217,7 @@ http://viima.github.io/jquery-comments/*/
 	background: #FFF;
 	font-size: 1em;
 	line-height: 1.45em;
-	padding: .25em .8em;
+	padding: .25em .8em;  
 	padding-right: 2em;
 }
 
@@ -272,6 +272,7 @@ http://viima.github.io/jquery-comments/*/
 
 .jquery-comments ul.navigation .navigation-wrapper {
 	position: relative;
+	display: none;
 }
 
 .jquery-comments ul.navigation li {
@@ -499,6 +500,7 @@ http://viima.github.io/jquery-comments/*/
 	font-size: .8em;
 	font-weight: normal;
 	vertical-align: top;
+
 }
 
 .jquery-comments ul.main li.comment .name .reply-to i {
