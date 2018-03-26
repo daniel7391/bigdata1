@@ -34,12 +34,16 @@
 			.container{
 				width: 1030px;
 			}
+			.media-object{
+				width: 300px;
+				height: 180px;
+			}
 		</style>
 	</head>
 
 	<body>
       <div class="container">
-        <a href="#"><img src="img/logo.png" /></a>
+        <a href="MainPage.html"><img src="img/logo.png" /></a>
       </div>
       <div class="navbar navbar-inverse navbar-static-top" role="navigation">
             <div class="container">
@@ -53,9 +57,9 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="#">추천여행지</a></li>
-                        <li><a href="#">여행 일정 만들기</a></li>
-                        <li><a href="#">여행 후기</a></li>
+                        <li><a href="SResult.html">추천여행지</a></li>
+                        <li><a href="Plan.html">여행 일정 만들기</a></li>
+                        <li><a href="Review.html">여행 후기</a></li>
                     </ul>
                 </div>
                 <div class="input-group" style="position: relative; bottom: 5px;">
@@ -183,7 +187,7 @@
 			</div>
 		</div>
 		<div class="container">
-			<ul class="pagination">
+			<ul class="pagination" style="margin-left: 380px;">
 				<li class="disabled"><a href="#">&laquo;</a></li>
 				<li class="active"><span>1 <span class="sr-only">(current)</span>
 				</span></li>
@@ -194,9 +198,9 @@
 				<li><a href="#">&raquo;</a></li>
 			</ul>
 
-			<div class="container">
+			<div class="container" style="padding-left: 0px;">
 			<div class="page-header">
-				<h3>최근 조회한 일정, 장소</h3>
+				<h3>북마크 메뉴</h3>
 			</div>
 
 			<!-- 웹진과 같은 형태로 구성되는 태그 구조 입니다. -->
@@ -231,7 +235,7 @@
 		<br />
 		<div id="content">
 			<div id="sidebar">
-		<h3>북마크 메뉴</h3>
+		<h3>최근 조회한 일정, 장소</h3>
 		<address>
 		        <ul>
 		          <a href="http://www.itpaper.co.kr">
