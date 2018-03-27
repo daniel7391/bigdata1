@@ -1,0 +1,185 @@
+		*{
+		    padding: 0;
+		    margin: 0;
+		}
+		body{
+		    padding-top: 0px;
+		    padding-bottom: 20px;
+		}
+		.container{
+		    width: 1030px;
+		}
+		.media-object {
+		  width: 200px;
+		  height: 170px;
+		}
+		.btn-box{
+		  position: relative;
+		  top: 10px;
+		  background: black;
+		}
+		section .plandBody{
+		    width: 200px;
+		    background-color: #eee;
+		}
+		section .jumbotron{
+		    text-align: center;
+		}
+		section .jumbotron h1, p{
+		    display: inline-block;
+		}
+		section .btn-group{
+		    padding-bottom: 10px;
+		}
+		section .btn-group button{
+		    width: 100px;
+		}
+		section .container li{
+		    list-style: none;
+		    width: 100%;
+		
+		}
+		section .planLeft{
+		    vertical-align: top;
+		    border: 2px solid #eee;
+		    width: 29%;
+		    background-color:#eee;
+		    display: inline-block;
+		}
+		section .planRight{
+		    border: 2px solid #eee;
+		    width: 70%;
+		    display: inline-block;
+		    padding: 0;
+		    margin: 0;
+		}
+		section .sidebar{
+		    width: 100%;
+		    display: inline-block;
+		}
+		section .sidebar .btn-group{
+		    width: 100%;
+		}
+		section .sidebar .btn-group button{
+		    width: 50%;
+		}
+		section li {
+		    padding: 2px;
+		}
+		section ul li input{
+		    width: 100%;
+		}
+		section .planRight div div{
+		    display: inline-block;
+		}
+		section .planRight .first{
+		    width: 100%;
+		}
+		section .planRight .second{
+		    width: 100%;
+		    height: 150px;
+		    margin-top: 2px;
+		}
+		section .planRight .third{
+		    display: inline-block;
+		}
+		.pull-left{float: left; border: 2px solid #eee}
+		.clearfix:after{content: ''; display: block; float: none; clear: both;}
+		.hide{display: none;}
+		
+		.tab{width:100%; margin: 20px auto;}
+		section .tab li {width: 50%; padding: 0; margin: 0;}
+		section .tab .tab-panel{
+		    width: 100%;
+		}
+		.tab-button-item{width: 100px; height: 40px;}
+		
+		.tab-button-item-link .selected{
+		    background: url("img/tab_selected.jpg");
+		
+		}
+		
+		.tab-button-item-link{
+		    background: url("img/tab.jpg") width:100%;
+		    display: block;
+		    color: #222;
+		    line-height: 40px;
+		    text-align: center;
+		    text-decoration: none;
+		}
+		
+		.tab-panel{
+		    border: 1px solid #9FB7D4;
+		    position: relative;
+		    top: -1px;
+		    padding: 20px 10px;
+		    width: 100%;
+		    height: 100%;
+		}
+		.tab-panel .tab-page-1{
+		    width: 100%;
+		    height: 100%;
+		}
+		.tab-panel .tab-page-2{
+		    width: 100%;
+		    height: 100%;
+		}
+		
+		.tab-button{
+		    position: relative;
+		    z-index: 10;
+		}
+		section .form-group{
+		    padding: 10px 5px 0px 5px;
+		    margin: 0;
+		}
+		
+		#gmap { width: 674px; height: 400px; }
+		
+		section table{
+		    width: 100%;
+		    border: 1px solid #d5d5d5;
+		    border-collapse: collapse;
+		}
+		section th, td{
+		    border: 1px solid #d5d5d5;
+		    width: 20%;
+		    text-align:center;
+		}
+		section th{
+		    border: 1px solid #d5d5d5;
+		    background-color: #444;
+		    padding: 5px 0;
+		    color: #eee;
+		    width: 20%;
+		    text-align:center;
+		}
+		section .input{
+		    padding: 5px 0;
+		    text-align: center;
+		    border: 0;
+		    width: 100%;
+		    display: block;
+		}
+		section .DayPlan{
+		    width: 674px;
+		    border: 0.8px solid #ccc;
+		}
+		
+		section .sidebar .searchResult{
+		    padding-top: 10px;
+		}
+		section .sidebar .searchResult .media{
+		    border: 1px solid #fff;
+		}
+		section .sidebar .result img{
+		    width: 100px;
+		    height: 100px;
+		    padding-bottom: 10px;
+		}
+		section .sidebar .media-body{
+		    display: inline-block;
+		}
+		section .sidebar .media-body .clearfix{
+		    width: 170px;
+		}
