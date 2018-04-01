@@ -1,63 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- 이 XML의 구조대로 구현될 클래스의 이름 => Impl클래스를 대체한다. -->
 <mapper namespace="TourInfoMapper">
-		<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
-		<resultMap type="gazua.model.TourInfo" id="tourinfo">
-			<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
-			<result column="id" property="id"/>
-			<result column="name" property="name"/>
-			<result column="postcode" property="postcode"/>
-			<result column="addr1" property="addr1"/>
-			<result column="addr2" property="addr2"/>
-			<result column="cost" property="cost"/>
-			<result column="route1" property="route1"/>
-			<result column="route2" property="route2"/>
-			<result column="holyday1" property="holiday1"/>
-			<result column="holyday2" property="holiday2"/>
-			<result column="holyday3" property="holiday3"/>
-			<result column="intro" property="intro"/>
-			<result column="likes" property="likes"/>
-			<result column="tel" property="tel"/>
-			<result column="homepage" property="homePage"/>
-			<result column="x" property="x"/>
-			<result column="y" property="y"/>
-			<result column="tour_tourCode" property="tour_tourCode"/>
-		</resultMap>
 
-		<!-- 게시물 하나에 대한 정보를 조회한다. -->
-		<select id="selectTourInfoList" resultMap="tourinfo" parameterType="gazua.model.TourInfo"> 
-			SELECT * FROM tourinfo 
-		</select>
-		
-		<!-- 이전글 정보를 조회한다. -->
-		<select id="selectPrevTourInfo" resultMap="tourinfo" parameterType="gazua.model.TourInfo"> 
-		SELECT * FROM tourinfo 
-		WHERE id &lt; #{id} 
-		ORDER BY id DESC LIMIT 0, 1
-		</select>
-		
-		<!-- 다음글 정보를 조회한다. -->
-		<select id="selectNextTourInfo" resultMap="tourinfo" parameterType="gazua.model.TourInfo"> 
-		SELECT * FROM tourinfo
-		WHERE id &gt; #{id} ORDER BY id ASC LIMIT 0, 1 
-		</select>
-		
-		<!-- 전체 게시물 수를 조회한다. -->
-		<select id="selectTourInfoCount" parameterType="gazua.model.TourInfo" resultType="int">
-		SELECT COUNT(id) 
-		FROM tourinfo 
-			<where>
-				<if test="name != null or intro != null">
-					<if test="name != null"> 
-					name LIKE concat('%', #{name}, '%') 
-					</if>
-					<if test="intro != null"> 
-					OR intro LIKE concat('%', #{intro}, '%') 
-					</if>
+	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+	<resultMap id="tourinfo" type="gazua.model.TourInfo">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="postCode" column="postcode" />
+		<result property="addr1" column="addr1" />
+		<result property="addr2" column="addr2" />
+		<result property="cost" column="cost" />
+		<result property="route1" column="route1" />
+		<result property="route2" column="route2" />
+		<result property="holiday1" column="holyday1" />
+		<result property="holiday2" column="holyday2" />
+		<result property="holiday3" column="holyday3" />
+		<result property="intro" column="intro" />
+		<result property="likes" column="likes" />
+		<result property="tel" column="tel" />
+		<result property="homePage" column="homepage" />
+		<result property="x" column="x" />
+		<result property="y" column="y" />
+		<result property="tourCode" column="tour_tourCode" />
+	</resultMap>
+	
+	<!-- 게시물 하나에 대한 정보를 조회한다. -->
+	<select id="selectTourInfoList" 
+		parameterType="gazua.model.TourInfo" 
+		resultMap="tourinfo">
+		SELECT *
+		FROM   tourinfo
+		ORDER  BY id DESC
+		LIMIT #{limitStart}, #{listCount}
+	</select>
+	
+	<!-- 이전글 정보를 조회한다. -->
+	<select id="selectPrevTourInfo" 
+		parameterType="gazua.model.TourInfo" 
+		resultMap="tourinfo">
+		SELECT *
+		FROM   tourinfo
+		WHERE  id &lt; #{id}
+		ORDER  BY name asc
+		LIMIT  0, 1
+	</select>
+	
+	<!-- 다음글 정보를 조회한다. -->
+	<select id="selectNextTourInfo" 
+		parameterType="gazua.model.TourInfo" 
+		resultMap="tourinfo">
+		SELECT *
+		FROM   tourinfo
+		WHERE  id &gt; #{id}
+		ORDER  BY id ASC
+		LIMIT  0, 1
+	</select>
+
+	
+	<!-- 전체 게시물 수를 조회한다. -->
+	<select id="selectTourInfoCount"
+		parameterType="gazua.model.TourInfo"
+		resultType="int">
+		SELECT COUNT(id) FROM tourinfo
+		<where>
+			<if test="name != null or intro != null">
+				<if test="name != null">
+					name LIKE concat('%', #{name}, '%')
 				</if>
-			</where>
-		</select>
+				<if test="intro != null">
+					OR intro LIKE concat('%', #{intro}, '%')
+				</if>
+			</if>
+		</where>
+	</select>
+	
 </mapper>
+
+
+
+
+

@@ -19,5 +19,6 @@
 		<mapper resource="gazua/dao/mapper/MemberMapper.xml"/>
 		<mapper resource="gazua/dao/mapper/TourInfoMapper.xml"/>
 		<mapper resource="gazua/dao/mapper/TourMapper.xml"/>
+		<mapper resource="gazua/dao/mapper/PhotoMapper.xml"/>
 	</mappers>
 </configuration>

@@ -1,9 +1,9 @@
 package gazua.model;
 
 public class TourInfo {
-	private int id ;  
+	private int id;
 	private String name;
-	private String postcode;
+	private int postCode;
 	private String addr1;
 	private String addr2;
 	private String cost;
@@ -15,13 +15,45 @@ public class TourInfo {
 	private String intro;
 	private int likes;
 	private String tel;
-	private String homepage;
+	private String homePage;
 	private double x;
 	private double y;
-	private int tour_tourCode;
+	private int tourCode;
+	
+	// 페이지 구현을 위해서 추가된 값
+	private int limitStart;
+	private int listCount;
+	
+	// 갤러리 구현을 위해서 추가된 값
+	private boolean gallery;
+	private String imagePath;
 	
 	public int getId() {
 		return id;
+	}
+	public int getLimitStart() {
+		return limitStart;
+	}
+	public void setLimitStart(int limitStart) {
+		this.limitStart = limitStart;
+	}
+	public int getListCount() {
+		return listCount;
+	}
+	public void setListCount(int listCount) {
+		this.listCount = listCount;
+	}
+	public boolean isGallery() {
+		return gallery;
+	}
+	public void setGallery(boolean gallery) {
+		this.gallery = gallery;
+	}
+	public String getImagePath() {
+		return imagePath;
+	}
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 	public void setId(int id) {
 		this.id = id;
@@ -32,11 +64,11 @@ public class TourInfo {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getPostcode() {
-		return postcode;
+	public int getPostCode() {
+		return postCode;
 	}
-	public void setPostcode(String postcode) {
-		this.postcode = postcode;
+	public void setPostCode(int postCode) {
+		this.postCode = postCode;
 	}
 	public String getAddr1() {
 		return addr1;
@@ -104,11 +136,11 @@ public class TourInfo {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	public String getHomepage() {
-		return homepage;
+	public String getHomePage() {
+		return homePage;
 	}
-	public void setHomepage(String homepage) {
-		this.homepage = homepage;
+	public void setHomePage(String homePage) {
+		this.homePage = homePage;
 	}
 	public double getX() {
 		return x;
@@ -122,23 +154,21 @@ public class TourInfo {
 	public void setY(double y) {
 		this.y = y;
 	}
-	public int getTour_tourCode() {
-		return tour_tourCode;
+	public int getTourCode() {
+		return tourCode;
 	}
-	public void setTour_tourCode(int tour_tourCode) {
-		this.tour_tourCode = tour_tourCode;
+	public void setTourCode(int tourCode) {
+		this.tourCode = tourCode;
 	}
 	@Override
 	public String toString() {
-		return "tourinfo [id=" + id + ", name=" + name + ", postcode=" + postcode + ", addr1=" + addr1 + ", addr2="
-				+ addr2 + ", cost=" + cost + ", route1=" + route1 + ", route2=" + route2 + ", holiday1=" + holiday1
+		return "Place [id=" + id + ", name=" + name + ", postCode=" + postCode + ", addr1=" + addr1 + ", addr2=" + addr2
+				+ ", cost=" + cost + ", route1=" + route1 + ", route2=" + route2 + ", holiday1=" + holiday1
 				+ ", holiday2=" + holiday2 + ", holiday3=" + holiday3 + ", intro=" + intro + ", likes=" + likes
-				+ ", tel=" + tel + ", homepage=" + homepage + ", x=" + x + ", y=" + y + ", tour_tourCode="
-				+ tour_tourCode + "]";
+				+ ", tel=" + tel + ", homePage=" + homePage + ", x=" + x + ", y=" + y + ", tourCode=" + tourCode
+				+ ", limitStart=" + limitStart + ", listCount=" + listCount + ", gallery=" + gallery + ", imagePath="
+				+ imagePath + "]";
 	}
 	
 	
-	
-	
-		
 }

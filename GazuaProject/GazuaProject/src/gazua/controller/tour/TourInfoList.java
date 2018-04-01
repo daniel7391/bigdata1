@@ -17,8 +17,12 @@ import gazua.helper.BaseController;
 import gazua.helper.PageHelper;
 import gazua.helper.UploadHelper;
 import gazua.helper.WebHelper;
+import gazua.model.Photo;
 import gazua.model.TourInfo;
+
+import gazua.service.PhotoService;
 import gazua.service.TourInfoService;
+import gazua.service.impl.PhotoServiceImpl;
 import gazua.service.impl.TourInfoServiceImpl;
 
 @WebServlet("/gazua/tourinfolist.do")
@@ -34,7 +38,7 @@ public class TourInfoList extends BaseController {
 	WebHelper web;
 	// --> import study.jsp.mysite.service.BbsDocumentService;
 	TourInfoService tourInfoService;
-//	PhotoService photoService;
+	PhotoService photoService;
 	// --> import study.jsp.helper.PageHelper;
 	PageHelper pageHelper;
 	// --> import study.jsp.helper.Upload;
@@ -51,7 +55,7 @@ public class TourInfoList extends BaseController {
 		web = WebHelper.getInstance(request, response);
 		
 		tourInfoService = new TourInfoServiceImpl(sqlSession, logger);
-//		photoService = new PhotoServiceImpl(sqlSession, logger);
+		photoService = new PhotoServiceImpl(sqlSession, logger);
 		
 		pageHelper = PageHelper.getInstance();
 		upload = UploadHelper.getInstance();
@@ -75,7 +79,7 @@ public class TourInfoList extends BaseController {
 		String keyword = web.getString("keyword");
 
 		TourInfo tourinfo = new TourInfo();
-//		Photo photo = new Photo();
+		Photo photo = new Photo();
 		
 		// 현재 페이지 수 --> 기본값은 1페이지로 설정함
 		int page = web.getInt("page", 1);
@@ -87,7 +91,7 @@ public class TourInfoList extends BaseController {
 		/** (6) 게시글 목록 조회 */
 		int totalCount = 0;
 		List<TourInfo> tourInfoList = null;
-//		List<Photo> photoList = null;
+
 		
 		try {
 			// 전체 게시물 수
@@ -98,10 +102,20 @@ public class TourInfoList extends BaseController {
 			pageHelper.pageProcess(page, totalCount, 8, 5);
 
 			// 페이지 번호 계산 결과에서 Limit절에 필요한 값을 Beans에 추가
-//			tourinfo.setLimitStart(pageHelper.getLimitStart());
-//			tourinfo.setListCount(pageHelper.getListCount());
+			tourinfo.setLimitStart(pageHelper.getLimitStart());
+			tourinfo.setListCount(pageHelper.getListCount());
 			
 			tourInfoList = tourInfoService.selectTourInfoList(tourinfo);
+			// 조회결과가 존재할 경우 --> 갤러리라면 이미지 경로를 썸네일로 교체
+			for (int i=0; i<tourInfoList.size(); i++) {
+				TourInfo item = tourInfoList.get(i);
+				photo.setTour_id(item.getId());
+				
+				Photo temp = photoService.selectOnePhotoByTourId(photo);
+				String temp2 = temp.getDir();
+				
+				item.setImagePath(temp2);
+			}
 		} catch (Exception e) {
 			web.redirect(null, e.getLocalizedMessage());
 			return null;
@@ -109,18 +123,6 @@ public class TourInfoList extends BaseController {
 			sqlSession.close();
 		}
 
-		// 조회결과가 존재할 경우 --> 갤러리라면 이미지 경로를 썸네일로 교체
-//		for (int i=0; i<tourInfoList.size(); i++) {
-//			TourInfo item = tourInfoList.get(i);
-//			String imagePath = item.getImagePath();
-//			if (imagePath != null) {
-//				String thumbPath = upload.createThumbnail(imagePath, 480, 320, true);
-//				// 글 목록 컬렉션 내의 Beans 객체가 갖는 이미지 경로를 썸네일로 변경한다.
-//				item.setImagePath(thumbPath);
-//				logger.debug("thumbnail create > " + item.getImagePath());
-//			}
-//		}
-		
 
 		/** (7) 조회 결과를 View에 전달 */
 		request.setAttribute("tourInfoList", tourInfoList);

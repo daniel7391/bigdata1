@@ -7,10 +7,41 @@
 <head>
 
 <style type="text/css">
-	<%@ include file="/assets/css/tourinfolist.css" %>
+    .container {
+        width: 1030px;
+    }
+    .media {
+        border: 1px solid #DDD;
+        height: 200px;
+    }
+    #like {
+        position: relative;
+        height: 20px;
+        background: white;
+        border: 0.5px solid gainsboro;
+        width: 120px;
+    }
+    .media-object {
+    	height: 200px;
+    	width: 250px;
+    }
+    .media-body h5 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .post {
+        color: #999;
+    }
+    .glyphicon-camera {
+        color: #2b2;
+    }
+    .summary {
+        width: 615px;
+    }
 </style>
 
-	<%@ include file="/WEB-INF/inc/common.jsp" %>
+<%@ include file="/WEB-INF/inc/common.jsp" %>
 </head>
 <body>
 <header>
@@ -26,36 +57,26 @@
 	
 	<c:choose>
 		<c:when test="${fn:length(tourInfoList) > 0}">
-			<c:forEach var="place" items="${tourInfoList}">
+			<c:forEach var="tourInfo" items="${tourInfoList}">
 				<div class="media">
 					<div class="pull-left">
-						<c:url var="readUrl" value="/place/place_read.do">
-							<c:param name="tourInfo_id" value="${tourinfo.id}" />
+						<c:url var="readUrl" value="/tourInfo/tourInfo_read.do">
+							<c:param name="tourInfo_id" value="${tourInfo.id}" />
 						</c:url>
 						<a href="${readUrl}">
-							<c:choose>
-								<c:when test="${tourinfo.imagePath != null}">
-									<c:url var="downloadUrl" value="/download.do">
-										<c:param name="file" value="${tourinfo.imagepath}" />
-									</c:url>
-									<img src="${downloadUrl}" class="media-object" />
-								</c:when>
-								<c:otherwise>
-									<img src="${pageContext.request.contextPath}/assets/img/no_image.jpg" class="media-object"/>
-								</c:otherwise>
-							</c:choose>
+							<img src="${tourInfo.imagePath}" class="media-object" />							
 						</a>
 					</div>
 					<div class="media-body">
 				            <!-- 내용의 제목 -->
-				            <a href="place.html" style="color: black; position: relative; top: 12px;"><h3 class="media-heading"><span class="glyphicon glyphicon-camera"></span><strong> "${place.name}"</strong></a><span class="rating">
-				                    <button class="btn like pull-right" id="like" style="height: 45px;">좋아요! (<span class="likes">${tourinfo.likes}</span>)</button>
+				            <a href="tourInfo.html" style="color: black; position: relative; top: 12px;"><h3 class="media-heading"><span class="glyphicon glyphicon-camera"></span><strong> "${tourInfo.name}"</strong></a><span class="rating">
+				                    <button class="btn like pull-right" id="like" style="height: 45px;">좋아요! (<span class="likes">${tourInfo.likes}</span>)</button>
 				                </span></h3>
 				            <!-- 내용 -->
 				            <br />
-				            <a href="place.html" style="color: gray;"><h5 class="summary">${tourinfo.intro}</h5></a>
+				            <a href="tourInfo.html" style="color: gray;"><h5 class="summary">${tourInfo.intro}</h5></a>
 				            <br />
-				            <h5 class="post"><span class="glyphicon glyphicon-list-alt"></span> 68개의 포스트 - ${tourinfo.addr1}</h5>
+				            <h5 class="post"><span class="glyphicon glyphicon-list-alt"></span> 68개의 포스트 - ${tourInfo.addr1}</h5>
 				 
 					</div>
 				</div>
@@ -66,8 +87,10 @@
 	<!--// 글 목록 끝 -->
 
 	<!-- 목록 페이지 하단부의 쓰기버튼+검색폼+페이지 번호 공통 영역 include -->
+	<%@ include file="/WEB-INF/inc/bbs_list_bottom.jsp" %>	
 		
 </div>
+<%@ include file="/WEB-INF/inc/footer.jsp" %>
 </body>
 </html>
 
