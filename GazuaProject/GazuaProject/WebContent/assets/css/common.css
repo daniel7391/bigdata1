@@ -1,0 +1,17 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+html, body{
+	height:100%;
+}
+
+body{
+	padding-top: 0px;
+	padding-bottom: 20px;
+}
+
+.container{
+    width: 1030px;
+}

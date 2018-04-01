@@ -17,12 +17,14 @@
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 <!-- gmap 플러그인 참조 -->
-<script src="../plugins/gmaps/gmaps.min.js"></script>
+<script src="../assets/plugins/gmaps/gmaps.min.js"></script>
 
 <!-- Javascript -->
 <script src="../assets/js/jquery.min.js"></script>
 <script src="../assets/js/bootstrap.min.js"></script>
 
+<script src="../assets/js/masonry.pkgd.js"></script>
+<script src="../assets/js/masonry.pkgd.min.js"></script>
 
 <!-- 모바일 웹 페이지 설정 -->
 <link rel="shortcut icon" href="../assets/ico/favicon.ico" />

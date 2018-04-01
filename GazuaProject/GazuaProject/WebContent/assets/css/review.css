@@ -1,0 +1,138 @@
+
+            .searchbar{
+                ;
+                background-color: gainsboro;
+            }
+            .btn-ttc, .btn-ttc:hover, .btn-ttc:focus {
+                color: #1DDB16;
+                background-color: #CEF279;
+                
+            }
+
+            /* 기본 배경 색상 정의 - gradient 색상을 적용할 수도 있다. */
+            .btn-ttc {
+                background-color: #E4F7BA;
+                color: #ABF200;
+                width: 120px;
+                
+            }
+
+            /* 마우스 올렸을 때, 약간의 위치 이동효과 */
+            .btn-ttc:hover {
+                background-position: 0 -15px;
+            }
+            .btn-ttc2, .btn-ttc2:hover, .btn-ttc2:active  {
+                color: #FF0000;
+                background-color: #FFCA6C;
+                
+            }
+
+            /* 기본 배경 색상 정의 - gradient 색상을 적용할 수도 있다. */
+            .btn-ttc2 {
+                color: #FF0000;
+                background-color: #FFCA6C;
+            }
+
+            /* 마우스 올렸을 때, 약간의 위치 이동효과 */
+            .btn-ttc2:hover {
+                background-position: 0 -15px;
+            }
+
+            /* 가장 작은 해상도 (핸드폰종류, 가로 480px 이하) */
+            @media (max-width: 767px) {
+                .btn-ttc{
+                    width: 200px;
+                }
+            }
+            
+            /* 태블릿 PC 혹은 가로 768px 이상 */
+            @media (min-width: 768px) and (max-width: 991px) {
+                .btn-ttc{
+                    width: 89px;
+                }
+              
+         
+            }
+            
+            /* 작은 크기의 데스크탑 혹은 가로 992px 이상 */
+            @media (min-width: 992px) and (max-width: 1199px) {
+               .btn-ttc{
+                    width: 110px;
+                }
+               
+                }
+            
+
+            .dropdownbar{
+                width: 250px;
+                margin:auto;
+            }
+             @media (min-width: 992px) and (max-width: 1199px) {
+               .dropdownbar{
+                    width: 228px;
+
+                }
+                 
+           }
+            @media (min-width: 768px) and (max-width: 991px) {
+                .dropdownbar{
+                    width: 185px;
+                }
+              
+         
+            }
+             @media (max-width: 767px) {
+                .dropdownbar{
+                    width: 410px;
+                }
+            }
+
+            #grid .item { width: 33%;  }
+            #grid .item .item-box { padding: 5px; width: auto; }
+            #grid .item .item-box .item-content { border: 1px solid #eee; }
+            #grid .item .item-box .item-content .img { width: 100%; height: 180px; border-bottom:1px solid #eee; }
+            #grid .item .item-box .item-content .title {
+                color: #333; font-size: 14px; font-weight: bold; padding: 5px 10px;
+            }
+            #grid .item .item-box .item-content .desc {
+                color: #555; font-size: 12px; padding: 0 10px;
+            }
+            #grid .item .item-box .item-content .state{
+                color:orange;	padding: 0px 0px 0px 10px
+            }
+            #grid .item .item-box .item-content .nick{
+                color:lightgray; font-size: 5px; padding: 0px 0px 0px 11px
+            }
+            .container{
+                width: 1030px;
+            }
+            .btn-ttc:active, .btn-ttc:visited {
+            	   color: #1DDB16;
+                background-color: #CEF279;
+			}
+
+			.active {
+				   color: #1DDB16;
+                background-color: #CEF279;
+			}
+			.btn-default.active{
+				 color: #1DDB16;
+                background-color: #CEF279;
+			}
+			  .btn-ttc3:active, .btn-ttc3:visited {
+            	   color: #1DDB16;
+                background-color: #CEF279;
+			}
+			.btn-ttc3, .btn-ttc3:hover, .btn-ttc3:focus {
+                color: #1DDB16;
+                background-color: #CEF279;
+                
+            }
+
+            /* 기본 배경 색상 정의 - gradient 색상을 적용할 수도 있다. */
+            .btn-ttc3{
+                background-color: #E4F7BA;
+                color: #ABF200;
+                width: 120px;
+                
+            }

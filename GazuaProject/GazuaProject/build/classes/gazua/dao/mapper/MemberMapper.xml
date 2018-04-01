@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 이 XML의 구조대로 구현될 클래스의 이름 => Impl클래스를 대체한다. -->
+<mapper namespace="MemberMapper">
+
+	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+	<resultMap id="member" type="gazua.model.Member">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+		<result property="member_id" column="member_id" />
+		<result property="member_user_id" column="member_user_id" />
+		<result property="member_pw" column="member_pw" />
+		<result property="member_name" column="member_name" />
+		<result property="member_name2" column="member_name2" />
+		<result property="member_email" column="member_email" />
+		<result property="birthdate" column="birthdate" />
+		<result property="member_gender" column="member_gender" />
+		<result property="member_profile_img" column="member_profile_img" />
+		<result property="reg_date" column="reg_date" />
+		<result property="edit_date" column="edit_date" />
+	</resultMap>
+	
+	<!-- 아이디 중복검사를 수행한다 -->
+    <select id="selectUserIdCount" parameterType="gazua.model.Member" resultType="int">
+        SELECT count(member_id) FROM member WHERE member_user_id=#{member_user_id}
+    </select>
+     
+    <!-- 닉네임 중복검사를 수행한다 -->
+    <select id="selectName2Count" parameterType="gazua.model.Member" resultType="int">
+        SELECT count(member_id) FROM member WHERE member_name2=#{member_name2}
+    </select>
+    
+    <!-- 회원정보를 저장한다 : 가입 -->
+	<insert id="insertMember" parameterType="gazua.model.Member" 
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO member (
+			member_user_id, member_pw, member_name, member_name2,
+			member_email, birthdate, member_gender, member_profile_img,
+			reg_date, edit_date
+		) VALUES (
+			#{member_user_id}, password(#{member_pw}), #{member_name},
+			#{member_name2}, #{member_email}, #{birthdate}, #{member_gender}, 
+			#{member_profile_img}, now(), now()
+		)
+	</insert>
+	
+	<!-- 아이디와 비밀번호가 일치하는 회원정보를 조회한다. -->
+    <select id="selectLoginInfo" parameterType="gazua.model.Member" resultMap="member">
+        SELECT
+        	member_id, member_user_id, member_pw, member_name,
+        	member_name2, member_email, birthdate, member_gender,
+        	member_profile_img, reg_date, edit_date
+        FROM member
+        WHERE member_user_id=#{member_user_id} AND member_pw=password(#{member_pw})
+        ORDER BY member_id DESC
+        LIMIT 0, 1
+    </select>
+    
+	
+	<!-- 현재 로그인 중인 회원의 비밀번호를 검사한다. -->
+    <select id="selectMemberPasswordCount" parameterType="gazua.model.Member" 
+    	resultType="int">
+        SELECT count(member_id) FROM member 
+        WHERE member_id=#{member_id} AND member_pw=password(#{member_pw})
+    </select>
+	
+	<!-- 회원정보를 삭제한다 : 탈퇴 -->
+	<delete id="deleteMember" parameterType="gazua.model.Member">
+		DELETE FROM member WHERE member_id=#{member_id};
+	</delete>
+	
+	
+	<!-- 일련번호에 의한 회원정보 조회 -->
+    <select id="selectMember" parameterType="gazua.model.Member" 
+    	resultMap="member">
+        SELECT
+        	member_user_id, member_pw, member_name, member_name2,
+        	member_email, birthdate, member_gender, member_profile_img,
+        	reg_date, edit_date
+        FROM member
+        WHERE member_id=#{member_id}
+    </select>
+    
+    <update id="updateMember" parameterType="gazua.model.Member">
+		UPDATE member SET
+			member_name2=#{member_name2},
+			member_email=#{member_email}, birthdate=#{birthdate}, member_gender=#{member_gender},
+			 edit_date=now()
+			
+			<if test="new_member_pw != null and new_member_pw != ''">
+				, member_pw=password(#{new_member_pw})
+			</if>
+			
+			<choose>
+				<when test="member_profile_img == ''">
+					, member_profile_img=null
+				</when>
+				<when test="member_profile_img != null">
+					, member_profile_img=#{member_profile_img}
+				</when>
+			</choose>
+		
+		WHERE member_id=#{member_id}
+	</update>
+
+</mapper>

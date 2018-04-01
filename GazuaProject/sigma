@@ -1,0 +1,354 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+-- -----------------------------------------------------
+-- Schema mysite
+-- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `mysite` ;
+
+-- -----------------------------------------------------
+-- Schema mysite
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `mysite` DEFAULT CHARACTER SET utf8 ;
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `mydb` ;
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+USE `mysite` ;
+
+-- -----------------------------------------------------
+-- Table `mysite`.`member`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mysite`.`member` ;
+
+CREATE TABLE IF NOT EXISTS `mysite`.`member` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(10) NOT NULL,
+  `user_id` VARCHAR(50) NOT NULL,
+  `user_pw` VARCHAR(255) NOT NULL,
+  `email` VARCHAR(150) NOT NULL,
+  `gender` CHAR(1) NOT NULL,
+  `birthdate` DATETIME NOT NULL,
+  `tel` VARCHAR(13) NOT NULL,
+  `postcode` CHAR(5) NULL DEFAULT NULL,
+  `addr1` VARCHAR(150) NULL DEFAULT NULL,
+  `addr2` VARCHAR(150) NULL DEFAULT NULL,
+  `profile_img` VARCHAR(255) NULL DEFAULT NULL,
+  `reg_date` DATETIME NOT NULL,
+  `edit_date` DATETIME NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 4
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mysite`.`bbs_document`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mysite`.`bbs_document` ;
+
+CREATE TABLE IF NOT EXISTS `mysite`.`bbs_document` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `category` VARCHAR(50) NOT NULL,
+  `writer_name` VARCHAR(50) NOT NULL,
+  `writer_pw` VARCHAR(255) NOT NULL,
+  `email` VARCHAR(150) NOT NULL,
+  `subject` VARCHAR(255) NOT NULL,
+  `content` TEXT NOT NULL,
+  `hit` INT(11) NOT NULL,
+  `reg_date` DATETIME NOT NULL,
+  `edit_date` DATETIME NOT NULL,
+  `ip_address` VARCHAR(15) NOT NULL,
+  `member_id` INT(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_bbs_document_member_idx` (`member_id` ASC),
+  CONSTRAINT `fk_bbs_document_member`
+    FOREIGN KEY (`member_id`)
+    REFERENCES `mysite`.`member` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 119
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mysite`.`bbs_comment`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mysite`.`bbs_comment` ;
+
+CREATE TABLE IF NOT EXISTS `mysite`.`bbs_comment` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `writer_name` VARCHAR(50) NOT NULL,
+  `writer_pw` VARCHAR(255) NOT NULL,
+  `email` VARCHAR(150) NOT NULL,
+  `content` TEXT NOT NULL,
+  `hit` INT(11) NOT NULL,
+  `reg_date` DATETIME NOT NULL,
+  `edit_date` DATETIME NOT NULL,
+  `ip_address` VARCHAR(15) NOT NULL,
+  `member_id` INT(11) NULL DEFAULT NULL,
+  `bbs_document_id` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_bbs_comment_member1_idx` (`member_id` ASC),
+  INDEX `fk_bbs_comment_bbs_document1_idx` (`bbs_document_id` ASC),
+  CONSTRAINT `fk_bbs_comment_bbs_document1`
+    FOREIGN KEY (`bbs_document_id`)
+    REFERENCES `mysite`.`bbs_document` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_bbs_comment_member1`
+    FOREIGN KEY (`member_id`)
+    REFERENCES `mysite`.`member` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mysite`.`bbs_file`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mysite`.`bbs_file` ;
+
+CREATE TABLE IF NOT EXISTS `mysite`.`bbs_file` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `origin_name` VARCHAR(255) NOT NULL,
+  `file_dir` VARCHAR(255) NOT NULL,
+  `file_name` VARCHAR(255) NOT NULL,
+  `content_type` VARCHAR(50) NOT NULL,
+  `file_size` INT(11) NOT NULL,
+  `reg_date` DATETIME NOT NULL,
+  `edit_date` DATETIME NOT NULL,
+  `bbs_filecol` VARCHAR(45) NULL DEFAULT NULL,
+  `bbs_document_id` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_bbs_file_bbs_document1_idx` (`bbs_document_id` ASC),
+  CONSTRAINT `fk_bbs_file_bbs_document1`
+    FOREIGN KEY (`bbs_document_id`)
+    REFERENCES `mysite`.`bbs_document` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 5
+DEFAULT CHARACTER SET = utf8;
+
+USE `mydb` ;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`member`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`member` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`member` (
+  `member_id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '회원 일련번호',
+  `member_user_id` VARCHAR(50) NOT NULL COMMENT '회원아이디',
+  `member_pw` VARCHAR(50) NOT NULL COMMENT '회원 비밀번호',
+  `member_name` VARCHAR(50) NOT NULL COMMENT '회원 이름',
+  `member_name2` VARCHAR(50) NOT NULL COMMENT '회원 닉네임',
+  `member_email` VARCHAR(100) NOT NULL COMMENT '회원 이메일',
+  `member_age` INT(10) NOT NULL COMMENT '회원 나이',
+  `member_gender` VARCHAR(5) NOT NULL COMMENT '회원 성별',
+  `member_profile_img` VARCHAR(255) NULL DEFAULT NULL COMMENT '회원 프로필사진',
+  `reg_date` DATETIME NOT NULL COMMENT '회원 등록일',
+  `edit_date` DATETIME NOT NULL COMMENT '회원 편집일',
+  PRIMARY KEY (`member_id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 7
+DEFAULT CHARACTER SET = utf8
+COMMENT = '회원테이블';
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`tour`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`tour` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`tour` (
+  `tourCode` INT(11) NOT NULL COMMENT '지역코드',
+  `tourLocation_gu` VARCHAR(50) NOT NULL COMMENT '지역구이름',
+  PRIMARY KEY (`tourCode`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COMMENT = '지역구정보';
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`tourinfo`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`tourinfo` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`tourinfo` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '관광지 일련번호',
+  `name` VARCHAR(50) NOT NULL COMMENT '관광지 이름',
+  `postcode` CHAR(5) NULL DEFAULT NULL COMMENT '관광지 우편번호',
+  `addr1` VARCHAR(150) NULL DEFAULT NULL COMMENT '관광지 주소1',
+  `addr2` VARCHAR(150) NULL DEFAULT NULL COMMENT '관광지 주소2',
+  `cost` TEXT NULL DEFAULT NULL COMMENT '관광지 입장비용',
+  `route1` VARCHAR(50) NULL DEFAULT NULL COMMENT '관광지 가는길1',
+  `route2` VARCHAR(50) NULL DEFAULT NULL COMMENT '관광지 가는길2',
+  `holiday1` VARCHAR(20) NULL DEFAULT NULL COMMENT '관광지 휴무',
+  `holiday2` VARCHAR(20) NULL DEFAULT NULL,
+  `holiday3` VARCHAR(20) NULL DEFAULT NULL,
+  `intro` TEXT NULL DEFAULT NULL COMMENT '관광지 설명',
+  `likes` INT(11) NULL DEFAULT NULL COMMENT '관광지 좋아요갯수',
+  `tel` VARCHAR(80) NULL DEFAULT NULL COMMENT '관광지 전화번호',
+  `homepage` VARCHAR(50) NULL DEFAULT NULL COMMENT '관광지 웹사이트주소',
+  `x` DOUBLE NOT NULL COMMENT '관광지 x좌표',
+  `y` DOUBLE NOT NULL COMMENT '관광지 y좌표',
+  `tour_tourCode` INT(11) NOT NULL COMMENT '관광지 소속지역구',
+  PRIMARY KEY (`id`),
+  INDEX `fk_tour1_tour1_idx` (`tour_tourCode` ASC),
+  CONSTRAINT `fk_tour1_tour1`
+    FOREIGN KEY (`tour_tourCode`)
+    REFERENCES `mydb`.`tour` (`tourCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 7
+DEFAULT CHARACTER SET = utf8
+COMMENT = '관광지정보';
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`tourplan`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`tourplan` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`tourplan` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '여행플랜 일련번호',
+  `name` VARCHAR(100) NOT NULL COMMENT '여행플랜 이름',
+  `intro` TEXT NOT NULL COMMENT '여행플랜 간략설명',
+  `intro_main` TEXT NOT NULL COMMENT '여행플랜 메인설명',
+  `startDate` DATETIME NOT NULL COMMENT '여행시작일',
+  `days` INT(11) NOT NULL COMMENT '여행한 일수',
+  `people` INT(11) NOT NULL COMMENT '여행자 수',
+  `theme` INT(11) NOT NULL COMMENT '여행 테마',
+  `reg_date` DATETIME NOT NULL COMMENT '여행플랜 등록일',
+  `edit_date` DATETIME NOT NULL COMMENT '여행플랜 편집일',
+  `member_member_id` INT(11) NOT NULL COMMENT '여행플랜 작성멤버의 id',
+  PRIMARY KEY (`id`),
+  INDEX `fk_tourPlan_member1_idx` (`member_member_id` ASC),
+  CONSTRAINT `fk_tourPlan_member1`
+    FOREIGN KEY (`member_member_id`)
+    REFERENCES `mydb`.`member` (`member_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 5
+DEFAULT CHARACTER SET = utf8
+COMMENT = '여행플랜 테이블';
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`comment`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`comment` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`comment` (
+  `comment_id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '댓글 일련번호',
+  `comment_user_name` VARCHAR(50) NOT NULL COMMENT '댓글 작성자이름',
+  `like_count` INT(11) NULL DEFAULT NULL COMMENT '댓글 좋아요 갯수',
+  `reg_date` DATETIME NOT NULL COMMENT '댓글 등록일',
+  `edit_date` DATETIME NOT NULL COMMENT '댓글 편집일',
+  `content` TEXT NOT NULL COMMENT '댓글 내용',
+  `tour1_id` INT(11) NULL DEFAULT NULL COMMENT '댓글 달려진 위치의 id',
+  `tourPlan_id` INT(11) NULL DEFAULT NULL COMMENT '댓글 달려진 플랜의 id',
+  `member_id` INT(11) NOT NULL,
+  PRIMARY KEY (`comment_id`),
+  INDEX `fk_comment_tour11_idx` (`tour1_id` ASC),
+  INDEX `fk_comment_tourPlan1_idx` (`tourPlan_id` ASC),
+  INDEX `fk_comment_member1_idx` (`member_id` ASC),
+  CONSTRAINT `fk_comment_member1`
+    FOREIGN KEY (`member_id`)
+    REFERENCES `mydb`.`member` (`member_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_comment_tour11`
+    FOREIGN KEY (`tour1_id`)
+    REFERENCES `mydb`.`tourinfo` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_comment_tourPlan1`
+    FOREIGN KEY (`tourPlan_id`)
+    REFERENCES `mydb`.`tourplan` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 7
+DEFAULT CHARACTER SET = utf8
+COMMENT = '댓글 테이블';
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`photo`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`photo` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`photo` (
+  `photo_id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '사진 일련번호',
+  `tour1_id` INT(11) NULL DEFAULT NULL COMMENT '사진이 올라간 관광지 id',
+  `dir` VARCHAR(255) NOT NULL COMMENT '사진 경로',
+  `origin_name` VARCHAR(255) NOT NULL COMMENT '사진 원래이름',
+  `name` VARCHAR(255) NOT NULL COMMENT '사진 이름',
+  `size` VARCHAR(45) NOT NULL COMMENT '사진 크기',
+  `content_type` VARCHAR(45) NOT NULL COMMENT '사진 형식',
+  `reg_date` DATETIME NOT NULL COMMENT '사진 등록일',
+  `edit_date` DATETIME NOT NULL COMMENT '사진 편집일',
+  `contents` TEXT NOT NULL COMMENT '사진 내용',
+  `tourPlan_id` INT(11) NULL DEFAULT NULL COMMENT '사진이 올라간 플랜의 id',
+  PRIMARY KEY (`photo_id`),
+  INDEX `fk_photo_tour11_idx` (`tour1_id` ASC),
+  INDEX `fk_photo_tourPlan1_idx` (`tourPlan_id` ASC),
+  CONSTRAINT `fk_photo_tour11`
+    FOREIGN KEY (`tour1_id`)
+    REFERENCES `mydb`.`tourinfo` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_photo_tourPlan1`
+    FOREIGN KEY (`tourPlan_id`)
+    REFERENCES `mydb`.`tourplan` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 7
+DEFAULT CHARACTER SET = utf8
+COMMENT = '사진 테이블';
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`review`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`review` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`review` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '리뷰 일련번호',
+  `tour1_id` INT(11) NOT NULL COMMENT '리뷰가 달린 관광지 id',
+  `like_level` INT(11) NULL DEFAULT NULL COMMENT '좋아요 등급(1~4)',
+  `people_level` INT(11) NULL DEFAULT NULL COMMENT '동행형태',
+  `season` INT(11) NULL DEFAULT NULL COMMENT '여행간 계절',
+  `member_id` INT(11) NOT NULL COMMENT '리뷰작성한 멤버의 id',
+  PRIMARY KEY (`id`),
+  INDEX `fk_review_tour1_idx` (`tour1_id` ASC),
+  CONSTRAINT `fk_review_tour1`
+    FOREIGN KEY (`tour1_id`)
+    REFERENCES `mydb`.`tourinfo` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 7
+DEFAULT CHARACTER SET = utf8
+COMMENT = '리뷰 테이블';
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
