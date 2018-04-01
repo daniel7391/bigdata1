@@ -1,4 +1,4 @@
-package gazua.controller.member;
+package gazua.controllers.member;
 
 import java.io.IOException;
 import java.util.List;

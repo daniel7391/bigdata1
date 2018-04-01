@@ -1,4 +1,4 @@
-package gazua.controller;
+package gazua.controllers;
 
 import java.io.IOException;
 

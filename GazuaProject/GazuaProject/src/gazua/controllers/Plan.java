@@ -1,3 +1,4 @@
+package gazua.controllers;
 //package gazua.controller;
 //
 //import gazua.dao.MyBatisConnectionFactory;

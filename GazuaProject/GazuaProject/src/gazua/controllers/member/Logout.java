@@ -1,4 +1,4 @@
-package gazua.controller.member;
+package gazua.controllers.member;
 
 import gazua.helper.BaseController;
 import gazua.helper.WebHelper;
