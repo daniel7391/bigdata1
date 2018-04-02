@@ -27,6 +27,11 @@ public class TourServiceImpl implements TourService{
 		try{
 			//첨부파일이 없는 경우도 있으므로, 조회결과가 null인경우 예외를 발생시키지 않는다
 			result = sqlSession.selectList("TourMapper.selectTourList", tour);
+			if (result == null) {
+				throw new NullPointerException();
+			}
+		}catch (NullPointerException e) {
+			throw new Exception("조회된 장소 목록이 없습니다.");
 		}catch(Exception e){
 			logger.error(e.getLocalizedMessage());
 			throw new Exception("파일 정보 조회에 실패했습니다.");
@@ -52,6 +57,22 @@ public class TourServiceImpl implements TourService{
 			logger.error(e.getLocalizedMessage());
 			throw new Exception("파일 정보 조회에 실패했습니다.");
 		}
+		return result;
+	}
+
+	@Override
+	public int selectTourCount(Tour tour) throws Exception {
+		int result = 0;
+
+		try {
+			// 게시물 수가 0건인 경우도 있으므로, 
+			// 결과값이 0인 경우에 대한 예외를 발생시키지 않는다.
+			result = sqlSession.selectOne("TourMapper.selectTourCount", tour);
+		} catch (Exception e) {
+			logger.error(e.getLocalizedMessage());
+			throw new Exception("Tour게시물 수 조회에 실패했습니다.");
+		}
+
 		return result;
 	}
 	

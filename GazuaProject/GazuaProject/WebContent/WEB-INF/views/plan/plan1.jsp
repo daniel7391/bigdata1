@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 <div class="container">
-                <div class="planHeader">
+       <div class="planHeader">
                     <div class="jumbotron">
                         <h1>일정 제목</h1>
                         <p>

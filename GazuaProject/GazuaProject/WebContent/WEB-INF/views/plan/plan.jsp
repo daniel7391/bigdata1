@@ -54,7 +54,7 @@
     	<%@ include file="/WEB-INF/inc/header.jsp" %>
     </header>
     <section>
-    	<%@ include file="/WEB-INF/inc/plan1.jsp" %>
+    	
     </section>
 </body>
 

@@ -2,8 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- 이 XML의 구조대로 구현될 클래스의 이름 -->
-<mapper namespace="tourMapper">
-	
+<mapper namespace="TourMapper">
 	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
 	<resultMap id="tour" type="gazua.model.Tour">
 		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
@@ -14,7 +13,7 @@
 	<!-- 하나의 정보 조회 -->
 	<select id="selectTour" parameterType="gazua.model.Tour"
 		resultMap="tour">
-		SELECT tourCode, tourLocation_gu
+		SELECT *
 		FROM tour
 		WHERE tourCode=#{tourCode}
 	</select>
@@ -22,7 +21,14 @@
 	<!-- 목록 조회 -->
 	<select id="selectTourList" parameterType="gazua.model.Tour"
 		resultMap="tour">
-		SELECT tourCode, tourLocation_gu
+		SELECT *
 		FROM tour
+	</select>
+	
+	<!-- 전체 게시물 수를 조회한다. -->
+	<select id="selectTourCount"
+		parameterType="gazua.model.Tour"
+		resultType="int">
+		SELECT COUNT(tourCode) FROM tour
 	</select>
 </mapper>

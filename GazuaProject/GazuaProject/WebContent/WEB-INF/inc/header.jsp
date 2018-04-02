@@ -41,18 +41,22 @@
 			</ul>
 		</div>
 		<div class="input-group">
-			<div class="input-group-btn">
-				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-				어디에서
-				
-					<span class="caret"></span>
-				</button>
-				<ul class="dropdown-menu" role="menu">
-					<li><a href="#">강남구</a></li>
-					<li><a href="#">강북구</a></li>
-					<li><a href="#">강서구</a></li>
-				</ul>
-			</div>
+			<select name="subject" id="subject">
+				<option value="">--- 지역구 선택 ---</option>
+				<c:choose>
+					<c:when test="${fn:length(tourList) > 0}">
+						<c:forEach var="tour" items="${tourList}">
+							<option value="${tour.tourCode}">${tour.tourLocation_gu}</option>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<tr>
+							<td colspan="5" class="text-center" style="line-height: 100px;">
+								조회된 지역구가 없습니다.</td>
+						</tr>
+					</c:otherwise>
+				</c:choose>
+				</select>
 			<input type="text" class="form-control">
 			<div class="input-group-btn">
 				<button type="submit" class="btn btn-primary">검색</button>

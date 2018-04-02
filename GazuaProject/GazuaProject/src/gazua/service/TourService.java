@@ -20,4 +20,13 @@ public interface TourService {
 	 * @throws Exception
 	 */
 	public Tour selectTour(Tour tour) throws Exception;
+	
+	/**
+	 * 전체 게시물 수 조회
+	 * @param place
+	 * @return int 
+	 * @throws Exception
+	 */
+	public int selectTourCount(Tour tour) throws Exception;
+	
 }
