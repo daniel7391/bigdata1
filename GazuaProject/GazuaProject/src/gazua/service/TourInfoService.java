@@ -4,6 +4,7 @@ import java.util.List;
 
 import gazua.model.TourInfo;
 
+
 /**
  * 게시물 관련 기능을 제공하기 위한 Service 계층
  */
@@ -29,11 +30,19 @@ public interface TourInfoService {
 	
 	/**
 	 * 전체 게시물 수 조회
-	 * @param place
+	 * @param tourinfo
 	 * @return int 
 	 * @throws Exception
 	 */
 	public int selectTourInfoCount(TourInfo tourinfo) throws Exception;
+	
+	/**
+	 * 하나의 게시물을 읽어들인다.
+	 * @param tourinfo - 읽어들일 게시물 일련번호가 저장된 Beans
+	 * @return TourInfo - 읽어들인 게시물 내용
+	 * @throws Exception
+	 */
+	public TourInfo selectTourInfo(TourInfo tourinfo) throws Exception;
 }
 
 

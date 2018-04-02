@@ -60,8 +60,8 @@
 			<c:forEach var="tourInfo" items="${tourInfoList}">
 				<div class="media">
 					<div class="pull-left">
-						<c:url var="readUrl" value="/tourInfo/tourInfo_read.do">
-							<c:param name="tourInfo_id" value="${tourInfo.id}" />
+						<c:url var="readUrl" value="/gazua/placeinfo.do">
+							<c:param name="id" value="${tourInfo.id}" />
 						</c:url>
 						<a href="${readUrl}">
 							<img src="${tourInfo.imagePath}" class="media-object" />							
@@ -69,7 +69,10 @@
 					</div>
 					<div class="media-body">
 				            <!-- 내용의 제목 -->
-				            <a href="tourInfo.html" style="color: black; position: relative; top: 12px;"><h3 class="media-heading"><span class="glyphicon glyphicon-camera"></span><strong> "${tourInfo.name}"</strong></a><span class="rating">
+				            <c:url var="readUrl" value="/gazua/placeinfo.do">
+								<c:param name="id" value="${tourInfo.id}" />
+							</c:url>
+				            <a href="${readUrl}" style="color: black; position: relative; top: 12px;"><h3 class="media-heading"><span class="glyphicon glyphicon-camera"></span><strong> "${tourInfo.name}"</strong></a><span class="rating">
 				                    <button class="btn like pull-right" id="like" style="height: 45px;">좋아요! (<span class="likes">${tourInfo.likes}</span>)</button>
 				                </span></h3>
 				            <!-- 내용 -->

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 이 XML의 구조대로 구현될 클래스의 이름 => Impl클래스를 대체한다. -->
+<mapper namespace="ReviewMapper">
+
+	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+	<resultMap id="review" type="gazua.model.Review">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+		<result property="id" column="id" />
+		<result property="tour_id" column="tour_id" />
+		<result property="like_level" column="like_level" />
+		<result property="people_level" column="people_level" />
+		<result property="season" column="season" />
+		<result property="member_id" column="member_id" />
+	</resultMap>
+	
+	<!-- 게시물 하나에 대한 정보를 조회한다. -->
+	<select id="selectReviewListByTourId" 
+		parameterType="gazua.model.Review" 
+		resultMap="review">
+		SELECT *
+		FROM   review
+		WHERE  tour_id=#{tour_id}
+	</select>
+	
+	<!-- 아주 좋음 갯수 새기 -->
+	<select id="selectLikeLevel4Count"
+		parameterType="gazua.model.Review"
+		resultType="int">
+		SELECT COUNT(id) FROM review
+		WHERE like_level = 4 and tour_id=#{tour_id}
+	</select>
+
+	<!-- 좋음 갯수 새기 -->
+	<select id="selectLikeLevel3Count"
+		parameterType="gazua.model.Review"
+		resultType="int">
+		SELECT COUNT(id) FROM review
+		WHERE like_level = 3 and tour_id=#{tour_id}
+	</select>
+
+	<!-- 보통 갯수 새기 -->
+	<select id="selectLikeLevel2Count"
+		parameterType="gazua.model.Review"
+		resultType="int">
+		SELECT COUNT(id) FROM review
+		WHERE like_level = 2 and tour_id=#{tour_id}
+	</select>
+
+	<!-- 별로 갯수 새기 -->
+	<select id="selectLikeLevel1Count"
+		parameterType="gazua.model.Review"
+		resultType="int">
+		SELECT COUNT(id) FROM review
+		WHERE like_level = 1 and tour_id=#{tour_id}
+	</select>
+
+	<!-- 가족 갯수 새기 -->
+	<select id="selectPeopleLevel4Count"
+		parameterType="gazua.model.Review"
+		resultType="int">
+		SELECT COUNT(id) FROM review
+		WHERE people_level = 4 and tour_id=#{tour_id}
+	</select>
+
+	<!-- 커플 갯수 새기 -->
+	<select id="selectPeopleLevel3Count"
+		parameterType="gazua.model.Review"
+		resultType="int">
+		SELECT COUNT(id) FROM review
+		WHERE people_level = 3 and tour_id=#{tour_id}
+	</select>
+
+	<!-- 친구 갯수 새기 -->
+	<select id="selectPeopleLevel2Count"
+		parameterType="gazua.model.Review"
+		resultType="int">
+		SELECT COUNT(id) FROM review
+		WHERE people_level = 2 and tour_id=#{tour_id}
+	</select>
+
+	<!-- 솔로 갯수 새기 -->
+	<select id="selectPeopleLevel1Count"
+		parameterType="gazua.model.Review"
+		resultType="int">
+		SELECT COUNT(id) FROM review
+		WHERE people_level = 1 and tour_id=#{tour_id}
+	</select>
+
+	<!-- 봄 갯수 새기 -->
+	<select id="selectSeasonLevel4Count"
+		parameterType="gazua.model.Review"
+		resultType="int">
+		SELECT COUNT(id) FROM review
+		WHERE season = 4 and tour_id=#{tour_id}
+	</select>
+
+	<!-- 여름 갯수 새기 -->
+	<select id="selectSeasonLevel3Count"
+		parameterType="gazua.model.Review"
+		resultType="int">
+		SELECT COUNT(id) FROM review
+		WHERE season = 3 and tour_id=#{tour_id}
+	</select>
+
+	<!-- 가을 갯수 새기 -->
+	<select id="selectSeasonLevel2Count"
+		parameterType="gazua.model.Review"
+		resultType="int">
+		SELECT COUNT(id) FROM review
+		WHERE season = 2 and tour_id=#{tour_id}
+	</select>
+
+	<!-- 겨울 갯수 새기 -->
+	<select id="selectSeasonLevel1Count"
+		parameterType="gazua.model.Review"
+		resultType="int">
+		SELECT COUNT(id) FROM review
+		WHERE season = 1 and tour_id=#{tour_id}
+	</select>
+	
+</mapper>
+
+
+
+
+

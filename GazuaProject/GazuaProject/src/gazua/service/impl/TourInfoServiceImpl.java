@@ -94,4 +94,24 @@ public class TourInfoServiceImpl implements TourInfoService {
 		return result;
 	}
 
+
+	@Override
+	public TourInfo selectTourInfo(TourInfo tourinfo) throws Exception {
+		TourInfo result = null;
+
+		try {
+			result = sqlSession.selectOne("TourInfoMapper.selectTourInfo", tourinfo);
+			if (result == null) {
+				throw new NullPointerException();
+			}
+		} catch (NullPointerException e) {
+			throw new Exception("조회된 게시물이 없습니다.");
+		} catch (Exception e) {
+			logger.error(e.getLocalizedMessage());
+			throw new Exception("게시물 조회에 실패했습니다.");
+		}
+
+		return result;
+	}
+
 }
