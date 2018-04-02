@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page trimDirectiveWhitespaces="true"%>
+
 <!DOCTYPE html>
+
 <html lang="ko">
     <head>
         <%@ include file="/WEB-INF/inc/common.jsp" %>
@@ -9,6 +11,15 @@
         <!-- 시각적 확인을 위한 CSS 적용 -->
         <style type="text/css">
             <%@ include file="/assets/css/mainpage.css" %>
+            .status{
+            	width:255px;
+            }
+            .content-box{
+            	width:723px;
+            }
+        	#carousel-example-generic{
+        	width:740px;
+        	}
         </style>
     </head>
     <body>

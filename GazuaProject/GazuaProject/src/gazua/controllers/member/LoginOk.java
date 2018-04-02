@@ -68,6 +68,30 @@ public class LoginOk extends BaseController {
 			return null;
 		}
 		
+		String profileImg = loginInfo.getMember_profile_img();
+		if (profileImg != null) {
+			try {
+				String profileThumbnail =  upload.createThumbnail(profileImg, 120, 120, true);
+				web.setCookie("profileThumbnail", profileThumbnail, -1);
+			} catch (Exception e) {
+				web.redirect(null, e.getLocalizedMessage());
+				return null;
+			}
+		}
+		String profileImg2 = loginInfo.getMember_profile_img();
+		if (profileImg2 != null) {
+			try {
+				String profileThumbnail2 =  upload.createThumbnail(profileImg, 40, 40, true);
+				web.setCookie("profileThumbnail2", profileThumbnail2, -1);
+			} catch (Exception e) {
+				web.redirect(null, e.getLocalizedMessage());
+				return null;
+			}
+		}
+		
+		
+		
+		
 		logger.debug("로그인 성공");
 		logger.debug("LoginInfo >> " + loginInfo.toString());
 		

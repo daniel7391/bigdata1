@@ -19,9 +19,7 @@
 <!-- gmap 플러그인 참조 -->
 <script src="../assets/plugins/gmaps/gmaps.min.js"></script>
 
-<!-- Javascript -->
-<script src="../assets/js/jquery.min.js"></script>
-<script src="../assets/js/bootstrap.min.js"></script>
+
 
 <script src="../assets/js/masonry.pkgd.js"></script>
 <script src="../assets/js/masonry.pkgd.min.js"></script>
