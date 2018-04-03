@@ -88,10 +88,20 @@ z-index:1;
 					<li><a href="#">강서구</a></li>
 				</ul>
 			</div>
-			<input type="text" class="form-control">
-			<div class="input-group-btn">
-				<button type="submit" class="btn btn-primary">검색</button>
+			 <div class="pull-left">
+		<form method="get" action="${pageContext.request.contextPath}/gazua/tourinfolist.do" style="width: 900px">
+			<div class="input-group">
+				<input type="text" name="keyword" class="form-control" 
+					placeholder="제목,내용 검색"  value="${keyword}"/>
+				<span class="input-group-btn">
+					<button class="btn btn-primary" type="submit">
+						<i class="glyphicon glyphicon-search"></i>
+					</button>
+				</span>
 			</div>
+		</form>
+	</div>
+</div>
 		</div>
 	</div>
 </div>

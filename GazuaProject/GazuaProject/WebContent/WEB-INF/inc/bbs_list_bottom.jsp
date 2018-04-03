@@ -2,22 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page trimDirectiveWhitespaces="true"%>
 <!-- 검색폼 + 글 쓰기 버튼 시작 -->
-<div class="clearfix">
-    <!-- 검색 폼 -->
-    <div class="pull-left">
-		<form method="get" action="${pageContext.request.contextPath}/gazua/tourinfolist.do" style="width: 200px">
-			<div class="input-group">
-				<input type="text" name="keyword" class="form-control" 
-					gazuaholder="제목,내용 검색"  value="${keyword}"/>
-				<span class="input-group-btn">
-					<button class="btn btn-success" type="submit">
-						<i class="glyphicon glyphicon-search"></i>
-					</button>
-				</span>
-			</div>
-		</form>
-	</div>
-</div>
+
 <!--// 검색폼 + 글 쓰기 버튼 끝 -->
 
 <!-- 페이지 번호 시작 -->

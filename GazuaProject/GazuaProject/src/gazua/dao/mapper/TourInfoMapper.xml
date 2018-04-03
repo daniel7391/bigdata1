@@ -35,8 +35,21 @@
 		resultMap="tourinfo">
 		SELECT *
 		FROM   tourinfo
+			<where>
+			<if test="name != null or intro != null">
+				<if test="name != null">
+					name LIKE concat('%', #{name}, '%')
+				</if>
+				<if test="intro != null">
+					OR intro LIKE concat('%', #{intro}, '%')
+				</if>
+			</if>
+		</where>
 		ORDER  BY id DESC
+			
 		LIMIT #{limitStart}, #{listCount}
+		
+	
 	</select>
 	
 	<!-- 이전글 정보를 조회한다. -->

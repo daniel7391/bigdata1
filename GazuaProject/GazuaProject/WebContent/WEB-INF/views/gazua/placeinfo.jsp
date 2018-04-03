@@ -535,19 +535,17 @@
 
                 /** 표시중인 위치에 마커 추가 */
                 // 필요한 만큼 반복하면 마커가 여러 개 표시된다.
-                map.addMarker({
-                    // 마우스 오버시 노란 박스
-                    title: ${readTourInfo.name},
-                    lat: lat_value,     // 마커가 표시될 위도
-                    lng: lng_value,     // 마커가 표시될 경도
-                    icon: {             // 사용자 정의 아이콘
-                        url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2vdpkKcNGhLpCsg-4ZnxXPG5zLCh4dObs1zIFJJhSb8-Wvedk",
-                        scaledSize: new google.maps.Size(50, 50)
-                    },
-                    infoWindow: {       // 클릭시 표시될 말풍선 <-- HTML 코딩 가능함.
-                        content: '<img src="img/Kyung2.jpg" width="160" /><h4>경복궁</h4><p>서울특별시 종로구 사직로 161</p><a href="#">상세보기</a>'
-                    }
-                });
+               map.addMarker({
+                // 마우스 오버시 노란 박스
+                title: '${readTourInfo.name}',
+                lat: lat_value,		// 마커가 표시될 위도
+                lng: lng_value,		// 마커가 표시될 경도
+                icon: {				// 사용자 정의 아이콘
+                    url: "../assets/img/marker3.png",
+                    scaledSize: new google.maps.Size(15, 15)
+                },
+                
+            });
 
                 var saveComment = function(data) {
 
@@ -623,6 +621,7 @@
                     // });
                 }
             });
+            
         </script>
 <%@ include file="/WEB-INF/inc/footer.jsp" %>
 </body>
