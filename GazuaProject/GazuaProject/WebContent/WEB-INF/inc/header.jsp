@@ -22,6 +22,8 @@ z-index:1;
 	<a href="${pageContext.request.contextPath}/gazua/main.do">
 		<img src="../assets/img/logo.png" />
 	</a>
+		<c:set var="mainUrl" value="${pageContext.request.requestURL}/gazua/main.do" />
+		<c:if test="${mainUrl != 'http://localhost:8080/Gazua1/WEB-INF/views/gazua/main.jsp/gazua/main.do'}">
 	<c:choose>
 		<c:when test="${loginInfo != null}">
 			<div class="pull-right">
@@ -56,6 +58,7 @@ z-index:1;
 			</div>
 		</c:when>
 	</c:choose>
+		</c:if>
 </div>
 <div class="big">
 <div class="navbar navbar-inverse navbar-static-top" role="navigation">
