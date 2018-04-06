@@ -72,9 +72,9 @@
 				            <c:url var="readUrl" value="/gazua/placeinfo.do">
 								<c:param name="id" value="${tourInfo.id}" />
 							</c:url>
-				            <a href="${readUrl}" style="color: black; position: relative; top: 12px;"><h3 class="media-heading"><span class="glyphicon glyphicon-camera"></span><strong> "${tourInfo.name}"</strong></a><span class="rating">
+				            <a href="${readUrl}" style="color: black; position: relative; top: 12px;"><h3 class="media-heading"><span class="glyphicon glyphicon-camera"></span><strong> "${tourInfo.name}"</strong></h3></a><span class="rating">
 				                    <button class="btn like pull-right" id="like" style="height: 45px;">좋아요! (<span class="likes">${tourInfo.likes}</span>)</button>
-				                </span></h3>
+				                </span>
 				            <!-- 내용 -->
 				            <br />
 				            <a href="tourInfo.html" style="color: gray;"><h5 class="summary">${tourInfo.intro}</h5></a>

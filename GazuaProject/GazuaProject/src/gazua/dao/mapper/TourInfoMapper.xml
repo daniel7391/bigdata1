@@ -101,6 +101,16 @@
 		WHERE  id=#{id}
 	</select>
 	
+	<!-- 좋아요를 눌러한다. -->
+	<update id="updateLikes"
+		parameterType="gazua.model.TourInfo">
+		update tourinfo set likes=likes+1 where id=#{id}
+	</update>
+	
+	<update id="dedateLikes"
+		parameterType="gazua.model.TourInfo">
+		update tourinfo set likes=likes-1 where id=#{id}
+	</update>
 </mapper>
 
 

@@ -87,6 +87,7 @@ public class PlaceInfo extends BaseController {
 		List<Review> readReview = null;
 		ReviewSupport reviewSupport =new ReviewSupport();
 		
+		
 		try {
 			readTourInfo = tourInfoService.selectTourInfo(tourInfo);
 			readPhoto = photoService.selectOnePhotoByTourId(photo);
@@ -117,6 +118,8 @@ public class PlaceInfo extends BaseController {
 		request.setAttribute("readTourInfo", readTourInfo);
 		request.setAttribute("readPhoto", readPhoto);
 		request.setAttribute("readReview", readReview);
+		request.setAttribute("tourInfo", tourInfo);
+		request.setAttribute("tourInfoService", tourInfoService);
 		
 		String view = "gazua/placeinfo";
 

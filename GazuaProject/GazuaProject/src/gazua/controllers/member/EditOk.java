@@ -183,7 +183,7 @@ public class EditOk extends BaseController {
 		Member member = new Member();
 		// WHERE절에 사용할 회원번호는 세션에서 취득
 		member.setMember_id(loginInfo.getMember_id());
-		member.setMember_pw(member_pw);;
+		member.setMember_pw(member_pw);
 		member.setMember_name2(member_name2);
 		member.setMember_email(member_email);
 		member.setBirthdate(loginInfo.getBirthdate());
@@ -224,26 +224,39 @@ public class EditOk extends BaseController {
 		// 일단 쿠키의 썸네일 정보를 삭제한다.
 		if (imgDel != null && imgDel.equals("Y")) {
 			web.removeCookie("profileThumbnail");
+			web.removeCookie("profileThumbnail2");
 		}
 		
 		// 프로필 이미지가 있을 경우 썸네일을 생성하여 쿠키에 별도로 저장
 		String newmember_profile_img = editInfo.getMember_profile_img();
 		if (newmember_profile_img != null) {
 			try {
-				String profileThumbnail = upload.createThumbnail(newmember_profile_img, 40, 40, true);
+				String profileThumbnail = upload.createThumbnail(newmember_profile_img, 120, 120, true);
 				web.setCookie("profileThumbnail", profileThumbnail, -1);
+				
 			} catch (Exception e) {
 				web.redirect(null, e.getLocalizedMessage());
 				return null;
 			}
 		}
-		
+		String newmember_profile_img2 = editInfo.getMember_profile_img();
+		if (newmember_profile_img2 != null) {
+			try {
+				String profileThumbnail2 = upload.createThumbnail(newmember_profile_img, 40, 40, true);
+				web.setCookie("profileThumbnail2", profileThumbnail2, -1);
+				
+			} catch (Exception e) {
+				web.redirect(null, e.getLocalizedMessage());
+				return null;
+			}
+		}
+		editInfo.setMember_id(member.getMember_id());
 		// 세션을 갱신한다.
 		web.removeSession("loginInfo");
 		web.setSession("loginInfo", editInfo);
-
+		
 		/** (11) 수정이 완료되었으므로 다시 수정페이지로 이동 */
-		web.redirect(web.getRootPath() + "/member/edit.do", 
+		web.redirect(web.getRootPath() + "/gazua/main.do", 
 				"회원정보가 수정되었습니다.");
 
 		

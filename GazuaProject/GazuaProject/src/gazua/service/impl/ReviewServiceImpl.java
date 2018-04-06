@@ -191,4 +191,39 @@ public class ReviewServiceImpl implements ReviewService{
 		return result;
 	}
 
+	@Override
+	public void insertReview(Review review) throws Exception {
+		try {
+			int result = sqlSession.insert("ReviewMapper.insertReview", review);
+			if (result == 0) {
+				throw new NullPointerException();
+			}
+		} catch (NullPointerException e) {
+			sqlSession.rollback();
+			throw new Exception("저장된 리뷰가 없습니다.");
+		} catch (Exception e) {
+			sqlSession.rollback();
+			logger.error(e.getLocalizedMessage());
+			throw new Exception("리뷰 정보 등록에 실패했습니다.");
+		} finally {
+			sqlSession.commit();
+		}
+	}
+
+	@Override
+	public int selectReviewCountByMemberId(Review review) throws Exception {
+		int result = 0;
+		
+		try {
+			// 게시물 수가 0건인 경우도 있으므로, 
+			// 결과값이 0인 경우에 대한 예외를 발생시키지 않는다.
+			result = sqlSession.selectOne("ReviewMapper.selectReviewCountByMemberId", review);
+		} catch (Exception e) {
+			logger.error(e.getLocalizedMessage());
+			throw new Exception("게시물 수 조회에 실패했습니다.");
+		}
+
+		return result;
+	}
+
 }

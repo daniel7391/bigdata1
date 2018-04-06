@@ -41,7 +41,7 @@
             <label for='member_user_id' class="col-md-2">아이디*</label>
             <div class="col-md-10">
                 <!-- 아이디는 변경할 수 없기 때문에 출력만 한다. -->
-                <p class="form-control-static">${loginInfo.member_user_id}</p>
+                <p class="form-control-static">${loginInfo.member_id}</p>
             </div>
         </div>
         
@@ -94,11 +94,11 @@
             <label for='member_gender' class="col-md-2">성별*</label>
             <div class="col-md-10">
             	<label class="radio-inline">
-                	<input type="radio" name="gender" id="member_gender" value="M"  
+                	<input type="radio" name="gender" id="member_gender1" value="M"  
                 		<c:if test="${loginInfo.member_gender == 'M'}">checked</c:if>/> 남자
                 </label>
                 <label class="radio-inline">
-                	<input type="radio" name="gender" id="member_gender" value="F"
+                	<input type="radio" name="gender" id="member_gender2" value="F"
                 		<c:if test="${loginInfo.member_gender == 'F'}">checked</c:if> /> 여자
                 </label>
             </div>
@@ -123,7 +123,7 @@
             <!-- 등록된 프로필 이미지 표시하기 -->
             <div class="col-md-10 col-md-offset-2">
 	            <p>
-	            	<img src="${pageContext.request.contextPath}/download.do?file=${cookie.profileThumbnail.value}" class="img-circle"/>
+	            	<img src="${pageContext.request.contextPath}/gazua/download.do?file=${cookie.profileThumbnail.value}" class="img-circle"/>
 	            	<label class="checkbox-inline">
 	            		<input type="checkbox" name="img_del" id="img_del" value="Y" /> 이미지 삭제
 	            	</label>

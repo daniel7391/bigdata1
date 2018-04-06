@@ -26,6 +26,23 @@
 		WHERE  tour_id=#{tour_id}
 	</select>
 	
+	<insert id="insertReview" parameterType="gazua.model.Review" 
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO review (
+			tour_id, like_level, people_level, season, member_id
+		) VALUES (
+			#{tour_id}, #{like_level}, #{people_level}, #{season}, #{member_id}
+		)
+	</insert>
+	
+	<select id="selectReviewCountByMemberId"
+		parameterType="gazua.model.Review"
+		resultType="int">
+		SELECT COUNT(id) FROM review
+		where member_id = #{member_id}
+		and tour_id = #{tour_id}
+	</select>
+	
 	<!-- 아주 좋음 갯수 새기 -->
 	<select id="selectLikeLevel4Count"
 		parameterType="gazua.model.Review"

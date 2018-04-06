@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 이 XML의 구조대로 구현될 클래스의 이름 -->
+<mapper namespace="LikesMapper">
+	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+	<resultMap id="likes" type="gazua.model.Likes">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+		<result property="id" column="id"/>
+		<result property="member_id" column="member_id"/>
+		<result property="tour_id" column="tour_id"/>
+		<result property="plan_id" column="plan_id"/>
+	</resultMap>
+	
+	<!-- 하나의 정보 조회 -->
+	<select id="selectCountLikesByTourId" parameterType="gazua.model.Likes"
+		resultType="int">
+		SELECT count(id)
+		FROM likes
+		WHERE tour_id=#{tour_id}
+	</select>
+	
+	<insert id="insertLikesByPlace" parameterType="gazua.model.Likes" 
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO likes (
+			member_id, tour_id
+		) VALUES (
+			#{member_id}, #{tour_id}
+		)
+	</insert>
+
+	<delete id="deleteLikesByPlace" parameterType="gazua.model.Likes" >
+		delete from likes where tour_id=#{tour_id}
+	</delete>
+	
+	
+	<select id="selectLikesCountByMemberId"
+		parameterType="gazua.model.Likes"
+		resultType="int">
+		SELECT COUNT(id) FROM likes
+		where member_id=#{member_id} and tour_id=#{tour_id}
+	</select>
+	
+</mapper>

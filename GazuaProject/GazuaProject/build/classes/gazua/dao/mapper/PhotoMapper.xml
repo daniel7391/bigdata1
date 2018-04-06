@@ -30,6 +30,14 @@
 		FROM   photo
 		WHERE tour_id = #{tour_id}
 	</select>
+
+	<select id="selectPhotoListByTourPlanId" 
+		parameterType="gazua.model.Photo" 
+		resultMap="photo">
+		SELECT *
+		FROM   photo
+		WHERE tourPlan_id = #{tourPlan_id}
+	</select>
 	
 	<select id="selectOnePhotoByTourId" 
 		parameterType="gazua.model.Photo" 
@@ -37,6 +45,15 @@
 		SELECT *
 		FROM   photo
 		WHERE tour_id = #{tour_id}
+		limit 0,1
+	</select>
+
+	<select id="selectOnePhotoByTourPlanId" 
+		parameterType="gazua.model.Photo" 
+		resultMap="photo">
+		SELECT *
+		FROM   photo
+		WHERE tourPlan_id = #{tourPlan_id}
 		limit 0,1
 	</select>
 </mapper>

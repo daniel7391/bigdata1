@@ -43,6 +43,10 @@ public interface TourInfoService {
 	 * @throws Exception
 	 */
 	public TourInfo selectTourInfo(TourInfo tourinfo) throws Exception;
+	
+	public void updateLikes(TourInfo tourinfo) throws Exception;
+	public void dedateLikes(TourInfo tourinfo) throws Exception;
+	
 }
 
 

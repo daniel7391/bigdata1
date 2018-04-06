@@ -72,7 +72,7 @@ z-index:1;
 			<ul class="nav navbar-nav">
 				<li><a href="${pageContext.request.contextPath}/gazua/tourinfolist.do">추천여행지</a></li>
 				<li><a href="${pageContext.request.contextPath}/gazua/plan.do">여행 일정 만들기</a></li>
-				<li><a href="${pageContext.request.contextPath}/gazua/">여행 후기</a></li>
+				<li><a href="${pageContext.request.contextPath}/gazua/plan_review_list.do">여행 후기</a></li>
 			</ul>
 		</div>
 		<div class="input-group">
