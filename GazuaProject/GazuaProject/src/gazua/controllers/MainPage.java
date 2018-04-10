@@ -1,4 +1,4 @@
-package gazua.controllers.tour;
+package gazua.controllers;
 
 import java.io.IOException;
 import java.util.List;

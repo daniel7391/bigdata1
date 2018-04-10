@@ -47,7 +47,7 @@ public class UploadHelper {
 	// ----------- 싱글톤 객체 생성 끝 ----------
 
 	/** 자신의 Workspace 경로 */
-	public static final String homeDir = "D:/jsp/workspace";
+	public static final String homeDir = "D:/Developers/WorkingSpace/EclipseEE";
 	/** 업로드 된 결과물이 저장될 폴더 */
 	public static final String fileDir = homeDir + "/upload";
 	/** 업로드가 진행될 임시 폴더 */

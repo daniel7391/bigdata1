@@ -121,7 +121,7 @@ public class PlaceInfo extends BaseController {
 		request.setAttribute("tourInfo", tourInfo);
 		request.setAttribute("tourInfoService", tourInfoService);
 		
-		String view = "gazua/placeinfo";
+		String view = "place/placeinfo";
 
 		return view;
 	}

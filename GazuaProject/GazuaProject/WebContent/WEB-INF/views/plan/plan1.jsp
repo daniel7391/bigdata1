@@ -16,22 +16,22 @@
                                 <button type="submit" class="btn btn-default save">저장하기</button>
                                 <button type="button" class="btn btn-default cancel">취소</button>
                             </div>
-<div>
-    <ul>
-        <li>
-            <button type="button" class="btn btn-default" style="width: 100%;">방문 명소</button>
-		</li>
-		<li>
-		    <input type="text" placeholder="지역구로 검색">
-		</li>
-		<li>
-		    <input type="text" placeholder="여행지명으로 검색">
-		</li>
-		<li>
-		    <button type="button" class="btn btn-warning" style="width: 100%">검색</button>
-        </li>
-    </ul>
-</div>
+							<div>
+							    <ul>
+							        <li>
+							            <button type="button" class="btn btn-default" style="width: 100%;">방문 명소</button>
+									</li>
+									<li>
+									    <input type="text" placeholder="지역구로 검색">
+									</li>
+									<li>
+									    <input type="text" placeholder="여행지명으로 검색">
+									</li>
+									<li>
+									    <button type="button" class="btn btn-warning" style="width: 100%">검색</button>
+							        </li>
+							    </ul>
+							</div>
                             <div class="searchResult">
                                 <ul class="media-list">
                                     <li class="media">
