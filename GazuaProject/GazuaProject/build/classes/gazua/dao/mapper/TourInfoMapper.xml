@@ -109,6 +109,7 @@
 		parameterType="gazua.model.TourInfo">
 		update tourinfo set likes=likes-1 where id=#{id}
 	</update>
+<<<<<<< HEAD
 	
 	   <select id="selectTourInfoListsecond" 
       parameterType="gazua.model.TourInfo" 
@@ -116,6 +117,8 @@
       SELECT *
       FROM   tourinfo
    </select>
+=======
+>>>>>>> 2bb6031a60b3c5b9d17ce4d694edf4b17d5ff1e4
 </mapper>
 
 

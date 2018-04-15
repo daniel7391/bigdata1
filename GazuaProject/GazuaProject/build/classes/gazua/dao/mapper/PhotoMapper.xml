@@ -57,6 +57,7 @@
 		WHERE tourPlan_id = #{tourPlan_id}
 		limit 0,1
 	</select>
+<<<<<<< HEAD
 	
 	<select id="selectTourIdByPlanId"
 		parameterType="gazua.model.Photo"
@@ -83,6 +84,8 @@
 		WHERE tourPlan_id = #{tourPlan_id}
 		ORDER BY date ASC
 	</select>
+=======
+>>>>>>> 2bb6031a60b3c5b9d17ce4d694edf4b17d5ff1e4
 </mapper>
 
 

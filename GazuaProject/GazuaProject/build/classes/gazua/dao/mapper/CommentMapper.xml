@@ -30,6 +30,7 @@
 		)
 	</insert>
 	
+<<<<<<< HEAD
 		<insert id="insertCommentPlan" parameterType="gazua.model.Comment" 
 		useGeneratedKeys="true" keyProperty="comment_id">
 		INSERT INTO comment (
@@ -40,6 +41,8 @@
 		)
 	</insert>
 	
+=======
+>>>>>>> 2bb6031a60b3c5b9d17ce4d694edf4b17d5ff1e4
 	<select id="selectCommentTour" parameterType="gazua.model.Comment" resultMap="comment">
 		SELECT comment_id, comment_user_name, content,
 			    DATE_FORMAT(reg_date, '%Y-%m-%d %H:%i:%s') as reg_date, 
@@ -49,6 +52,7 @@
 	 	WHERE  comment_id=#{comment_id}
 	</select>
 	
+<<<<<<< HEAD
 	<select id="selectCommentPlan" parameterType="gazua.model.Comment" resultMap="comment">
 		SELECT comment_id, comment_user_name, content,
 			    DATE_FORMAT(reg_date, '%Y-%m-%d %H:%i:%s') as reg_date, 
@@ -58,6 +62,8 @@
 	 	WHERE  comment_id=#{comment_id}
 	</select>
 	
+=======
+>>>>>>> 2bb6031a60b3c5b9d17ce4d694edf4b17d5ff1e4
 	<select id="selectCommentListTour" parameterType="gazua.model.Comment" resultMap="comment">
 		SELECT comment_id, comment_user_name, content,
 			    DATE_FORMAT(reg_date, '%Y-%m-%d %H:%i:%s') as reg_date, 
@@ -67,6 +73,7 @@
 	 	WHERE  tour_id=#{tour_id}
 	</select>
 	
+<<<<<<< HEAD
 	<select id="selectCommentListPlan" parameterType="gazua.model.Comment" resultMap="comment">
 		SELECT comment_id, comment_user_name, content,
 			    DATE_FORMAT(reg_date, '%Y-%m-%d %H:%i:%s') as reg_date, 
@@ -76,6 +83,8 @@
 	 	WHERE  tourPlan_id=#{tourPlan_id}
 	</select>
 	
+=======
+>>>>>>> 2bb6031a60b3c5b9d17ce4d694edf4b17d5ff1e4
 	<select id="selectCommentCountByMemberId"
 		parameterType="gazua.model.Comment"
 		resultType="int">

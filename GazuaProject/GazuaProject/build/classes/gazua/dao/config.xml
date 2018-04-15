@@ -24,9 +24,12 @@
 		<mapper resource="gazua/dao/mapper/TourPlanMapper.xml"/>
 		<mapper resource="gazua/dao/mapper/LikesMapper.xml"/>
 		<mapper resource="gazua/dao/mapper/CommentMapper.xml"/>
+<<<<<<< HEAD
 		<mapper resource="gazua/dao/mapper/PhotoTourInfoMapper.xml"/>
 		<mapper resource="gazua/dao/mapper/TourPlanJoinMapper.xml"/>
 		<mapper resource="gazua/dao/mapper/TourInfoJoinMapper.xml"/>
 		<mapper resource="gazua/dao/mapper/PhotoJoinMapper.xml"/>
+=======
+>>>>>>> 2bb6031a60b3c5b9d17ce4d694edf4b17d5ff1e4
 	</mappers>
 </configuration>
