@@ -7,6 +7,7 @@ import gazua.model.Review;
 public interface ReviewService {
 	
 	public List<Review> selectReviewListByTourId(Review review) throws Exception;
+	public int selectReviewCountByMemberId(Review review) throws Exception;
 	
 	public int selectLikeLevel4Count(Review review) throws Exception;
 	public int selectLikeLevel3Count(Review review) throws Exception;
@@ -20,4 +21,6 @@ public interface ReviewService {
 	public int selectSeasonLevel3Count(Review review) throws Exception;
 	public int selectSeasonLevel2Count(Review review) throws Exception;
 	public int selectSeasonLevel1Count(Review review) throws Exception;
+	
+	public void insertReview(Review review) throws Exception;
 }

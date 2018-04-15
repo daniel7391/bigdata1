@@ -18,6 +18,7 @@
 		<result property="content_type" column="content_type" />
 		<result property="reg_date" column="reg_date" />
 		<result property="edit_date" column="edit_date" />
+		<result property="date" column="date" />		
 		<result property="contents" column="contents" />
 		<result property="tourPlan_id" column="tourPlan_id" />
 	</resultMap>
@@ -30,6 +31,14 @@
 		FROM   photo
 		WHERE tour_id = #{tour_id}
 	</select>
+
+	<select id="selectPhotoListByTourPlanId" 
+		parameterType="gazua.model.Photo" 
+		resultMap="photo">
+		SELECT *
+		FROM   photo
+		WHERE tourPlan_id = #{tourPlan_id}
+	</select>
 	
 	<select id="selectOnePhotoByTourId" 
 		parameterType="gazua.model.Photo" 
@@ -38,6 +47,41 @@
 		FROM   photo
 		WHERE tour_id = #{tour_id}
 		limit 0,1
+	</select>
+
+	<select id="selectOnePhotoByTourPlanId" 
+		parameterType="gazua.model.Photo" 
+		resultMap="photo">
+		SELECT *
+		FROM   photo
+		WHERE tourPlan_id = #{tourPlan_id}
+		limit 0,1
+	</select>
+	
+	<select id="selectTourIdByPlanId"
+		parameterType="gazua.model.Photo"
+		resultType="int">
+		select tour_id
+		from photo
+		where tourPlan_id = #{tourPlan_id}
+		and tour_id is not null	
+	</select>
+	
+	<select id="selectTourIdByPlanIdCount"
+		parameterType="gazua.model.Photo"
+		resultType="int">
+		SELECT COUNT(photo_id) FROM photo
+		where tourPlan_id = #{tourPlan_id}
+		and tour_id is not null
+	</select>
+	
+	<select id="selectPhotoListByTourPlanId2" 
+		parameterType="gazua.model.Photo" 
+		resultMap="photo">
+		SELECT *
+		FROM   photo
+		WHERE tourPlan_id = #{tourPlan_id}
+		ORDER BY date ASC
 	</select>
 </mapper>
 

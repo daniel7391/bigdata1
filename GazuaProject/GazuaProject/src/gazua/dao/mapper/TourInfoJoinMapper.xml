@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 이 XML의 구조대로 구현될 클래스의 이름 => Impl클래스를 대체한다. -->
+<mapper namespace="TourInfoJoinMapper">
+
+	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+	<resultMap id="tourinfojoin" type="gazua.model.TourInfoJoin">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="postCode" column="postcode" />
+		<result property="addr1" column="addr1" />
+		<result property="addr2" column="addr2" />
+		<result property="cost" column="cost" />
+		<result property="route1" column="route1" />
+		<result property="route2" column="route2" />
+		<result property="holiday1" column="holyday1" />
+		<result property="intro" column="intro" />
+		<result property="likes" column="likes" />
+		<result property="tel" column="tel" />
+		<result property="homePage" column="homepage" />
+		<result property="x" column="x" />
+		<result property="y" column="y" />
+		<result property="tourCode" column="tour_tourCode" />
+		<result property="member_id" column="member_id" />
+	</resultMap>
+	
+
+	<select id="selectTourInfoJoin"
+		parameterType="gazua.model.TourInfoJoin"
+		resultMap="tourinfojoin">
+		SELECT tourinfo.id, tourinfo.name, postCode, addr1, addr2,
+			cost, route1, route2, holiday1, intro, likes, tel, homePage, x, y, tour_tourCode
+		from tourinfo, review
+		WHERE review.tour_id=tourinfo.id and review.member_id = #{member_id}
+		order by review.id desc
+		LIMIT 0, 4
+	</select>
+	
+	<select id="selectTourInfoJoinCount"
+		parameterType="gazua.model.TourInfoJoin"
+		resultType="int">
+		SELECT count(tourinfo.id)
+		from tourinfo, review
+		WHERE review.tour_id=tourinfo.id and review.member_id = #{member_id}
+	</select>
+	
+	
+</mapper>
+
+
+
+
+

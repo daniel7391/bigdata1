@@ -10,8 +10,16 @@ public class Photo {
 	private String content_type;
 	private String reg_date;
 	private String edit_date;
+	private String date;
 	private String contents;
 	private int tourPlan_id;
+
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
 	public int getPhoto_id() {
 		return photo_id;
 	}
@@ -82,7 +90,8 @@ public class Photo {
 	public String toString() {
 		return "Photo [photo_id=" + photo_id + ", tour_id=" + tour_id + ", dir=" + dir + ", origin_name=" + origin_name
 				+ ", name=" + name + ", size=" + size + ", content_type=" + content_type + ", reg_date=" + reg_date
-				+ ", edit_date=" + edit_date + ", contents=" + contents + ", tourPlan_id=" + tourPlan_id + "]";
+				+ ", edit_date=" + edit_date + ", date=" + date + ", contents=" + contents + ", tourPlan_id="
+				+ tourPlan_id + "]";
 	}
 	
 	 

@@ -17,12 +17,15 @@ import gazua.helper.BaseController;
 import gazua.helper.UploadHelper;
 import gazua.helper.WebHelper;
 import gazua.model.Photo;
+import gazua.model.PhotoJoin;
 import gazua.model.Review;
 import gazua.model.ReviewSupport;
 import gazua.model.TourInfo;
+import gazua.service.PhotoJoinService;
 import gazua.service.PhotoService;
 import gazua.service.ReviewService;
 import gazua.service.TourInfoService;
+import gazua.service.impl.PhotoJoinServiceImpl;
 import gazua.service.impl.PhotoServiceImpl;
 import gazua.service.impl.ReviewServiceImpl;
 import gazua.service.impl.TourInfoServiceImpl;
@@ -44,6 +47,7 @@ public class PlaceInfo extends BaseController {
 	TourInfoService tourInfoService;
 	PhotoService photoService;
 	ReviewService reviewService;
+	PhotoJoinService photoJoinService;
 	// --> import study.jsp.helper.Upload;
 	UploadHelper upload;
 	
@@ -60,6 +64,7 @@ public class PlaceInfo extends BaseController {
 		tourInfoService = new TourInfoServiceImpl(sqlSession, logger);
 		photoService = new PhotoServiceImpl(sqlSession, logger);
 		reviewService = new ReviewServiceImpl(sqlSession, logger);
+		photoJoinService = new PhotoJoinServiceImpl(sqlSession, logger);
 		
 		upload = UploadHelper.getInstance();
 		
@@ -80,17 +85,23 @@ public class PlaceInfo extends BaseController {
 		Review review = new Review();
 		review.setTour_id(tourInfo.getId());
 		
+		PhotoJoin photoJoin = new PhotoJoin();
+		photoJoin.setTour_id(tourInfo.getId());
+		
 		/** (6) 게시물 일련번호를 사용한 데이터 조회 */
 		// 지금 읽고 있는 게시물이 저장될 객체
 		TourInfo readTourInfo = null;
 		Photo readPhoto = null;
 		List<Review> readReview = null;
+		List<PhotoJoin> readPhotoJoinList = null;
 		ReviewSupport reviewSupport =new ReviewSupport();
+		
 		
 		try {
 			readTourInfo = tourInfoService.selectTourInfo(tourInfo);
 			readPhoto = photoService.selectOnePhotoByTourId(photo);
 			readReview = reviewService.selectReviewListByTourId(review);
+			readPhotoJoinList = photoJoinService.selectPhotoJoinList(photoJoin);
 			
 			reviewSupport.setVerygood(reviewService.selectLikeLevel4Count(review));
 			reviewSupport.setGood(reviewService.selectLikeLevel3Count(review));
@@ -117,8 +128,11 @@ public class PlaceInfo extends BaseController {
 		request.setAttribute("readTourInfo", readTourInfo);
 		request.setAttribute("readPhoto", readPhoto);
 		request.setAttribute("readReview", readReview);
+		request.setAttribute("tourInfo", tourInfo);
+		request.setAttribute("readPhotoJoinList", readPhotoJoinList);
+		request.setAttribute("tourInfoService", tourInfoService);
 		
-		String view = "gazua/placeinfo";
+		String view = "place/placeinfo";
 
 		return view;
 	}

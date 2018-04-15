@@ -9,7 +9,7 @@
 				margin-top: 3px;
 			}
 			.container {
-				width: 1030px;
+				width: 1030px !important;
 			}
 			.form-horizontal{
 				margin-left:300px;
@@ -41,11 +41,7 @@
             <label for='member_user_id' class="col-md-2">아이디*</label>
             <div class="col-md-10" style="float:left;">
                 <input type="text" name="member_user_id" id="member_user_id" class="form-control pull-left" style="width:200px;"/>
-	           <div class="col-md-3">	
-					<button  class="btn confirm"  
-					style="background: orange; color: white; margin-top: 0px; float:left;" onclick="MemberService.selectUserIdCount()">중복확인
-					</button>
-			</div>
+	           
 					
             </div>
         	
@@ -55,11 +51,7 @@
             <label for='member_name2' class="col-md-2">닉네임*</label>
             <div class="col-md-10" style="float:left;">
                 <input type="text" name="member_name2" id="member_name2" class="form-control pull-left" style="width:200px;"/>
-	           <div class="col-md-3">	
-					<button type="submit" class="btn confirm"  
-					style="background: orange; color: white; margin-top: 0px; float:left;">중복확인
-					</button>
-			</div>
+	           
 					
             </div>
         	

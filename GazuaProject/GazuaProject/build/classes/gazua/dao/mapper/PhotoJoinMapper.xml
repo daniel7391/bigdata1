@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 이 XML의 구조대로 구현될 클래스의 이름 => Impl클래스를 대체한다. -->
+<mapper namespace="PhotoJoinMapper">
+
+	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+	<resultMap id="photojoin" type="gazua.model.PhotoJoin">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+		<result property="photo_id" column="photo_id" />
+		<result property="tour_id" column="tour_id" />
+		<result property="dir" column="dir" />
+		<result property="origin_name" column="origin_name" />
+		<result property="name" column="name" />
+		<result property="size" column="size" />
+		<result property="content_type" column="content_type" />
+		<result property="reg_date" column="reg_date" />
+		<result property="edit_date" column="edit_date" />
+		<result property="date" column="date" />		
+		<result property="contents" column="contents" />
+		<result property="tourPlan_id" column="tourPlan_id" />
+		<result property="planname" column="planname" />
+		<result property="intro" column="intro" />
+	</resultMap>
+	
+	<!-- 게시물 하나에 대한 정보를 조회한다. -->
+	<select id="selectPhotoJoinList" 
+		parameterType="gazua.model.PhotoJoin" 
+		resultMap="photojoin">
+		SELECT photo_id, dir, tourplan.name as planname, intro, tour_id, tourPlan_id
+		FROM   photo, tourplan
+		WHERE tourPlan_id = tourplan.id and tour_id=#{tour_id}
+		group by photo_id
+	</select>
+
+</mapper>
+
+
+
+
+

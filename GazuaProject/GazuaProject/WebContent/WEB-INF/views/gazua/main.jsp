@@ -172,94 +172,43 @@
                 <div class="row">
                     <div class="content-box pull-left" id="content-box">
                         <ul id="grid">
-                            <li class="item">
-                                <div class="item-box">
-                                    <div class="item-content">
-                                        <a href="#"><img src="../assets/img/img1.jpg" class="img" /></a>
-                                        <h3 class="title">
-                                            <a href="#" target="_blank">프로필</a>
-                                        </h3>
-                                        <p class="state">닉네임 | 여행유형</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="item">
-                                <div class="item-box">
-                                    <div class="item-content">
-                                        <a href="#"><img src="../assets/img/img2.jpg" class="img" /></a>
-                                        <h3 class="title">
-                                            <a href="#" target="_blank">프로필</a>
-                                        </h3>
-                                        <p class="state">닉네임 | 여행유형</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="item">
-                                <div class="item-box">
-                                    <div class="item-content">
-                                        <a href="#"><img src="../assets/img/img3.jpg" class="img" /></a>
-                                        <h3 class="title">
-                                            <a href="#" target="_blank">프로필</a>
-                                        </h3>
-                                        <p class="state">닉네임 | 여행유형</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="item">
-                                <div class="item-box">
-                                    <div class="item-content">
-                                        <a href="#"><img src="../assets/img/img4.jpg" class="img" /></a>
-                                        <h3 class="title">
-                                            <a href="#" target="_blank">프로필</a>
-                                        </h3>
-                                        <p class="state">닉네임 | 여행유형</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="item">
-                                <div class="item-box">
-                                    <div class="item-content">
-                                        <a href="#"><img src="../assets/img/img21.jpg" class="img" /></a>
-                                        <h3 class="title">
-                                            <a href="#" target="_blank">프로필</a>
-                                        </h3>
-                                        <p class="state">닉네임 | 여행유형</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="item">
-                                <div class="item-box">
-                                    <div class="item-content">
-                                        <a href="#"><img src="../assets/img/img13.jpg" class="img" /></a>
-                                        <h3 class="title">
-                                            <a href="#" target="_blank">프로필</a>
-                                        </h3>
-                                        <p class="state">닉네임 | 여행유형</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="item">
-                                <div class="item-box">
-                                    <div class="item-content">
-                                        <a href="#"><img src="../assets/img/img21.jpg" class="img" /></a>
-                                        <h3 class="title">
-                                            <a href="#" target="_blank">프로필</a>
-                                        </h3>
-                                        <p class="state">닉네임 | 여행유형</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="item">
-                                <div class="item-box">
-                                    <div class="item-content">
-                                        <a href="#"><img src="../assets/img/img21.jpg" class="img" /></a>
-                                        <h3 class="title">
-                                            <a href="#" target="_blank">프로필</a>
-                                        </h3>
-                                        <p class="state">닉네임 | 여행유형</p>
-                                    </div>
-                                </div>
-                            </li>
+                        	<c:choose>
+                        		<c:when test="${fn:length(tourPlanJoinList) > 0}">
+                        			<c:forEach var="tourPlanJoin" items="${tourPlanJoinList}">
+			                            <li class="item">
+			                                <div class="item-box">
+			                                    <div class="item-content">
+			                                    	<c:url var="readUrl2" value="/gazua/planinfo.do">
+														<c:param name="id" value="${tourPlanJoin.id}" />
+													</c:url>
+			                                        <a href="${readUrl2}"><img src="${tourPlanJoin.dir}" class="img" /></a>
+			                                        
+			                                     
+			                                        <h3 class="title">
+			                                            <a href="${readUrl2}">${tourPlanJoin.name}</a>
+			                                        </h3>
+			                                        <p class="state">${tourPlanJoin.member_name2} | 
+			                                        	<c:choose>
+						                            		<c:when test="${tourPlanJoin.theme==4}">
+						                            			 가족과 함께
+						                            		</c:when>
+						                            		<c:when test="${tourPlanJoin.theme==3}">
+						                            			 연인과 함께
+						                            		</c:when>
+						                            		<c:when test="${tourPlanJoin.theme==2}">
+						                            			 친구와 함께
+						                            		</c:when>
+						                            		<c:otherwise>
+						                            			 혼자서
+						                            		</c:otherwise>
+						                            	</c:choose>
+			                                        </p>
+			                                    </div>
+			                                </div>
+			                            </li>
+                            		</c:forEach>
+                            	</c:when>
+                            </c:choose>
                         </ul>
                     </div><!-- content-box end -->
                 </div><!-- row end -->
@@ -269,94 +218,43 @@
                 <div class="row">
                     <div class="content-box pull-left" id="content-box">
                         <ul id="grid1">
-                            <li class="item">
-                                <div class="item-box">
-                                    <div class="item-content">
-                                        <a href="#"><img src="../assets/img/img1.jpg" class="img" /></a>
-                                        <h3 class="title">
-                                            <a href="#" target="_blank">프로필</a>
-                                        </h3>
-                                        <p class="state">닉네임 | 여행유형</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="item">
-                                <div class="item-box">
-                                    <div class="item-content">
-                                        <a href="#"><img src="../assets/img/img2.jpg" class="img" /></a>
-                                        <h3 class="title">
-                                            <a href="#" target="_blank">프로필</a>
-                                        </h3>
-                                        <p class="state">닉네임 | 여행유형</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="item">
-                                <div class="item-box">
-                                    <div class="item-content">
-                                        <a href="#"><img src="../assets/img/img3.jpg" class="img" /></a>
-                                        <h3 class="title">
-                                            <a href="#" target="_blank">프로필</a>
-                                        </h3>
-                                        <p class="state">닉네임 | 여행유형</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="item">
-                                <div class="item-box">
-                                    <div class="item-content">
-                                        <a href="#"><img src="../assets/img/img4.jpg" class="img" /></a>
-                                        <h3 class="title">
-                                            <a href="#" target="_blank">프로필</a>
-                                        </h3>
-                                        <p class="state">닉네임 | 여행유형</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="item">
-                                <div class="item-box">
-                                    <div class="item-content">
-                                        <a href="#"><img src="../assets/img/img21.jpg" class="img" /></a>
-                                        <h3 class="title">
-                                            <a href="#" target="_blank">프로필</a>
-                                        </h3>
-                                        <p class="state">닉네임 | 여행유형</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="item">
-                                <div class="item-box">
-                                    <div class="item-content">
-                                        <a href="#"><img src="../assets/img/img13.jpg" class="img" /></a>
-                                        <h3 class="title">
-                                            <a href="#" target="_blank">프로필</a>
-                                        </h3>
-                                        <p class="state">닉네임 | 여행유형</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="item">
-                                <div class="item-box">
-                                    <div class="item-content">
-                                        <a href="#"><img src="../assets/img/img21.jpg" class="img" /></a>
-                                        <h3 class="title">
-                                            <a href="#" target="_blank">프로필</a>
-                                        </h3>
-                                        <p class="state">닉네임 | 여행유형</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="item">
-                                <div class="item-box">
-                                    <div class="item-content">
-                                        <a href="#"><img src="../assets/img/img21.jpg" class="img" /></a>
-                                        <h3 class="title">
-                                            <a href="#" target="_blank">프로필</a>
-                                        </h3>
-                                        <p class="state">닉네임 | 여행유형</p>
-                                    </div>
-                                </div>
-                            </li>
+                        	<c:choose>
+                        		<c:when test="${fn:length(tourPlanJoinList2) > 0}">
+                        			<c:forEach var="tourPlanJoin2" items="${tourPlanJoinList2}">
+			                            <li class="item">
+			                                <div class="item-box">
+			                                    <div class="item-content">
+			                                    	<c:url var="readUrl3" value="/gazua/planinfo.do">
+														<c:param name="id" value="${tourPlanJoin2.id}" />
+													</c:url>
+			                                        <a href="${readUrl3}"><img src="${tourPlanJoin2.dir}" class="img" /></a>
+			                                        
+			                                     
+			                                        <h3 class="title">
+			                                            <a href="${readUrl3}">${tourPlanJoin2.name}</a>
+			                                        </h3>
+			                                        <p class="state">${tourPlanJoin2.member_name2} | 
+			                                        	<c:choose>
+						                            		<c:when test="${tourPlanJoin2.theme==4}">
+						                            			 가족과 함께
+						                            		</c:when>
+						                            		<c:when test="${tourPlanJoin2.theme==3}">
+						                            			 연인과 함께
+						                            		</c:when>
+						                            		<c:when test="${tourPlanJoin2.theme==2}">
+						                            			 친구와 함께
+						                            		</c:when>
+						                            		<c:otherwise>
+						                            			 혼자서
+						                            		</c:otherwise>
+						                            	</c:choose>
+			                                        </p>
+			                                    </div>
+			                                </div>
+			                            </li>
+                            		</c:forEach>
+                            	</c:when>
+                            </c:choose>
                         </ul>
                     </div><!-- content-box end -->
                 </div><!-- row end -->

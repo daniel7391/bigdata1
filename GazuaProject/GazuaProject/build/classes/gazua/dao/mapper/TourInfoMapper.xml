@@ -18,8 +18,6 @@
 		<result property="route1" column="route1" />
 		<result property="route2" column="route2" />
 		<result property="holiday1" column="holyday1" />
-		<result property="holiday2" column="holyday2" />
-		<result property="holiday3" column="holyday3" />
 		<result property="intro" column="intro" />
 		<result property="likes" column="likes" />
 		<result property="tel" column="tel" />
@@ -35,8 +33,21 @@
 		resultMap="tourinfo">
 		SELECT *
 		FROM   tourinfo
+			<where>
+			<if test="name != null or intro != null">
+				<if test="name != null">
+					name LIKE concat('%', #{name}, '%')
+				</if>
+				<if test="intro != null">
+					OR intro LIKE concat('%', #{intro}, '%')
+				</if>
+			</if>
+		</where>
 		ORDER  BY id DESC
+			
 		LIMIT #{limitStart}, #{listCount}
+		
+	
 	</select>
 	
 	<!-- 이전글 정보를 조회한다. -->
@@ -88,6 +99,23 @@
 		WHERE  id=#{id}
 	</select>
 	
+	<!-- 좋아요를 눌러한다. -->
+	<update id="updateLikes"
+		parameterType="gazua.model.TourInfo">
+		update tourinfo set likes=likes+1 where id=#{id}
+	</update>
+	
+	<update id="dedateLikes"
+		parameterType="gazua.model.TourInfo">
+		update tourinfo set likes=likes-1 where id=#{id}
+	</update>
+	
+	   <select id="selectTourInfoListsecond" 
+      parameterType="gazua.model.TourInfo" 
+      resultMap="tourinfo">
+      SELECT *
+      FROM   tourinfo
+   </select>
 </mapper>
 
 

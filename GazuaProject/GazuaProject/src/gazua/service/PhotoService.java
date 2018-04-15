@@ -12,7 +12,16 @@ public interface PhotoService {
 	public List<Photo> selectPhotoListByTourId(Photo photo) throws Exception;
 	
 	public Photo selectOnePhotoByTourId(Photo photo) throws Exception;
+
+	public List<Photo> selectPhotoListByTourPlanId(Photo photo) throws Exception;
 	
+	public Photo selectOnePhotoByTourPlanId(Photo photo) throws Exception;
+	
+	public List<Integer> selectTourIdByPlanId(Photo photo) throws Exception;
+	
+	public int selectTourIdByPlanIdCount(Photo photo) throws Exception;
+	
+	public List<Photo> selectPhotoListByTourPlanId2(Photo photo) throws Exception;
 }
 
 

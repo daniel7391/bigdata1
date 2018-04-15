@@ -11,7 +11,49 @@ public class TourPlan {
 	private int theme;
 	private String reg_date;
 	private String edit_date;
-	private int member_member_id;
+	private int member_id;
+	private int likes;
+	
+	
+	// 페이지 구현을 위해서 추가된 값
+	private int limitStart;
+	private int listCount;
+	
+	// 갤러리 구현을 위해서 추가된 값
+	private boolean gallery;
+	private String imagePath;
+		
+	public int getLikes() {
+		return likes;
+	}
+	public void setLikes(int likes) {
+		this.likes = likes;
+	}
+	
+	public int getLimitStart() {
+		return limitStart;
+	}
+	public void setLimitStart(int limitStart) {
+		this.limitStart = limitStart;
+	}
+	public int getListCount() {
+		return listCount;
+	}
+	public void setListCount(int listCount) {
+		this.listCount = listCount;
+	}
+	public boolean isGallery() {
+		return gallery;
+	}
+	public void setGallery(boolean gallery) {
+		this.gallery = gallery;
+	}
+	public String getImagePath() {
+		return imagePath;
+	}
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
 	public int getId() {
 		return id;
 	}
@@ -72,18 +114,19 @@ public class TourPlan {
 	public void setEdit_date(String edit_date) {
 		this.edit_date = edit_date;
 	}
-	public int getMember_member_id() {
-		return member_member_id;
+	public int getMember_id() {
+		return member_id;
 	}
-	public void setMember_member_id(int member_member_id) {
-		this.member_member_id = member_member_id;
+	public void setMember_id(int member_id) {
+		this.member_id = member_id;
 	}
 	@Override
 	public String toString() {
 		return "TourPlan [id=" + id + ", name=" + name + ", intro=" + intro + ", intro_main=" + intro_main
 				+ ", startDate=" + startDate + ", days=" + days + ", people=" + people + ", theme=" + theme
-				+ ", reg_date=" + reg_date + ", edit_date=" + edit_date + ", member_member_id=" + member_member_id
-				+ "]";
+				+ ", reg_date=" + reg_date + ", edit_date=" + edit_date + ", member_id=" + member_id + ", likes="
+				+ likes + ", limitStart=" + limitStart + ", listCount=" + listCount + ", gallery=" + gallery
+				+ ", imagePath=" + imagePath + "]";
 	}
 	
 	

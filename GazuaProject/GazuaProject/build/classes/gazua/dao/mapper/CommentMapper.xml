@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 이 XML의 구조대로 구현될 클래스의 이름 => Impl클래스를 대체한다. -->
+<mapper namespace="CommentMapper">
+
+	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+	<resultMap id="comment" type="gazua.model.Comment">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+			<result property="comment_id" column="comment_id" />
+			<result property="comment_user_name" column="comment_user_name" />
+			<result property="like_count" column="like_count" />
+			<result property="reg_date" column="reg_date" />
+			<result property="edit_date" column="edit_date" />
+			<result property="content" column="content" />
+			<result property="tour_id" column="tour_id" />
+			<result property="tourPlan_id" column="tourPlan_id" />
+			<result property="member_id" column="member_id" />
+	</resultMap>
+	
+	<insert id="insertCommentTour" parameterType="gazua.model.Comment" 
+		useGeneratedKeys="true" keyProperty="comment_id">
+		INSERT INTO comment (
+			comment_user_name, content, reg_date, edit_date, tour_id, member_id
+		) VALUES (
+			#{comment_user_name}, #{content}, now(), now(),#{tour_id},#{member_id}
+			
+		)
+	</insert>
+	
+		<insert id="insertCommentPlan" parameterType="gazua.model.Comment" 
+		useGeneratedKeys="true" keyProperty="comment_id">
+		INSERT INTO comment (
+			comment_user_name, content, reg_date, edit_date, tourPlan_id, member_id
+		) VALUES (
+			#{comment_user_name}, #{content}, now(), now(),#{tourPlan_id},#{member_id}
+			
+		)
+	</insert>
+	
+	<select id="selectCommentTour" parameterType="gazua.model.Comment" resultMap="comment">
+		SELECT comment_id, comment_user_name, content,
+			    DATE_FORMAT(reg_date, '%Y-%m-%d %H:%i:%s') as reg_date, 
+			   DATE_FORMAT(edit_date, '%Y-%m-%d %H:%i:%s') as edit_date, 
+			   member_id, tour_id
+	 	FROM   comment
+	 	WHERE  comment_id=#{comment_id}
+	</select>
+	
+	<select id="selectCommentPlan" parameterType="gazua.model.Comment" resultMap="comment">
+		SELECT comment_id, comment_user_name, content,
+			    DATE_FORMAT(reg_date, '%Y-%m-%d %H:%i:%s') as reg_date, 
+			   DATE_FORMAT(edit_date, '%Y-%m-%d %H:%i:%s') as edit_date, 
+			   member_id, tourPlan_id
+	 	FROM   comment
+	 	WHERE  comment_id=#{comment_id}
+	</select>
+	
+	<select id="selectCommentListTour" parameterType="gazua.model.Comment" resultMap="comment">
+		SELECT comment_id, comment_user_name, content,
+			    DATE_FORMAT(reg_date, '%Y-%m-%d %H:%i:%s') as reg_date, 
+			   DATE_FORMAT(edit_date, '%Y-%m-%d %H:%i:%s') as edit_date, 
+			   member_id, tour_id
+	 	FROM   comment
+	 	WHERE  tour_id=#{tour_id}
+	</select>
+	
+	<select id="selectCommentListPlan" parameterType="gazua.model.Comment" resultMap="comment">
+		SELECT comment_id, comment_user_name, content,
+			    DATE_FORMAT(reg_date, '%Y-%m-%d %H:%i:%s') as reg_date, 
+			   DATE_FORMAT(edit_date, '%Y-%m-%d %H:%i:%s') as edit_date, 
+			   member_id, tourPlan_id
+	 	FROM   comment
+	 	WHERE  tourPlan_id=#{tourPlan_id}
+	</select>
+	
+	<select id="selectCommentCountByMemberId"
+		parameterType="gazua.model.Comment"
+		resultType="int">
+		 SELECT COUNT(comment_id) FROM comment
+		 WHERE comment_id=#{comment_id} AND member_id=#{member_id}
+	</select>
+	
+	<delete id="deleteComment" parameterType="gazua.model.Comment">
+		DELETE FROM comment WHERE comment_id=#{comment_id}
+	</delete>
+	
+	<update id="updateComment" parameterType="gazua.model.Comment">
+		UPDATE comment SET
+			content=#{content},
+			edit_date=now()
+		WHERE comment_id=#{comment_id}
+	</update>
+	
+</mapper>
+
+
+
+
+

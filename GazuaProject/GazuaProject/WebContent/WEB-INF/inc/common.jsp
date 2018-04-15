@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 
 <meta charset="utf-8" />
@@ -14,7 +15,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCF2vH4Dij1sIDQx2WhmvRCfrduXXfLMcM"></script>
-<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+
 
 <!-- gmap 플러그인 참조 -->
 <script src="../assets/plugins/gmaps/gmaps.min.js"></script>
@@ -35,6 +36,22 @@
 <!-- 나눔고딕 웹 폰트 적용 -->
 <link rel="stylesheet" type="text/css" href="../assets/css/nanumfont.css" />
 
+<!-- handlebars -->
+<script src="${pageContext.request.contextPath}/assets/plugins/handlebars/handlebars-v4.0.5.js"></script>
+
+<!-- ajax -->
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/plugins/ajax/ajax_helper.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/ajax/ajax_helper.js"></script>
+
+<!-- ajaxForm -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/ajax-form/jquery.form.min.js"></script>
+
+<!-- CKEditor -->
+<script src="http://cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
+
+<!-- Multi-column -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/multi-column/ie-row-fix.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/multi-column/multi-columns-row.css" />
 <!-- 반응형 웹을 지원하지 않을 경우 -->
 <!-- <link rel="stylesheet" href="assets/css/non-responsive.css" /> -->
 

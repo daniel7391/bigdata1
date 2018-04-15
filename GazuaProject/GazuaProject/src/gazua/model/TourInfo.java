@@ -10,8 +10,6 @@ public class TourInfo {
 	private String route1;
 	private String route2;
 	private String holiday1;
-	private String holiday2;
-	private String holiday3;
 	private String intro;
 	private int likes;
 	private String tel;
@@ -106,18 +104,7 @@ public class TourInfo {
 	public void setHoliday1(String holiday1) {
 		this.holiday1 = holiday1;
 	}
-	public String getHoliday2() {
-		return holiday2;
-	}
-	public void setHoliday2(String holiday2) {
-		this.holiday2 = holiday2;
-	}
-	public String getHoliday3() {
-		return holiday3;
-	}
-	public void setHoliday3(String holiday3) {
-		this.holiday3 = holiday3;
-	}
+	
 	public String getIntro() {
 		return intro;
 	}
@@ -164,7 +151,7 @@ public class TourInfo {
 	public String toString() {
 		return "Place [id=" + id + ", name=" + name + ", postCode=" + postCode + ", addr1=" + addr1 + ", addr2=" + addr2
 				+ ", cost=" + cost + ", route1=" + route1 + ", route2=" + route2 + ", holiday1=" + holiday1
-				+ ", holiday2=" + holiday2 + ", holiday3=" + holiday3 + ", intro=" + intro + ", likes=" + likes
+				+ ", intro=" + intro + ", likes=" + likes
 				+ ", tel=" + tel + ", homePage=" + homePage + ", x=" + x + ", y=" + y + ", tourCode=" + tourCode
 				+ ", limitStart=" + limitStart + ", listCount=" + listCount + ", gallery=" + gallery + ", imagePath="
 				+ imagePath + "]";

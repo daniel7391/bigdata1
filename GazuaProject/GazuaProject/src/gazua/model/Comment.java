@@ -10,6 +10,7 @@ public class Comment {
 	public int tour_id;
 	public int tourPlan_id;
 	public int member_id;
+	
 	public int getComment_id() {
 		return comment_id;
 	}

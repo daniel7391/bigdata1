@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 이 XML의 구조대로 구현될 클래스의 이름 => Impl클래스를 대체한다. -->
+<mapper namespace="TourPlanJoinMapper">
+
+	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+	<resultMap id="tourplanjoin" type="gazua.model.TourPlanJoin">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="intro" column="intro" />
+		<result property="intro_main" column="intro_main" />
+		<result property="startDate" column="startDate" />
+		<result property="days" column="days" />
+		<result property="people" column="people" />
+		<result property="theme" column="theme" />
+		<result property="reg_date" column="reg_date" />
+		<result property="edit_date" column="edit_date" />
+		<result property="member_id" column="member_id" />
+		<result property="likes" column="likes" />
+		<result property="dir" column="dir" />
+		<result property="member_name2" column="member_name2" />
+	</resultMap>
+	
+	<!-- 게시물의 정보를 조회한다. -->
+	<select id="selectTourPlanJoin" 
+		resultMap="tourplanjoin">
+		SELECT id, tourplan.name, theme, dir, member_name2, intro, intro_main, startDate, days,
+		people, tourplan.reg_date as reg, tourplan.edit_date as edit, tourplan.member_id, likes
+		from tourplan
+		LEFT OUTER  JOIN photo ON tourPlan_id=id
+		LEFT OUTER  JOIN member ON member.member_id=tourplan.member_id
+		GROUP BY id
+		ORDER BY likes DESC
+		LIMIT 0, 8
+	</select>
+	
+	<select id="selectTourPlanJoin2" 
+		resultMap="tourplanjoin">
+		SELECT id, tourplan.name, theme, dir, member_name2, intro, intro_main, startDate, days,
+		people, tourplan.reg_date as reg, tourplan.edit_date as edit, tourplan.member_id, likes
+		from tourplan
+		LEFT OUTER  JOIN photo ON tourPlan_id=id
+		LEFT OUTER  JOIN member ON member.member_id=tourplan.member_id
+		GROUP BY id
+		ORDER BY reg DESC
+		LIMIT 0, 8
+	</select>
+	
+	<select id="selectTourPlanJoinList"
+		parameterType="gazua.model.TourPlanJoin"  
+		resultMap="tourplanjoin">
+		SELECT id, tourplan.name, theme, dir, member_name2, intro, intro_main, startDate, days,
+		people, tourplan.reg_date as reg, tourplan.edit_date as edit, tourplan.member_id, likes
+		from tourplan
+		LEFT OUTER  JOIN photo ON tourPlan_id=id
+		LEFT OUTER  JOIN member ON member.member_id=tourplan.member_id
+		<where>
+			<if test="name != null or intro != null">
+				<if test="name != null">
+					tourplan.name LIKE concat('%', #{name}, '%')
+				</if>
+				<if test="intro != null">
+					OR intro LIKE concat('%', #{intro}, '%')
+				</if>
+			</if>
+			<if test = "theme != 0">
+				and theme=#{theme}
+			</if>
+		</where>
+		GROUP BY id
+		order by likes desc
+		
+		LIMIT #{limitStart}, #{listCount}
+	</select>
+	
+	<select id="selectTourPlanJoinList2"
+		parameterType="gazua.model.TourPlanJoin"  
+		resultMap="tourplanjoin">
+		SELECT id, tourplan.name, theme, dir, member_name2, intro, intro_main, startDate, days,
+		people, tourplan.reg_date as reg, tourplan.edit_date as edit, tourplan.member_id, likes
+		from tourplan
+		LEFT OUTER  JOIN photo ON tourPlan_id=id
+		LEFT OUTER  JOIN member ON member.member_id=tourplan.member_id
+		<where>
+			<if test="name != null or intro != null">
+				<if test="name != null">
+					tourplan.name LIKE concat('%', #{name}, '%')
+				</if>
+				<if test="intro != null">
+					OR intro LIKE concat('%', #{intro}, '%')
+				</if>
+			</if>
+			<if test = "theme != 0">
+				and theme=#{theme}
+			</if>
+		</where>
+		GROUP BY id
+		order by reg desc
+		
+		LIMIT #{limitStart}, #{listCount}
+	</select>
+	
+	<select id="selectTourPlanJoinCount"
+		parameterType="gazua.model.TourPlanJoin"
+		resultType="int">
+		SELECT count(id)
+		from tourplan
+		LEFT OUTER  JOIN photo ON tourPlan_id=id
+		LEFT OUTER  JOIN member ON member.member_id=tourplan.member_id
+		<where>
+			<if test="name != null or intro != null">
+				<if test="name != null">
+					tourplan.name LIKE concat('%', #{name}, '%')
+				</if>
+				<if test="intro != null">
+					OR intro LIKE concat('%', #{intro}, '%')
+				</if>
+			</if>
+			<if test = "theme != 0">
+				and theme=#{theme}
+			</if>
+		</where>
+		
+	</select>
+	
+	<select id="selectTourPlanJoinCount2"
+		parameterType="gazua.model.TourPlanJoin"
+		resultType="int">
+		SELECT count(id)
+		from tourplan
+		WHERE tourplan.member_id = #{member_id}
+	</select>
+	
+	<select id="selectTourPlanJoinList3"
+		parameterType="gazua.model.TourPlanJoin"  
+		resultMap="tourplanjoin">
+		SELECT id, tourplan.name, theme, dir, member_name2, intro, intro_main, startDate, days,
+		people, tourplan.reg_date as reg, tourplan.edit_date as edit, tourplan.member_id, likes
+		from tourplan
+		LEFT OUTER  JOIN photo ON tourPlan_id=id
+		LEFT OUTER  JOIN member ON member.member_id=tourplan.member_id
+		WHERE tourplan.member_id=#{member_id}
+		GROUP BY id
+		order by likes desc
+		
+		LIMIT #{limitStart}, #{listCount}
+	</select>
+</mapper>
+
+
+
+
+

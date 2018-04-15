@@ -114,4 +114,62 @@ public class TourInfoServiceImpl implements TourInfoService {
 		return result;
 	}
 
+
+	@Override
+	public void updateLikes(TourInfo tourinfo) throws Exception {
+		try {
+			int result = sqlSession.update("TourInfoMapper.updateLikes", tourinfo);
+			if (result == 0) {
+				throw new NullPointerException();
+			}
+		} catch (NullPointerException e) {
+			sqlSession.rollback();
+			throw new Exception("존재하지 않는 게시물에 대한 요청입니다.");
+		} catch (Exception e) {
+			sqlSession.rollback();
+			logger.error(e.getLocalizedMessage());
+			throw new Exception("좋아요수 갱신에 실패했습니다.");
+		} finally {
+			sqlSession.commit();
+		}
+	}
+
+	@Override
+	public void dedateLikes(TourInfo tourinfo) throws Exception {
+		try {
+			int result = sqlSession.update("TourInfoMapper.dedateLikes", tourinfo);
+			if (result == 0) {
+				throw new NullPointerException();
+			}
+		} catch (NullPointerException e) {
+			sqlSession.rollback();
+			throw new Exception("존재하지 않는 게시물에 대한 요청입니다.");
+		} catch (Exception e) {
+			sqlSession.rollback();
+			logger.error(e.getLocalizedMessage());
+			throw new Exception("좋아요수 갱신에 실패했습니다.");
+		} finally {
+			sqlSession.commit();
+		}
+	}
+	
+	@Override
+	public List<TourInfo> selectTourInfoListSecond(TourInfo tourinfo) throws Exception {
+		List<TourInfo> result = null;
+
+		try {
+			result = sqlSession.selectList("TourInfoMapper.selectTourInfoListsecond", tourinfo);
+			if (result == null) {
+				throw new NullPointerException();
+			}
+		} catch (NullPointerException e) {
+			throw new Exception("조회된 장소 목록이 없습니다.");
+		} catch (Exception e) {
+			logger.error(e.getLocalizedMessage());
+			throw new Exception("장소 목록 조회에 실패했습니다.");
+		}
+
+		return result;
+	}
+	
 }
