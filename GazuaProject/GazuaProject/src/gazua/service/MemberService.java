@@ -1,5 +1,7 @@
 package gazua.service;
 
+import java.util.List;
+
 import gazua.model.Member;
 
 /** 회원 관련 기능을 제공하기 위한 Service 계층 */
@@ -56,4 +58,10 @@ public interface MemberService {
 	public Member selectMember(Member member) throws Exception;
 	
 	public void updateMember(Member member) throws Exception;
+	
+	public Member selectFindMemberId(Member member) throws Exception;
+	
+	public void updateMemberPasswordByEmail(Member member) throws Exception;
+	
+	public List<Member> selectidList(Member member) throws Exception;
 }

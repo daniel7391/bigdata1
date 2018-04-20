@@ -59,17 +59,18 @@
 		LEFT OUTER  JOIN photo ON tourPlan_id=id
 		LEFT OUTER  JOIN member ON member.member_id=tourplan.member_id
 		<where>
+			<if test = "theme != 0">
+				theme=#{theme}
+			</if>
 			<if test="name != null or intro != null">
 				<if test="name != null">
-					tourplan.name LIKE concat('%', #{name}, '%')
+					and tourplan.name LIKE concat('%', #{name}, '%')
 				</if>
 				<if test="intro != null">
 					OR intro LIKE concat('%', #{intro}, '%')
 				</if>
 			</if>
-			<if test = "theme != 0">
-				and theme=#{theme}
-			</if>
+			
 		</where>
 		GROUP BY id
 		order by likes desc
@@ -86,17 +87,18 @@
 		LEFT OUTER  JOIN photo ON tourPlan_id=id
 		LEFT OUTER  JOIN member ON member.member_id=tourplan.member_id
 		<where>
+			<if test = "theme != 0">
+				theme=#{theme}
+			</if>
 			<if test="name != null or intro != null">
 				<if test="name != null">
-					tourplan.name LIKE concat('%', #{name}, '%')
+					and tourplan.name LIKE concat('%', #{name}, '%')
 				</if>
 				<if test="intro != null">
 					OR intro LIKE concat('%', #{intro}, '%')
 				</if>
 			</if>
-			<if test = "theme != 0">
-				and theme=#{theme}
-			</if>
+			
 		</where>
 		GROUP BY id
 		order by reg desc

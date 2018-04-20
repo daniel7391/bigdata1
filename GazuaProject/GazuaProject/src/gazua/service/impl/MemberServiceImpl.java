@@ -1,5 +1,7 @@
 package gazua.service.impl;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.logging.log4j.Logger;
 
@@ -181,4 +183,56 @@ public class MemberServiceImpl implements MemberService {
 			sqlSession.commit();
 		}
 	}
+	@Override
+	   public Member selectFindMemberId(Member member) throws Exception {
+	      Member result = null;
+	      
+	      try {
+	         result = sqlSession.selectOne("MemberMapper.selectFindMemberId", member);
+	      } catch (NullPointerException e) {
+	         throw new Exception("아이디가 존재하지 않습니다.");
+	      } catch (Exception e) {
+	         logger.error(e.getLocalizedMessage());
+	         throw new Exception("아이디 찾기에 실패했습니다.");
+	      }
+	      
+	      return result;
+	   }
+
+	   @Override
+	   public void updateMemberPasswordByEmail(Member member) throws Exception {
+	      try {
+	         int result = sqlSession.update("MemberMapper.updatememberPasswordByEmail", member);
+	         if(result == 0) {
+	            throw new NullPointerException();
+	         }
+	      } catch (NullPointerException e) {
+	         sqlSession.rollback();
+	         throw new Exception("가입된 이메일이 아닙니다.");
+	      } catch (Exception e) {
+	         sqlSession.rollback();
+	         logger.error(e.getLocalizedMessage());
+	         throw new Exception("비밀번호 변경에 실패했습니다.");
+	      } finally {
+	         sqlSession.commit();
+	      }
+	   }
+	   
+	   @Override
+		public List<Member> selectidList(Member member) throws Exception {
+			List<Member> result =null;
+			try {
+				result = sqlSession.selectList("MemberMapper.selectidList", member);
+				if (result == null) {
+					throw new NullPointerException();
+				}
+			} catch (NullPointerException e) {
+				throw new Exception("조회된 회원이.");
+			} catch (Exception e) {
+				logger.error(e.getLocalizedMessage());
+				throw new Exception("회원 목록 조회에 실패했습니다.");
+			}
+
+			return result;
+		}
 }

@@ -34,7 +34,7 @@
 				            <br />
 				            <a href="tourInfo.html" style="color: gray;"><h5 class="summary">${tourInfo.intro}</h5></a>
 				            <br />
-				            <h5 class="post"><span class="glyphicon glyphicon-list-alt"></span> 68개의 포스트 - ${tourInfo.addr1}</h5>
+				            <h5 class="post"><span class="glyphicon glyphicon-list-alt"></span> ${tourInfo.meetCnt}개의 여행일정 - ${tourInfo.addr1}</h5>
 				 
 					</div>
 				</div>

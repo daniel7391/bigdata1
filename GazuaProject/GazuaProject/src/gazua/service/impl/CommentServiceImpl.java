@@ -2,7 +2,6 @@ package gazua.service.impl;
 
 import java.util.List;
 
-
 import org.apache.ibatis.session.SqlSession;
 import org.apache.logging.log4j.Logger;
 
@@ -126,62 +125,7 @@ public class CommentServiceImpl implements CommentService {
 			sqlSession.commit();
 		}
 	}
-	@Override
-	public void insertCommentPlan(Comment comment) throws Exception {
-		// TODO Auto-generated method stub
-		try{
-			int result=sqlSession.insert("CommentMapper.insertCommentPlan",comment);
-			if (result == 0) {
-				throw new NullPointerException();
-			}
-		} catch (NullPointerException e) {
-			sqlSession.rollback();
-			throw new Exception("저장된 덧글이 없습니다.");
-		} catch (Exception e) {
-			sqlSession.rollback();
-			logger.error(e.getLocalizedMessage());
-			throw new Exception("덧글 등록에 실패했습니다.");
-		} finally {
-			sqlSession.commit();
-		}
-	}
-	@Override
-	public Comment selectCommentPlan(Comment comment) throws Exception {
-		Comment result=null;
-		try {
-			result = sqlSession.selectOne("CommentMapper.selectCommentPlan", comment);
-			if (result == null) {
-				throw new NullPointerException();
-			}
-		} catch (NullPointerException e) {
-			throw new Exception("조회된 덧글이 없습니다.");
-		} catch (Exception e) {
-			logger.error(e.getLocalizedMessage());
-			throw new Exception("덧글 조회에 실패했습니다.");
-		}
-
-		return result;
-	}
-	@Override
-	public List<Comment> selectCommentListPlan(Comment comment) throws Exception {
-		List<Comment> result =null;
 		
-		try {
-			result = sqlSession.selectList("CommentMapper.selectCommentListPlan", comment);
-			if (result == null) {
-				throw new NullPointerException();
-			}
-		} catch (NullPointerException e) {
-			throw new Exception("조회된 덧글이 없습니다.");
-		} catch (Exception e) {
-			logger.error(e.getLocalizedMessage());
-			throw new Exception("덧글 목록 조회에 실패했습니다.");
-		}
-
-		return result;
-}
 	}
-		
-	
 
 

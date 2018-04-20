@@ -29,11 +29,11 @@
                 height: 500px;
             }
             .container {
-                width: 1011px;
-            }
+		        width: 1030px !important;
+		    }
             .status {
                 background: white;
-                width: 287px;
+                width: 270px;
                 margin-top: 10px;
                 margin-left: 3px;
                 position: relative;
@@ -69,6 +69,8 @@
             }
             .filterLabel {
                  height: 20px;
+                 position: relative;
+                 right: 20px;
             }
             #gmap { width: 700px; height: 500px; background: black;}
             #like {
@@ -77,7 +79,7 @@
             }
             #entry {
                 position: relative;
-                right: -880px;
+                
             }
             #summary {
                 white-space: nowrap;
@@ -101,90 +103,14 @@
 
 </head>
 <body>
-<div class="container" style="width: 1030px;">
-        <a href="${pageContext.request.contextPath}/gazua/main.do">
-        	<img src="../assets/img/logo.png" />
-        </a>
-        <c:choose>
-		<c:when test="${loginInfo != null}">
-			<div class="pull-right">
-				<!-- 로그인 된 경우 -->
-				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"
-						style="padding:5px; margin-top:20px;">
-						<c:if test="${loginInfo.member_profile_img != null }">
-				            <c:if test="${cookie.profileThumbnail != null}">
-				                <img src="${pageContext.request.contextPath}/gazua/download.do?file=${cookie.profileThumbnail2.value}" class="img-circle" />
-				            </c:if>
-				        </c:if>
-				        <c:if test="${loginInfo.member_profile_img == null}">
-				            <img src="${pageContext.request.contextPath}/assets/img/nullprof2.png" class="img-circle"/>
-				        </c:if>
-						<!-- 쿠키값에 따른 프로필 이미지 표시 끝 -->
-						${loginInfo.member_name2}님 <span class="caret"></span>
-						</a>
-						<ul class="dropdown-menu">
-					              <li><a href="${pageContext.request.contextPath}/member/mypage.do">
-					            	마이페이지</a></li>
-					              <li><a href="${pageContext.request.contextPath}/member/edit.do">
-					            	회원정보 수정</a></li>
-					              <li><a href="${pageContext.request.contextPath}/member/logout.do">
-					            	로그아웃</a></li>
-					          
-					          
-						</ul>
-					</li>
-				</ul>
-			</div>
-		</c:when>
-	</c:choose>
-      </div>
-      <div class="navbar navbar-inverse navbar-static-top" role="navigation" style="z-index : 0;">
-            <div class="container" style="width: 1030px;">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">메뉴열기</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="${pageContext.request.contextPath}/gazua/tourinfolist.do">추천여행지</a></li>
-						<li><a href="${pageContext.request.contextPath}/gazua/plan.do">여행 일정 만들기</a></li>
-						<li><a href="${pageContext.request.contextPath}/gazua/plan_review_list.do">여행 후기</a></li>
-                    </ul>
-                </div>
-                <div class="input-group" style="position: relative; bottom: 5px;">
-                  <div class="input-group-btn">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">어디에서<span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">강남구</a></li>
-                        <li><a href="#">강북구</a></li>
-                        <li><a href="#">강서구</a></li>
-                    </ul>
-                  </div>
-                <form method="get" action="${pageContext.request.contextPath}/gazua/tourinfolist.do" style="width: 900px">
-			<div class="input-group">
-				<input type="text" name="keyword" class="form-control" 
-					placeholder="제목,내용 검색"  value="${keyword}"/>
-				<span class="input-group-btn">
-					<button class="btn btn-primary" type="submit">
-						<i class="glyphicon glyphicon-search"></i>
-					</button>
-				</span>
-			</div>
-		</form>
-              </div>
-            </div>
-        </div>
-
+	<header>
+		<%@ include file="/WEB-INF/inc/header.jsp" %>
+	</header>
+	<section>
+	<div class="container">
         <!-- 본문 영역 -->
         <div id="back">
-            <form class="container" id="contents" action="${pageContext.request.contextPath}/gazua/likes_ok.do" style="position:relative; left: 80px;">
+            <form class="container" id="contents" action="${pageContext.request.contextPath}/gazua/likes_ok.do" style="position:relative;">
             	<input type="hidden" name="tour_id" value="${readTourInfo.id}" />
                 <div class="content-box pull-left" id="content-box">
                     <div class="summary">
@@ -266,14 +192,14 @@
                     <h3><strong>리 뷰</strong></h3>
                     <div class="like-review pull-left form-group" style="width:300px;">
                         <ul style="padding-left: 0px;">
-                            <li class="filterItem">
+                            <li class="filterItem clearfix">
 
                                     <span class="toggle pull-left">
-                                        <input type="radio" name="filterRating1" value="4" class="filterInput"/>
+                                        <label><input type="radio" name="filterRating1" value="4" class="filterInput"/>&nbsp;아주 좋음</label>
                                     </span>
-                                    <label class="filterLabel" style="width: 90%;">
-                                        <label class="pull-left" style="width: 30%;">&nbsp;아주 좋음</label>
-                                        <div class="progress pull-left" style="width: 55%;  border: 1px solid black; height: 15px; margin-top: 5px;">
+                                    <label class="filterLabel pull-right" style="width: 60%;">
+                                        
+                                        <div class="progress pull-left" style="width: 80%;  border: 1px solid black; height: 15px; margin-top: 5px;">
                                             <!-- 진행상태를 위한 그래픽 박스 >> style 속성으로 넓이를 지정해 준 것에 주의 합시다. -->
                                             <div class="progress-bar pro1 pull-left" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                                                 <!-- 웹 접근성을 위한 스크린 리더 전용 부분 처리 -->
@@ -284,13 +210,12 @@
                                     </label>
 
                             </li>
-                            <li class="filterItem">
+                            <li class="filterItem clearfix">
                                 <span class="toggle pull-left">
-                                    <input type="radio" name="filterRating1" value="3" class="filterInput" />
+                                    <label><input type="radio" name="filterRating1" value="3" class="filterInput" />&nbsp;좋음</label>
                                 </span>
-                                <label class="filterLabel" style="width: 90%;">
-                                    <label class="pull-left" style="width: 30%;">&nbsp;좋음</label>
-                                    <div class="progress pull-left" style="width: 55%; border: 1px solid black; height: 15px; margin-top: 5px;">
+                                <label class="filterLabel pull-right" style="width: 60%;">
+                                    <div class="progress pull-left" style="width: 80%; border: 1px solid black; height: 15px; margin-top: 5px;">
                                         <!-- 진행상태를 위한 그래픽 박스 >> style 속성으로 넓이를 지정해 준 것에 주의 합시다. -->
                                         <div class="progress-bar pro2 pull-left" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                                             <!-- 웹 접근성을 위한 스크린 리더 전용 부분 처리 -->
@@ -300,13 +225,13 @@
                                     <span class="pull-left hit">&nbsp;&nbsp;${reviewSupport.good}</span>
                                 </label>
                             </li>
-                            <li class="filterItem">
+                            <li class="filterItem clearfix">
                                 <span class="toggle pull-left">
-                                    <input type="radio" name="filterRating1" value="2" class="filterInput" />
+                                    <label><input type="radio" name="filterRating1" value="2" class="filterInput" />&nbsp;보통</label>
                                 </span>
-                                <label class="filterLabel" style="width: 90%;">
-                                    <label class="pull-left" style="width: 30%;">&nbsp;보통</label>
-                                    <div class="progress pull-left" style="width: 55%; border: 1px solid black; height: 15px; margin-top: 5px;">
+                                <label class="filterLabel pull-right" style="width: 60%;">
+                                    
+                                    <div class="progress pull-left" style="width: 80%; border: 1px solid black; height: 15px; margin-top: 5px;">
                                         <!-- 진행상태를 위한 그래픽 박스 >> style 속성으로 넓이를 지정해 준 것에 주의 합시다. -->
                                         <div class="progress-bar pro3 pull-left" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                                             <!-- 웹 접근성을 위한 스크린 리더 전용 부분 처리 -->
@@ -316,13 +241,15 @@
                                     <span class="pull-left hit">&nbsp;&nbsp;${reviewSupport.soso}</span>
                                 </label>
                             </li>
-                            <li class="filterItem">
+                            <li class="filterItem clearfix">
                                 <span class="toggle pull-left">
-                                    <input type="radio" name="filterRating1" value="1" class="filterInput" />
+	                                <label>
+	                                    <input type="radio" name="filterRating1" value="1" class="filterInput" />&nbsp;별로
+	                                </label>
                                 </span>
-                                <label class="filterLabel" style="width: 90%;">
-                                    <label class="pull-left" style="width: 30%;">&nbsp;별로</label>
-                                    <div class="progress pull-left" style="width: 55%; border: 1px solid black; height: 15px; margin-top: 5px;">
+                                <label class="filterLabel pull-right" style="width: 60%;">
+                                    
+                                    <div class="progress pull-left" style="width: 80%; border: 1px solid black; height: 15px; margin-top: 5px;">
                                         <!-- 진행상태를 위한 그래픽 박스 >> style 속성으로 넓이를 지정해 준 것에 주의 합시다. -->
                                         <div class="progress-bar pro4 pull-left" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                                             <!-- 웹 접근성을 위한 스크린 리더 전용 부분 처리 -->
@@ -336,13 +263,13 @@
                     </div>
                     <div class="people-review pull-left form-group" style="width:300px;">
                         <ul style="padding-left: 0px;">
-                            <li class="filterItem">
+                            <li class="filterItem clearfix">
                                 <span class="toggle pull-left">
-                                    <input type="radio" name="filterRating2" value="4" class="filterInput" />
+                                    <label><input type="radio" name="filterRating2" value="4" class="filterInput" />&nbsp;가족</label>
                                 </span>
-                                <label class="filterLabel" style="width: 90%;">
-                                    <label class="pull-left" style="width: 30%;">&nbsp;가족</label>
-                                    <div class="progress pull-left" style="width: 55%; border: 1px solid black; height: 15px; margin-top: 5px;">
+                                <label class="filterLabel pull-right" style="width: 60%;">
+                                    
+                                    <div class="progress pull-left" style="width: 80%; border: 1px solid black; height: 15px; margin-top: 5px;">
                                         <!-- 진행상태를 위한 그래픽 박스 >> style 속성으로 넓이를 지정해 준 것에 주의 합시다. -->
                                         <div class="progress-bar pro5 pull-left" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                                             <!-- 웹 접근성을 위한 스크린 리더 전용 부분 처리 -->
@@ -352,13 +279,13 @@
                                     <span class="pull-left hit">&nbsp;&nbsp;${reviewSupport.family}</span>
                                 </label>
                             </li>
-                            <li class="filterItem">
+                            <li class="filterItem clearfix">
                                 <span class="toggle pull-left">
-                                    <input type="radio" name="filterRating2" value="3" class="filterInput" />
+                                    <label><input type="radio" name="filterRating2" value="3" class="filterInput" />&nbsp;커플</label>
                                 </span>
-                                <label class="filterLabel" style="width: 90%;">
-                                    <label class="pull-left" style="width: 30%;">&nbsp;커플</label>
-                                    <div class="progress pull-left" style="width: 55%; border: 1px solid black; height: 15px; margin-top: 5px;">
+                                <label class="filterLabel pull-right" style="width: 60%;">
+                                    
+                                    <div class="progress pull-left" style="width: 80%; border: 1px solid black; height: 15px; margin-top: 5px;">
                                         <!-- 진행상태를 위한 그래픽 박스 >> style 속성으로 넓이를 지정해 준 것에 주의 합시다. -->
                                         <div class="progress-bar pro6 pull-left" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                                             <!-- 웹 접근성을 위한 스크린 리더 전용 부분 처리 -->
@@ -368,13 +295,13 @@
                                     <span class="pull-left hit">&nbsp;&nbsp;${reviewSupport.couple}</span>
                                 </label>
                             </li>
-                            <li class="filterItem">
+                            <li class="filterItem clearfix">
                                 <span class="toggle pull-left">
-                                    <input type="radio" name="filterRating2" value="2" class="filterInput" />
+                                    <label><input type="radio" name="filterRating2" value="2" class="filterInput" />&nbsp;친구</label>
                                 </span>
-                                <label class="filterLabel" style="width: 90%;">
-                                    <label class="pull-left" style="width: 30%;">&nbsp;친구</label>
-                                    <div class="progress pull-left" style="width: 55%; border: 1px solid black; height: 15px; margin-top: 5px;">
+                                <label class="filterLabel pull-right" style="width: 60%;">
+                                    
+                                    <div class="progress pull-left" style="width: 80%; border: 1px solid black; height: 15px; margin-top: 5px;">
                                         <!-- 진행상태를 위한 그래픽 박스 >> style 속성으로 넓이를 지정해 준 것에 주의 합시다. -->
                                         <div class="progress-bar pro7 pull-left" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                                             <!-- 웹 접근성을 위한 스크린 리더 전용 부분 처리 -->
@@ -384,13 +311,13 @@
                                     <span class="pull-left hit">&nbsp;&nbsp;${reviewSupport.friend}</span>
                                 </label>
                             </li>
-                            <li class="filterItem">
+                            <li class="filterItem clearfix">
                                 <span class="toggle pull-left">
-                                    <input type="radio" name="filterRating2" value="1" class="filterInput" />
+                                    <label><input type="radio" name="filterRating2" value="1" class="filterInput" />&nbsp;혼자</label>
                                 </span>
-                                <label class="filterLabel" style="width: 90%;">
-                                    <label class="pull-left" style="width: 30%;">&nbsp;혼자</label>
-                                    <div class="progress pull-left" style="width: 55%; border: 1px solid black; height: 15px; margin-top: 5px;">
+                                <label class="filterLabel pull-right" style="width: 60%;">
+                                    
+                                    <div class="progress pull-left" style="width: 80%; border: 1px solid black; height: 15px; margin-top: 5px;">
                                         <!-- 진행상태를 위한 그래픽 박스 >> style 속성으로 넓이를 지정해 준 것에 주의 합시다. -->
                                         <div class="progress-bar pro8 pull-left" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                                             <!-- 웹 접근성을 위한 스크린 리더 전용 부분 처리 -->
@@ -404,13 +331,13 @@
                     </div>
                     <div class="season-review pull-left form-group" style="width:300px;">
                         <ul style="padding-left: 0px;">
-                            <li class="filterItem">
+                            <li class="filterItem clearfix">
                                 <span class="toggle pull-left">
-                                    <input type="radio" name="filterRating3" value="4" class="filterInput" />
+                                   <label><input type="radio" name="filterRating3" value="4" class="filterInput" />&nbsp;3~5월</label>
                                 </span>
-                                <label class="filterLabel" style="width: 90%;">
-                                    <label class="pull-left" style="width: 30%;">&nbsp;3~5월</label>
-                                    <div class="progress pull-left" style="width: 55%; border: 1px solid black; height: 15px; margin-top: 5px;">
+                                <label class="filterLabel pull-right" style="width: 60%;">
+                                    
+                                    <div class="progress pull-left" style="width: 80%; border: 1px solid black; height: 15px; margin-top: 5px;">
                                         <!-- 진행상태를 위한 그래픽 박스 >> style 속성으로 넓이를 지정해 준 것에 주의 합시다. -->
                                         <div class="progress-bar pro9 pull-left" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                                             <!-- 웹 접근성을 위한 스크린 리더 전용 부분 처리 -->
@@ -420,13 +347,13 @@
                                     <span class="pull-left hit">&nbsp;&nbsp;${reviewSupport.spring}</span>
                                 </label>
                             </li>
-                            <li class="filterItem">
+                            <li class="filterItem clearfix">
                                 <span class="toggle pull-left">
-                                    <input type="radio" name="filterRating3" value="3" class="filterInput" />
+                                    <label><input type="radio" name="filterRating3" value="3" class="filterInput" />&nbsp;6~8월</label>
                                 </span>
-                                <label class="filterLabel" style="width: 90%;">
-                                    <label class="pull-left" style="width: 30%;">&nbsp;6~8월</label>
-                                    <div class="progress pull-left" style="width: 55%; border: 1px solid black; height: 15px; margin-top: 5px;">
+                                <label class="filterLabel pull-right" style="width: 60%;">
+                                    
+                                    <div class="progress pull-left" style="width: 80%; border: 1px solid black; height: 15px; margin-top: 5px;">
                                         <!-- 진행상태를 위한 그래픽 박스 >> style 속성으로 넓이를 지정해 준 것에 주의 합시다. -->
                                         <div class="progress-bar pro10 pull-left" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                                             <!-- 웹 접근성을 위한 스크린 리더 전용 부분 처리 -->
@@ -436,13 +363,13 @@
                                     <span class="pull-left hit">&nbsp;&nbsp;${reviewSupport.summer}</span>
                                 </label>
                             </li>
-                            <li class="filterItem">
+                            <li class="filterItem clearfix">
                                 <span class="toggle pull-left">
-                                    <input type="radio" name="filterRating3" value="2" class="filterInput" />
+                                    <label><input type="radio" name="filterRating3" value="2" class="filterInput" />&nbsp;9~11월</label>
                                 </span>
-                                <label class="filterLabel" style="width: 90%;">
-                                    <label class="pull-left" style="width: 30%;">&nbsp;9~11월</label>
-                                    <div class="progress pull-left" style="width: 55%; border: 1px solid black; height: 15px; margin-top: 5px;">
+                                <label class="filterLabel pull-right" style="width: 60%;">
+                                    
+                                    <div class="progress pull-left" style="width: 80%; border: 1px solid black; height: 15px; margin-top: 5px;">
                                         <!-- 진행상태를 위한 그래픽 박스 >> style 속성으로 넓이를 지정해 준 것에 주의 합시다. -->
                                         <div class="progress-bar pro11 pull-left" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                                             <!-- 웹 접근성을 위한 스크린 리더 전용 부분 처리 -->
@@ -452,13 +379,13 @@
                                     <span class="pull-left hit">&nbsp;&nbsp;${reviewSupport.autumn}</span>
                                 </label>
                             </li>
-                            <li class="filterItem">
+                            <li class="filterItem clearfix">
                                 <span class="toggle pull-left">
-                                    <input type="radio" name="filterRating3" value="1" class="filterInput" />
+                                    <label><input type="radio" name="filterRating3" value="1" class="filterInput" />&nbsp;12~2월</label>
                                 </span>
-                                <label class="filterLabel" style="width: 90%;">
-                                    <label class="pull-left" style="width: 30%;">&nbsp;12~2월</label>
-                                    <div class="progress pull-left" style="width: 55%; border: 1px solid black; height: 15px; margin-top: 5px;">
+                                <label class="filterLabel pull-right" style="width: 60%;">
+                                    
+                                    <div class="progress pull-left" style="width: 80%; border: 1px solid black; height: 15px; margin-top: 5px;">
                                         <!-- 진행상태를 위한 그래픽 박스 >> style 속성으로 넓이를 지정해 준 것에 주의 합시다. -->
                                         <div class="progress-bar pro12 pull-left" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                                             <!-- 웹 접근성을 위한 스크린 리더 전용 부분 처리 -->
@@ -750,7 +677,8 @@
 
             
         </script>
-
+		</div>
+	</section>
 </body>
 </html>
 

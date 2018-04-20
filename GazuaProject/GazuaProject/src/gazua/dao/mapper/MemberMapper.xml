@@ -104,5 +104,29 @@
 		
 		WHERE member_id=#{member_id}
 	</update>
-
+	
+	<!-- 아이디 찾기 -->
+   <select id="selectFindMemberId" parameterType="gazua.model.Member" resultMap="member">
+      select member_user_id
+      from member
+      where member_email = #{member_email}
+      <choose>
+         <when test="member_name != null and member_name != ''">
+            or member_name=#{member_name}
+         </when>
+      </choose>
+   </select>
+   
+   <!-- 비밀번호 재발급: 이메일주소가 일치하는 비밀번호를 변경 -->
+   <update id="updatememberPasswordByEmail" parameterType="gazua.model.Member">
+      Update member set member_pw=password(#{member_pw}), edit_date=now()
+      where member_email=#{member_email}
+   </update>
+   
+   <select id="selectidList" parameterType="gazua.model.Member"
+		resultMap="member">
+		SELECT member_user_id, member_name2
+		FROM member
+		
+	</select>
 </mapper>

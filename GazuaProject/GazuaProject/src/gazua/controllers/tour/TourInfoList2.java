@@ -81,6 +81,7 @@ public class TourInfoList2 extends BaseController {
 		}
 		logger.debug("플랜아뒤" + plan_id);
 		logger.debug("우아1" + tourIdList.size());
+		
 		for(int i = 0; i<tourIdList.size(); i++) {
 			tourinfo.setId(tourIdList.get(i));
 			
@@ -93,6 +94,7 @@ public class TourInfoList2 extends BaseController {
 			}
 			
 		}
+		
 		for (int i=0; i<tourInfoList.size(); i++) {
 			TourInfo item2 = tourInfoList.get(i);
 			photo.setTour_id(item2.getId());
@@ -108,6 +110,12 @@ public class TourInfoList2 extends BaseController {
 			String temp2 = temp.getDir();
 			
 			item2.setImagePath(temp2);
+			try {
+				item2.setMeetCnt(photoService.selectCountTourInfoWithTourPlan(photo));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		sqlSession.close();

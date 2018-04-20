@@ -34,14 +34,19 @@
 		SELECT *
 		FROM   tourinfo
 			<where>
+			<if test="tourCode != 0">
+				tour_tourCode = #{tourCode} 
+			</if>
 			<if test="name != null or intro != null">
 				<if test="name != null">
-					name LIKE concat('%', #{name}, '%')
+					and name LIKE concat('%', #{name}, '%')
 				</if>
 				<if test="intro != null">
 					OR intro LIKE concat('%', #{intro}, '%')
 				</if>
+				
 			</if>
+			
 		</where>
 		ORDER  BY id DESC
 			
@@ -79,9 +84,12 @@
 		resultType="int">
 		SELECT COUNT(id) FROM tourinfo
 		<where>
+			<if test="tourCode != 0">
+				tour_tourCode = #{tourCode} 
+			</if>
 			<if test="name != null or intro != null">
 				<if test="name != null">
-					name LIKE concat('%', #{name}, '%')
+					and name LIKE concat('%', #{name}, '%')
 				</if>
 				<if test="intro != null">
 					OR intro LIKE concat('%', #{intro}, '%')
@@ -110,11 +118,21 @@
 		update tourinfo set likes=likes-1 where id=#{id}
 	</update>
 	
-	   <select id="selectTourInfoListsecond" 
+	<select id="selectTourInfoListsecond" 
       parameterType="gazua.model.TourInfo" 
       resultMap="tourinfo">
       SELECT *
       FROM   tourinfo
+   </select>
+   
+   
+   <!-- 임시 매퍼 -->
+   <select id ="selectTourInfo4"
+   	parameterType="gazua.model.TourInfo"
+   	resultMap="tourinfo">
+   	select *
+   	from tourinfo
+   	limit 4, 4;
    </select>
 </mapper>
 

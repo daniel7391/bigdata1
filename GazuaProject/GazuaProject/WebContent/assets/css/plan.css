@@ -72,7 +72,7 @@ section .planRight .second{
 section .planRight .third{
     display: inline-block;
 }
-.pull-left{float: left; border: 2px solid #eee}
+section pull-left{float: left; border: 2px solid #eee}
 .clearfix:after{content: ''; display: block; float: none; clear: both;}
 .hide{display: none;}
 

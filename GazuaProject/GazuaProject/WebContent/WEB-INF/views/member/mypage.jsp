@@ -29,21 +29,14 @@
 			<div class="page-header">
 				<a href="${pageContext.request.contextPath}/member/out.do"
 					class="btn btn-danger btn-md pull-right">회원 탈퇴</a>
+				<a href="${pageContext.request.contextPath}/member/edit.do" class="btn btn-primary btn-md pull-right" style="margin-right: 3px;">정보 수정</a>
+				
 				<h1>마이페이지</h1>
 			</div>
 			<!-- /.modal-dialog -->
 			<!-- /.modal -->
 
-			<!-- /.modal -->
-			<div class="row">
-				<tr>
-					<td colspan="2">
-						<img src="${pageContext.request.contextPath}/gazua/download.do?file=${cookie.profileThumbnail.value}" class="img-circle" style="height: 100px; margin-top: 20px;" />
-						<a href="${pageContext.request.contextPath}/member/edit.do" class="btn btn-primary btn-md pull-right">정보 수정</a>
-						<h5>${readMember.member_name2}</h5>
-					</td>
-				</tr>
-			</div>
+			
 		</div>
 		<div class="container">
 			<div class="page-header">

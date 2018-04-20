@@ -29,7 +29,7 @@
 
         <!-- 본문 영역 -->
         <div id="back">
-            <div class="container" id="midbar">
+            <div class="container" id="midbar" style="position:relative; left:10px;">
                 <div class="content-box pull-left" id="content-box">
                     <div class="summary">
                         <div id="carousel-example-generic" class="carousel slide"
@@ -105,62 +105,52 @@
                         </c:choose>
                         <!-- 아이디 찾기 모달 -->
                         <div class="modal" id="findId" aria-hidden="true">
-                            <div class="modal-dialog">
+                            <div class="modal-dialog" style="z-index: 1070 !important;">
+                                <form name="findIdform" method="post" action="${pageContext.request.contextPath}/member/findId.do">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <h4 class="modal-title">아이디 찾기</h4>
+                                    <h2 class="modal-title">아이디 찾기</h2>
                                 </div>
                                 <div>
                                     <div class="modal-body">
-                                        <form name="findIdform" method="post" action="#">
-                                            <fieldset>
-                                                <div class="form-group">
-                                                    <label for="find_id_email">이메일</label>
-                                                    <input type="text" name="find_id_email" id="find_id_email" class="form-control" />
-                                                </div>
-                                                <p>또는</p>
-                                                <div class="form-group">
-                                                    <label for="find_id_name">이름</label>
-                                                    <input type="text" name="find_id_name" id="find_id_name" class="form-control" />
-                                                </div>
-                                            </fieldset>
-                                        </form>
+                                       <fieldset>
+                                           <div class="form-group">
+                                               <label for="find_id_email">이메일</label>
+                                               <input type="email" name="find_id_email" id="find_id_email" class="form-control" />
+                                           </div>
+                                           <p>또는</p>
+                                           <div class="form-group">
+                                               <label for="find_id_name">이름</label>
+                                               <input type="text" name="find_id_name" id="find_id_name" class="form-control" />
+                                           </div>
+                                       </fieldset>
+                                       <span id="resultId"></span>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <a href="#" data-dismiss="modal" class="btn">Close</a>
-                                    <a href="#" class="btn btn-primary">Save changes</a>
+                                    <a href="#" data-dismiss="modal" class="btn">닫기</a>
+                                    <button type="button" class="btn btn-primary" id="findIdButton">아이디찾기</button>
                                 </div>
+								</form>
                             </div>
                         </div><!-- 아이디모달끝 -->
                         <!-- 비밀번호 찾기 모달 -->
                         <div class="modal" id="findPw" aria-hidden="true">
-                            <div class="modal-dialog">
+                            <div class="modal-dialog" style="z-index: 1070 !important;">
+                            	<form name="myform" method="post" action="${pageContext.request.contextPath}/member/findpw_ok.do">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <h4 class="modal-title">비밀번호 찾기</h4>
+                                    <h2 class="modal-title">비밀번호 찾기</h2>
                                 </div>
                                 <div>
-                                    <div class="modal-body">
-                                        <form name="findPwform" method="post" action="#">
-                                            <fieldset>
-                                                <div class="form-group">
-                                                    <label for="find_pw_id">아이디</label>
-                                                    <input type="text" name="find_pw_id" id="find_pw_id" class="form-control" />
-                                                </div>
-                                                <p>또는</p>
-                                                <div class="form-group">
-                                                    <label for="find_pw_email">이메일</label>
-                                                    <input type="text" name="find_pw_email" id="find_pw_email" class="form-control" />
-                                                </div>
-                                            </fieldset>
-                                        </form>
+                                    <div class="modal-body" style="height:110px;">
+                                        <%@ include file="/WEB-INF/views/member/find_pw.jsp" %>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <a href="#" data-dismiss="modal" class="btn">Close</a>
-                                    <a href="#" class="btn btn-primary">Save changes</a>
+                                    <button type="submit" class="btn btn-primary btn-block">비밀번호 재설정 하기</button>
                                 </div>
+                                </form>
                             </div>
                         </div><!-- 비번모달끝 -->
                     </div>
@@ -284,11 +274,29 @@
                     itemSelector:'.item'
                 });
 
-
+                $("#findIdButton").click(function(e){
+                	//console.log($("#find_id_email").val());
+                	
+                	$.post("${pageContext.request.contextPath}/member/findId.do",{
+                		find_id_email : $("#find_id_email").val()
+                	}, function(json){
+                		if(json.rt != "OK"){
+                			alert(json.rt);
+                			return false;
+                		}
+                		//console.log(json.rt);
+                		//console.log(json.item);
+                		//console.log(json.item.member_user_id);
+                		$("#resultId").html("아이디는 <strong>"+json.item.member_user_id+"</strong> 입니다.");
+                	});
+                });
+                
+                
+            });
 
                 //모달 검사
                 //모달 아이디찾기
-                $("#findId").submit(function(e){
+                /* $("#findId").submit(function(e){
                     e.preventDefault();
 
                     if(!regex.value("#find_id_email", "이메일을 입력하세요")){return false;}
@@ -308,8 +316,8 @@
 
                     if(!regex.value("#find_pw_email", "이메일을 입력하세요")){return false;}
                     if(!regex.email("#find_pw_email", "이메일 유형이 아님")){return false;}
-                });
-            });
+                }); */
+            //});
         </script>
     </body>
 </html>

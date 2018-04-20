@@ -53,7 +53,7 @@ public class PhotoServiceImpl implements PhotoService {
 				throw new NullPointerException();
 			}
 		} catch (NullPointerException e) {
-			throw new Exception("조회된 게시물이 없습니다.");
+			throw new Exception("조회된 게시물이 없습니다3.");
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
 			throw new Exception("게시물 조회에 실패했습니다.");
@@ -91,7 +91,7 @@ public class PhotoServiceImpl implements PhotoService {
 				throw new NullPointerException();
 			}
 		} catch (NullPointerException e) {
-			throw new Exception("조회된 게시물이 없습니다.");
+			throw new Exception("조회된 게시물이 없습니다.99");
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
 			throw new Exception("게시물 조회에 실패했습니다.");
@@ -154,6 +154,67 @@ public class PhotoServiceImpl implements PhotoService {
 			throw new Exception("사진 목록 조회에 실패했습니다.");
 		}
 
+		return result;
+	}
+
+	@Override
+	public void insertPhotoByPlan(Photo photo) throws Exception {
+		try {
+			int result = sqlSession.insert("PhotoMapper.insertPhotoByPlan", photo);
+			if (result == 0) {
+				throw new NullPointerException();
+			}
+		} catch (NullPointerException e) {
+			sqlSession.rollback();
+			throw new Exception("저장된 에몽이 없습니다.");
+		} catch (Exception e) {
+			sqlSession.rollback();
+			logger.error(e.getLocalizedMessage());
+			throw new Exception("에몽 등록에 실패했습니다.");
+		} finally {
+			sqlSession.commit();
+		}
+		
+	}
+
+	@Override
+	public void updateDirByTourId(Photo photo) throws Exception {
+		try {
+			int result = sqlSession.insert("PhotoMapper.updateDirByTourId", photo);
+			if (result == 0) {
+				throw new NullPointerException();
+			}
+		} catch (NullPointerException e) {
+			sqlSession.rollback();
+			throw new Exception("수정된 에몽이 없습니다.");
+		} catch (Exception e) {
+			sqlSession.rollback();
+			logger.error(e.getLocalizedMessage());
+			throw new Exception("에몽 수정에 실패했습니다.");
+		} finally {
+			sqlSession.commit();
+		}
+		
+	}
+
+	@Override
+	public int selectCountTourInfoWithTourPlan(Photo photo) throws Exception {
+		int result = 0;
+		
+		try {
+			result = sqlSession.selectOne("PhotoMapper.selectCountTourInfoWithTourPlan", photo);
+			
+		} catch (NullPointerException e) {
+			sqlSession.rollback();
+			throw new Exception("에몽에몽이 없습니다.");
+		} catch (Exception e) {
+			sqlSession.rollback();
+			logger.error(e.getLocalizedMessage());
+			throw new Exception("에몽에몽에 실패했습니다.");
+		} finally {
+			sqlSession.commit();
+		}
+		
 		return result;
 	}
 

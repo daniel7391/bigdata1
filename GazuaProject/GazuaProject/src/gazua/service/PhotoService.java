@@ -22,6 +22,12 @@ public interface PhotoService {
 	public int selectTourIdByPlanIdCount(Photo photo) throws Exception;
 	
 	public List<Photo> selectPhotoListByTourPlanId2(Photo photo) throws Exception;
+	
+	public void insertPhotoByPlan(Photo photo) throws Exception;
+	
+	public void updateDirByTourId(Photo photo) throws Exception;
+	
+	public int selectCountTourInfoWithTourPlan(Photo photo) throws Exception;
 }
 
 

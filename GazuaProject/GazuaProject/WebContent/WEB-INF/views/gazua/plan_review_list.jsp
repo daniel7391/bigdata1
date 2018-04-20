@@ -161,14 +161,21 @@
 		<%@ include file="/WEB-INF/inc/header.jsp" %>
 	</header>
 	
-        <div id="main">  
+        
         	  <!-- 링크 바 시작-->
              <div class="container">
                 <div class="linkbar">
                  <a href="${pageContext.request.contextPath}/gazua/main.do" style="margin: 5px">메인</a>
                  <font color=black> > </font>        
                  <a href="${pageContext.request.contextPath}/gazua/plan_review_list.do">여행후기</a>    
+                 <c:choose>
+		        	<c:when test="${keyword != null}">
+		        		<font color=black> > </font>   
+		        		<a href="${pageContext.request.contextPath}/gazua/plan_review_list.do?keyword=${keyword}">${keyword}</a>
+		        	</c:when>
+		         </c:choose>
                   </div>
+                  	
                   <hr />
              </div>
                <!-- 링크 바 끝-->
@@ -272,7 +279,7 @@
         </div>
        		  <!--페이지네이션 끝-->
 
-        </div>
+       
           <!-- 메인 끝-->
 	
 	

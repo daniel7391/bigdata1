@@ -26,6 +26,17 @@ public class TourInfo {
 	private boolean gallery;
 	private String imagePath;
 	
+	// 이 장소를 방문한 일정의 갯수를 세기 위한 값
+	private int meetCnt;
+	
+	
+	public int getMeetCnt() {
+		return meetCnt;
+	}
+	
+	public void setMeetCnt(int meetCnt) {
+		this.meetCnt = meetCnt;
+	}
 	public int getId() {
 		return id;
 	}
@@ -149,12 +160,11 @@ public class TourInfo {
 	}
 	@Override
 	public String toString() {
-		return "Place [id=" + id + ", name=" + name + ", postCode=" + postCode + ", addr1=" + addr1 + ", addr2=" + addr2
-				+ ", cost=" + cost + ", route1=" + route1 + ", route2=" + route2 + ", holiday1=" + holiday1
-				+ ", intro=" + intro + ", likes=" + likes
-				+ ", tel=" + tel + ", homePage=" + homePage + ", x=" + x + ", y=" + y + ", tourCode=" + tourCode
-				+ ", limitStart=" + limitStart + ", listCount=" + listCount + ", gallery=" + gallery + ", imagePath="
-				+ imagePath + "]";
+		return "TourInfo [id=" + id + ", name=" + name + ", postCode=" + postCode + ", addr1=" + addr1 + ", addr2="
+				+ addr2 + ", cost=" + cost + ", route1=" + route1 + ", route2=" + route2 + ", holiday1=" + holiday1
+				+ ", intro=" + intro + ", likes=" + likes + ", tel=" + tel + ", homePage=" + homePage + ", x=" + x
+				+ ", y=" + y + ", tourCode=" + tourCode + ", limitStart=" + limitStart + ", listCount=" + listCount
+				+ ", gallery=" + gallery + ", imagePath=" + imagePath + ", meetCnt=" + meetCnt + "]";
 	}
 	
 	

@@ -14,6 +14,7 @@
 				<!-- 이전 그룹에 대한 페이지 번호가 존재한다면? -->
 				<!-- 이전 그룹으로 이동하기 위한 URL을 생성해서 "prevUrl"에 저장 -->
 				<c:url var="prevUrl" value="/gazua/tourinfolist.do">
+					<c:param name="location_gu" value="${keyword2}"></c:param>
 					<c:param name="keyword" value="${keyword}"></c:param>
 					<c:param name="page" value="${pageHelper.prevPage}"></c:param>
 				</c:url>
@@ -33,6 +34,7 @@
 
 			<!-- 각 페이지 번호로 이동할 수 있는 URL을 생성하여 page_url에 저장 -->
 			<c:url var="pageUrl" value="/gazua/tourinfolist.do" >
+				<c:param name="location_gu" value="${keyword2}"></c:param>
 				<c:param name="keyword" value="${keyword}"></c:param>
 				<c:param name="page" value="${i}"></c:param>
 			</c:url>
@@ -55,6 +57,7 @@
 				<!-- 다음 그룹에 대한 페이지 번호가 존재한다면? -->
 				<!-- 다음 그룹으로 이동하기 위한 URL을 생성해서 "nextUrl"에 저장 -->
 				<c:url var="nextUrl" value="/gazua/tourinfolist.do">
+					<c:param name="location_gu" value="${keyword2}"></c:param>
 					<c:param name="keyword" value="${keyword}"></c:param>
 					<c:param name="page" value="${pageHelper.nextPage}"></c:param>
 				</c:url>

@@ -99,8 +99,11 @@ public class PlanReviewList extends BaseController {
 				
 				tourPlanJoinList = tourPlanJoinService.selectTourPlanJoinList(tourplanjoin);
 				// 조회결과가 존재할 경우 --> 갤러리라면 이미지 경로를 썸네일로 교체
+				logger.debug("ㅇㄹㅇㄴㄹㅇㄴㄹ"+ tourPlanJoinList.size());
+				
 				for (int i=0; i<tourPlanJoinList.size(); i++) {
 					TourPlanJoin item = tourPlanJoinList.get(i);
+					logger.debug("아이뒤:"+item.getId());
 					photo.setTourPlan_id(item.getId());
 					
 					Photo temp = photoService.selectOnePhotoByTourPlanId(photo);
@@ -131,8 +134,9 @@ public class PlanReviewList extends BaseController {
 				// 조회결과가 존재할 경우 --> 갤러리라면 이미지 경로를 썸네일로 교체
 				for (int i=0; i<tourPlanJoinList.size(); i++) {
 					TourPlanJoin item = tourPlanJoinList.get(i);
+					logger.debug("아이뒤:"+item.getId());
 					photo.setTourPlan_id(item.getId());
-					
+					logger.debug(photo.getTourPlan_id());
 					Photo temp = photoService.selectOnePhotoByTourPlanId(photo);
 					String temp2 = temp.getDir();
 					

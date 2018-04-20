@@ -23,6 +23,13 @@
 		<result property="tourPlan_id" column="tourPlan_id" />
 	</resultMap>
 	
+	<insert id="insertPhotoByPlan"
+		parameterType="gazua.model.Photo"
+		useGeneratedKeys="true" keyProperty="photo_id">
+		insert into photo (tour_id, name, reg_date, edit_date, date, contents, tourPlan_id) 
+		values (#{tour_id}, name, now(), now(), #{date}, #{contents}, #{tourPlan_id})
+	</insert>
+	
 	<!-- 게시물 하나에 대한 정보를 조회한다. -->
 	<select id="selectPhotoListByTourId" 
 		parameterType="gazua.model.Photo" 
@@ -82,6 +89,20 @@
 		FROM   photo
 		WHERE tourPlan_id = #{tourPlan_id}
 		ORDER BY date ASC
+	</select>
+	
+	<update id="updateDirByTourId"
+		parameterType="gazua.model.Photo">
+		update photo set dir=#{dir} where tour_id=#{tour_id}
+	</update>
+	
+	<select id="selectCountTourInfoWithTourPlan"
+		parameterType="gazua.model.Photo"
+		resultType="int">
+		select count(photo_id)
+		from photo
+		where tour_id=#{tour_id}
+		and tourPlan_id is not null
 	</select>
 </mapper>
 

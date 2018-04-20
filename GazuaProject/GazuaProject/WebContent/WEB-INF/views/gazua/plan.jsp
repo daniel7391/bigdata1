@@ -12,6 +12,15 @@
       .modal-backdrop{
          display:none;
       }
+      
+      div .form-group{
+       padding-left: 30px;
+      }
+      
+      .theme {
+       margin-right: 10px;
+      }
+      
    </style>
 </head>
 
@@ -39,28 +48,28 @@
         <!-- 여행제목 끝 -->
       
       <!-- 여행지 오른쪽 -->
-      <div class="planRight pull-right" style="width:65%">
+      <div class="planRight pull-right">
             <div class="passData" style="width: 100%; height: 300px; background-color: #eee;">
                <input type="text" class="first form-control" name="intro" placeholder="여행 간단 소개" style="height: 50px;">
                 <input type="text" class="second form-control" name="intro_main"  placeholder="여행 일정 소개">
                 <div class="form-group">
                    <label for="startDate">여행시작일</label>
-                    <input type="date" class="form-control" id="startDate" name="startDate" style="height: 24px;">
+                    <input type="date" class="form-control" id="startDate" name="startDate" style="width: 165px; height: 24px;">
                 </div>
                 <div class="form-group">
-                    <label for="days">일</label>
-                    <input type="text" class="form-control" id="days" name="days" placeholder="여행 일수" style="width: 80px">
+                    <label for="days">여행(일)</label>
+                    <input type="text" class="form-control" id="days" name="days" placeholder="여행 일수" style="width: 85px;height: 24px;">
                 </div>
                 <div class="form-group">
-                    <label for="people">명</label>
-                    <input type="text" class="form-control" id="people" name="people" placeholder="여행 인원" style="width: 80px">
+                    <label for="people">인원(명)</label>
+                    <input type="text" class="form-control" id="people" name="people" placeholder="여행 인원" style="width: 85px; height: 24px;">
                 </div>
                 <div class="form-group" id="theme">
-                    <label for="theme">여행테마</label> 
-                    <label><input type='radio' name='theme' value="1">나홀로 여행</label>
-                     <label><input type='radio' name='theme' value="2">친구와 함께</label>
-                    <label><input type='radio' name='theme' value="3">가족과 함께</label>
-                   <label><input type='radio' name='theme' value="4">연인과 함께</label>
+                    <label for="theme" class="theme">여행테마</label> 
+                    <label><input type='radio' name='theme'  value="1">&nbsp;나홀로 여행</label>
+                     <label><input type='radio' name='theme' value="2">&nbsp;친구와 함께</label>
+                    <label><input type='radio' name='theme' value="3">&nbsp;가족과 함께</label>
+                   <label><input type='radio' name='theme' value="4">&nbsp;연인과 함께</label>
                 </div>
                  <div class="tab">
                      <div class="tab-button clearfix form-control" style="text-align:center;">
@@ -76,7 +85,6 @@
                              <div style="background:#eee; width:100%;" >
                                 <button type="button" id="addplanbtn" class="btn btn-success" style="width:100%;" >여행지추가...</button>
                               <ul id="plan_list_start">
-                              
                               </ul>
                           </div>
                        </div>
@@ -130,6 +138,7 @@
          </div>
          
          <div class="modal-body">
+            <input type="hidden" id="plan_list_tourinfo_id" value=""/>
             <label>시작 날짜</label>
             <input type="date" class="form-control" id="plan_list_date"/>
             <br/>
@@ -206,7 +215,7 @@
         });
         
         var plan_sc={};
-       var num = 0;
+        var num = 0;
         $(".planbtn").click(function(e){
            ++num;;
            $("#plan_list_ok").unbind('click');
@@ -218,7 +227,8 @@
           
              // 여행지명
              var plan_name = $(this).parents().parents().children("div").children("div").children("h5").html();
-             
+             var planInfo_id = $(this).parents().parents().children("div").children("div").children("input").val();
+             console.log(">>>"+planInfo_id);
              plan_sc.plan_name = plan_name;
              
              var temp = Handlebars.compile($("#tmpl_searching").html());
@@ -229,8 +239,9 @@
                  plan_sc.plan_date = $("#plan_list_date").val();
                  plan_sc.plan_time = $("#plan_list_time").val();
                  plan_sc.num = num;
-                plan_sc.plan_contents = $("#plan_list_modal").val();
-                
+                 plan_sc.plan_contents = $("#plan_list_modal").val();
+                 plan_sc.planInfo_id = planInfo_id;
+                 
                 $("#plan_list_start").append(temp(plan_sc));
                 console.log($("#plan_list_date").val());
                 console.log($("#plan_list_time").val());
@@ -277,8 +288,14 @@
          <div>{{plan_name}}</div>
          <button type="button" id="contents_check">확인</button>
          <textarea class="form-control" id="content" style="max-width:100%">{{plan_contents}}</textarea>
+      <input type="hidden" name="plan_list_{{num}}_1" id="plan_list_{{num}}_1" value="{{plan_date}}">
+      <input type="hidden" name="plan_list_{{num}}_2" id="plan_list_{{num}}_2" value="{{plan_time}}">
+      <input type="hidden" name="plan_list_{{num}}_3" id="plan_list_{{num}}_3" value="{{plan_name}}">
+      <input type="hidden" name="plan_list_{{num}}_4" id="plan_list_{{num}}_4" value="{{plan_contents}}">
+      <input type="hidden" name="plan_list_{{num}}_5" id="plan_list_{{num}}_5" value="{{planInfo_id}}">
       </li>
    </script>
 </body>
 
 </html>
+      

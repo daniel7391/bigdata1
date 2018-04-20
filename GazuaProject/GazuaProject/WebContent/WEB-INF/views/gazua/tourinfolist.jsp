@@ -49,8 +49,22 @@
 </header>
 
 <div class="container" style="margin-top: -10px;">
-	<div class="search-process">
-        <h5>추천여행지 > "경복궁" 검색결과</h5>
+	<div class="linkbar">
+        <a href="${pageContext.request.contextPath}/gazua/main.do" style="margin: 5px">메인</a>
+        <font color=black> > </font>        
+        <a href="${pageContext.request.contextPath}/gazua/tourinfolist.do">추천여행지</a>
+        <c:choose>
+        	<c:when test="${keyword2 != 0}">
+        		<font color=black> > </font>   
+        		<a href="${pageContext.request.contextPath}/gazua/tourinfolist.do?location_gu=${keyword2}">${tour2.tourLocation_gu}</a>
+        	</c:when>
+        </c:choose>
+        <c:choose>
+        	<c:when test="${keyword != null}">
+        		<font color=black> > </font>   
+        		<a href="${pageContext.request.contextPath}/gazua/tourinfolist.do?keyword=${keyword}">${keyword}</a>
+        	</c:when>
+        </c:choose>    
     </div>
 
 	<!-- 글 목록 시작 -->
@@ -79,7 +93,7 @@
 				            <br />
 				            <h5 class="summary" style="color: gray;">${tourInfo.intro}</h5>
 				            <br />
-				            <h5 class="post"><span class="glyphicon glyphicon-list-alt"></span> 68개의 포스트 - ${tourInfo.addr1}</h5>
+				            <h5 class="post"><span class="glyphicon glyphicon-list-alt"></span> ${tourInfo.meetCnt}개의 여행일정 - ${tourInfo.addr1}</h5>
 
 					</div>
 				</div>

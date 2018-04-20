@@ -49,6 +49,12 @@ public interface TourInfoService {
 	public void updateLikes(TourInfo tourinfo) throws Exception;
 	public void dedateLikes(TourInfo tourinfo) throws Exception;
 	
+	
+	/**
+	 * 임시 서비스
+	 */
+	public List<TourInfo> selectTourInfo4() throws Exception;
+	
 }
 
 

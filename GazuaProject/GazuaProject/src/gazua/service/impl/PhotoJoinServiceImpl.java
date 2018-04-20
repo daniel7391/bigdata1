@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.logging.log4j.Logger;
 
+import gazua.model.Photo;
 import gazua.model.PhotoJoin;
 import gazua.service.PhotoJoinService;
 

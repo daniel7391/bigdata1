@@ -18,12 +18,14 @@ import gazua.helper.PageHelper;
 import gazua.helper.UploadHelper;
 import gazua.helper.WebHelper;
 import gazua.model.Photo;
+import gazua.model.Tour;
 import gazua.model.TourInfo;
-
 import gazua.service.PhotoService;
 import gazua.service.TourInfoService;
+import gazua.service.TourService;
 import gazua.service.impl.PhotoServiceImpl;
 import gazua.service.impl.TourInfoServiceImpl;
+import gazua.service.impl.TourServiceImpl;
 
 @WebServlet("/gazua/tourinfolist.do")
 public class TourInfoList extends BaseController {
@@ -39,6 +41,7 @@ public class TourInfoList extends BaseController {
 	// --> import study.jsp.mysite.service.BbsDocumentService;
 	TourInfoService tourInfoService;
 	PhotoService photoService;
+	TourService tourService;
 	// --> import study.jsp.helper.PageHelper;
 	PageHelper pageHelper;
 	// --> import study.jsp.helper.Upload;
@@ -56,6 +59,7 @@ public class TourInfoList extends BaseController {
 		
 		tourInfoService = new TourInfoServiceImpl(sqlSession, logger);
 		photoService = new PhotoServiceImpl(sqlSession, logger);
+		tourService = new TourServiceImpl(sqlSession, logger);
 		
 		pageHelper = PageHelper.getInstance();
 		upload = UploadHelper.getInstance();
@@ -77,21 +81,24 @@ public class TourInfoList extends BaseController {
 		/** (5) 조회할 정보에 대한 Beans 생성 */
 		// 검색어
 		String keyword = web.getString("keyword");
-
+		int keyword2 =web.getInt("location_gu");
+		
 		TourInfo tourinfo = new TourInfo();
 		Photo photo = new Photo();
-		
+		Tour tour = new Tour();
+		Tour tour2 = new Tour();
 		// 현재 페이지 수 --> 기본값은 1페이지로 설정함
 		int page = web.getInt("page", 1);
 
 		// 제목과 내용에 대한 검색으로 활용하기 위해서 입력값을 설정한다.
 		tourinfo.setName(keyword);
 		tourinfo.setIntro(keyword);
-
+		tourinfo.setTourCode(keyword2);
+		tour.setTourCode(keyword2);
 		/** (6) 게시글 목록 조회 */
 		int totalCount = 0;
 		List<TourInfo> tourInfoList = null;
-
+		
 		
 		try {
 			// 전체 게시물 수
@@ -106,6 +113,7 @@ public class TourInfoList extends BaseController {
 			tourinfo.setListCount(pageHelper.getListCount());
 			
 			tourInfoList = tourInfoService.selectTourInfoList(tourinfo);
+			tour2 = tourService.selectTour(tour);
 			// 조회결과가 존재할 경우 --> 갤러리라면 이미지 경로를 썸네일로 교체
 			for (int i=0; i<tourInfoList.size(); i++) {
 				TourInfo item = tourInfoList.get(i);
@@ -114,20 +122,26 @@ public class TourInfoList extends BaseController {
 				Photo temp = photoService.selectOnePhotoByTourId(photo);
 				String temp2 = temp.getDir();
 				
+				item.setMeetCnt(photoService.selectCountTourInfoWithTourPlan(photo));
 				item.setImagePath(temp2);
 			}
+			
 		} catch (Exception e) {
 			web.redirect(null, e.getLocalizedMessage());
 			return null;
 		} finally {
 			sqlSession.close();
 		}
-
+		
+		
 
 		/** (7) 조회 결과를 View에 전달 */
 		request.setAttribute("tourInfoList", tourInfoList);
+		request.setAttribute("tour2", tour2);
+		
 		// 사용자가 입력한 검색어를 View에 되돌려준다. --> 자동완성 구현을 위함
 		request.setAttribute("keyword", keyword);
+		request.setAttribute("keyword2", keyword2);
 		// 페이지 번호 계산 결과를 View에 전달
 		request.setAttribute("pageHelper", pageHelper);
 		

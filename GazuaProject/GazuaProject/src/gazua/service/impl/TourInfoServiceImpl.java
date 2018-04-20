@@ -105,7 +105,7 @@ public class TourInfoServiceImpl implements TourInfoService {
 				throw new NullPointerException();
 			}
 		} catch (NullPointerException e) {
-			throw new Exception("조회된 게시물이 없습니다.");
+			throw new Exception("조회된 게시물이 없습니다.2");
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
 			throw new Exception("게시물 조회에 실패했습니다.");
@@ -169,6 +169,25 @@ public class TourInfoServiceImpl implements TourInfoService {
 			throw new Exception("장소 목록 조회에 실패했습니다.");
 		}
 
+		return result;
+	}
+
+
+	@Override
+	public List<TourInfo> selectTourInfo4() throws Exception {
+		List<TourInfo> result = null;
+		
+		try {
+			result = sqlSession.selectList("TourInfoMapper.selectTourInfo4");
+			if (result == null) {
+				throw new NullPointerException();
+			}
+		} catch (NullPointerException e) {
+			throw new Exception("조회된 장소 목록이 없습니다.");
+		} catch (Exception e) {
+			logger.error(e.getLocalizedMessage());
+			throw new Exception("장소 목록 조회에 실패했습니다.");
+		}
 		return result;
 	}
 	

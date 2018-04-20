@@ -47,9 +47,7 @@ public class TourServiceImpl implements TourService{
 		
 		try{
 			result = sqlSession.selectOne("TourMapper.selectTour", tour);
-			if(result == null){
-				throw new NullPointerException();
-			}
+			
 		} catch (NullPointerException e) {
 			sqlSession.rollback();
 			throw new Exception("존재하지 않는 파일에 대한 요청입니다.");

@@ -77,7 +77,8 @@ public class MainPage extends BaseController {
 		List<TourInfo> tourInfoList = null;
 		List<TourPlanJoin> tourPlanJoinList = null;
 		List<TourPlanJoin> tourPlanJoinList2 = null;
-
+		
+		
 		
 		try {
 			// 전체 게시물 수
