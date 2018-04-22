@@ -19,4 +19,9 @@ public interface CommentService {
 	
 	public void updateComment(Comment comment) throws Exception;
 	
+	public void insertCommentPlan(Comment comment) throws Exception;
+	public Comment selectCommentPlan(Comment comment) throws Exception;
+	
+	public List<Comment> selectCommentListPlan(Comment comment) throws Exception;
+	
 }

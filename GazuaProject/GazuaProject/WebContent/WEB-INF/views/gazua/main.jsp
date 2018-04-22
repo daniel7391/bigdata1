@@ -12,24 +12,24 @@
         <style type="text/css">
             <%@ include file="/assets/css/mainpage.css" %>
             .status{
-            	width:255px;
+               width:255px;
             }
             .content-box{
-            	width:723px;
+               width:723px;
             }
-        	#carousel-example-generic{
-        	width:740px;
-        	}
+           #carousel-example-generic{
+           width:740px;
+           }
         </style>
     </head>
     <body>
         <header>
-        	<%@ include file="/WEB-INF/inc/header.jsp" %>
+           <%@ include file="/WEB-INF/inc/header.jsp" %>
         </header>
 
         <!-- 본문 영역 -->
         <div id="back">
-            <div class="container" id="midbar" style="position:relative; left:10px;">
+            <div class="container" id="midbar">
                 <div class="content-box pull-left" id="content-box">
                     <div class="summary">
                         <div id="carousel-example-generic" class="carousel slide"
@@ -97,10 +97,10 @@
                     <div class="guestArea">
                         <c:choose>
                             <c:when test="${loginInfo == null}">
-								<%@ include file="/WEB-INF/views/function/login.jsp"%>
+                        <%@ include file="/WEB-INF/views/function/login.jsp"%>
                             </c:when>
                             <c:otherwise>
-								<%@ include file="/WEB-INF/views/function/loginInfo.jsp" %>
+                        <%@ include file="/WEB-INF/views/function/loginInfo.jsp" %>
                             </c:otherwise>
                         </c:choose>
                         <!-- 아이디 찾기 모달 -->
@@ -108,7 +108,7 @@
                             <div class="modal-dialog" style="z-index: 1070 !important;">
                                 <form name="findIdform" method="post" action="${pageContext.request.contextPath}/member/findId.do">
                                 <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <button type="button" class="close cmodal" data-dismiss="modal" aria-hidden="true">×</button>
                                     <h2 class="modal-title">아이디 찾기</h2>
                                 </div>
                                 <div>
@@ -118,28 +118,23 @@
                                                <label for="find_id_email">이메일</label>
                                                <input type="email" name="find_id_email" id="find_id_email" class="form-control" />
                                            </div>
-                                           <p>또는</p>
-                                           <div class="form-group">
-                                               <label for="find_id_name">이름</label>
-                                               <input type="text" name="find_id_name" id="find_id_name" class="form-control" />
-                                           </div>
                                        </fieldset>
                                        <span id="resultId"></span>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <a href="#" data-dismiss="modal" class="btn">닫기</a>
-                                    <button type="button" class="btn btn-primary" id="findIdButton">아이디찾기</button>
+                                    <!-- <a href="#" data-dismiss="modal" class="btn cmodal">닫기</a> -->
+                                    <button type="button" class="btn btn-primary btn-block" id="findIdButton">아이디찾기</button>
                                 </div>
-								</form>
+                        </form>
                             </div>
                         </div><!-- 아이디모달끝 -->
                         <!-- 비밀번호 찾기 모달 -->
                         <div class="modal" id="findPw" aria-hidden="true">
                             <div class="modal-dialog" style="z-index: 1070 !important;">
-                            	<form name="myform" method="post" action="${pageContext.request.contextPath}/member/findpw_ok.do">
+                               <form name="myform" method="post" action="${pageContext.request.contextPath}/member/findpw_ok.do">
                                 <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <button type="button" class="close cmodal" data-dismiss="modal" aria-hidden="true">×</button>
                                     <h2 class="modal-title">비밀번호 찾기</h2>
                                 </div>
                                 <div>
@@ -162,42 +157,42 @@
                 <div class="row">
                     <div class="content-box pull-left" id="content-box">
                         <ul id="grid">
-                        	<c:choose>
-                        		<c:when test="${fn:length(tourPlanJoinList) > 0}">
-                        			<c:forEach var="tourPlanJoin" items="${tourPlanJoinList}">
-			                            <li class="item">
-			                                <div class="item-box">
-			                                    <div class="item-content">
-			                                    	<c:url var="readUrl2" value="/gazua/planinfo.do">
-														<c:param name="id" value="${tourPlanJoin.id}" />
-													</c:url>
-			                                        <a href="${readUrl2}"><img src="${tourPlanJoin.dir}" class="img" /></a>
-			                                        
-			                                     
-			                                        <h3 class="title">
-			                                            <a href="${readUrl2}">${tourPlanJoin.name}</a>
-			                                        </h3>
-			                                        <p class="state">${tourPlanJoin.member_name2} | 
-			                                        	<c:choose>
-						                            		<c:when test="${tourPlanJoin.theme==4}">
-						                            			 가족과 함께
-						                            		</c:when>
-						                            		<c:when test="${tourPlanJoin.theme==3}">
-						                            			 연인과 함께
-						                            		</c:when>
-						                            		<c:when test="${tourPlanJoin.theme==2}">
-						                            			 친구와 함께
-						                            		</c:when>
-						                            		<c:otherwise>
-						                            			 혼자서
-						                            		</c:otherwise>
-						                            	</c:choose>
-			                                        </p>
-			                                    </div>
-			                                </div>
-			                            </li>
-                            		</c:forEach>
-                            	</c:when>
+                           <c:choose>
+                              <c:when test="${fn:length(tourPlanJoinList) > 0}">
+                                 <c:forEach var="tourPlanJoin" items="${tourPlanJoinList}">
+                                     <li class="item">
+                                         <div class="item-box">
+                                             <div class="item-content">
+                                                <c:url var="readUrl2" value="/gazua/planinfo.do">
+                                          <c:param name="id" value="${tourPlanJoin.id}" />
+                                       </c:url>
+                                                 <a href="${readUrl2}"><img src="${tourPlanJoin.dir}" class="img" /></a>
+                                                 
+                                              
+                                                 <h3 class="title">
+                                                     <a href="${readUrl2}">${tourPlanJoin.name}</a>
+                                                 </h3>
+                                                 <p class="state">${tourPlanJoin.member_name2} | 
+                                                    <c:choose>
+                                                    <c:when test="${tourPlanJoin.theme==4}">
+                                                        가족과 함께
+                                                    </c:when>
+                                                    <c:when test="${tourPlanJoin.theme==3}">
+                                                        연인과 함께
+                                                    </c:when>
+                                                    <c:when test="${tourPlanJoin.theme==2}">
+                                                        친구와 함께
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        혼자서
+                                                    </c:otherwise>
+                                                 </c:choose>
+                                                 </p>
+                                             </div>
+                                         </div>
+                                     </li>
+                                  </c:forEach>
+                               </c:when>
                             </c:choose>
                         </ul>
                     </div><!-- content-box end -->
@@ -208,42 +203,42 @@
                 <div class="row">
                     <div class="content-box pull-left" id="content-box">
                         <ul id="grid1">
-                        	<c:choose>
-                        		<c:when test="${fn:length(tourPlanJoinList2) > 0}">
-                        			<c:forEach var="tourPlanJoin2" items="${tourPlanJoinList2}">
-			                            <li class="item">
-			                                <div class="item-box">
-			                                    <div class="item-content">
-			                                    	<c:url var="readUrl3" value="/gazua/planinfo.do">
-														<c:param name="id" value="${tourPlanJoin2.id}" />
-													</c:url>
-			                                        <a href="${readUrl3}"><img src="${tourPlanJoin2.dir}" class="img" /></a>
-			                                        
-			                                     
-			                                        <h3 class="title">
-			                                            <a href="${readUrl3}">${tourPlanJoin2.name}</a>
-			                                        </h3>
-			                                        <p class="state">${tourPlanJoin2.member_name2} | 
-			                                        	<c:choose>
-						                            		<c:when test="${tourPlanJoin2.theme==4}">
-						                            			 가족과 함께
-						                            		</c:when>
-						                            		<c:when test="${tourPlanJoin2.theme==3}">
-						                            			 연인과 함께
-						                            		</c:when>
-						                            		<c:when test="${tourPlanJoin2.theme==2}">
-						                            			 친구와 함께
-						                            		</c:when>
-						                            		<c:otherwise>
-						                            			 혼자서
-						                            		</c:otherwise>
-						                            	</c:choose>
-			                                        </p>
-			                                    </div>
-			                                </div>
-			                            </li>
-                            		</c:forEach>
-                            	</c:when>
+                           <c:choose>
+                              <c:when test="${fn:length(tourPlanJoinList2) > 0}">
+                                 <c:forEach var="tourPlanJoin2" items="${tourPlanJoinList2}">
+                                     <li class="item">
+                                         <div class="item-box">
+                                             <div class="item-content">
+                                                <c:url var="readUrl3" value="/gazua/planinfo.do">
+                                          <c:param name="id" value="${tourPlanJoin2.id}" />
+                                       </c:url>
+                                                 <a href="${readUrl3}"><img src="${tourPlanJoin2.dir}" class="img" /></a>
+                                                 
+                                              
+                                                 <h3 class="title">
+                                                     <a href="${readUrl3}">${tourPlanJoin2.name}</a>
+                                                 </h3>
+                                                 <p class="state">${tourPlanJoin2.member_name2} | 
+                                                    <c:choose>
+                                                    <c:when test="${tourPlanJoin2.theme==4}">
+                                                        가족과 함께
+                                                    </c:when>
+                                                    <c:when test="${tourPlanJoin2.theme==3}">
+                                                        연인과 함께
+                                                    </c:when>
+                                                    <c:when test="${tourPlanJoin2.theme==2}">
+                                                        친구와 함께
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        혼자서
+                                                    </c:otherwise>
+                                                 </c:choose>
+                                                 </p>
+                                             </div>
+                                         </div>
+                                     </li>
+                                  </c:forEach>
+                               </c:when>
                             </c:choose>
                         </ul>
                     </div><!-- content-box end -->
@@ -274,24 +269,34 @@
                     itemSelector:'.item'
                 });
 
+                //ajax 아이디검사
                 $("#findIdButton").click(function(e){
-                	//console.log($("#find_id_email").val());
-                	
-                	$.post("${pageContext.request.contextPath}/member/findId.do",{
-                		find_id_email : $("#find_id_email").val()
-                	}, function(json){
-                		if(json.rt != "OK"){
-                			alert(json.rt);
-                			return false;
-                		}
-                		//console.log(json.rt);
-                		//console.log(json.item);
-                		//console.log(json.item.member_user_id);
-                		$("#resultId").html("아이디는 <strong>"+json.item.member_user_id+"</strong> 입니다.");
-                	});
+                   //console.log($("#find_id_email").val());
+                   
+                   $.post("${pageContext.request.contextPath}/member/findId.do",{
+                      find_id_email : $("#find_id_email").val()
+                   }, function(json){
+                      if(json.rt != "OK"){
+                         alert(json.rt);
+                         return false;
+                      }
+                      //console.log(json.rt);
+                      //console.log(json.item);
+                      //console.log(json.item.member_user_id);
+                      if(json.item.member_user_id != "회원가입을 해 주세요"){
+                         $("#resultId").html("아이디는 <strong>"+json.item.member_user_id+"</strong> 입니다.");
+                      } else {
+                         $("#resultId").html("등록된 이메일이 아닙니다.<br />회원가입을 해 주세요");
+                      }
+                   });
                 });
+                //end ajax
                 
-                
+                //모달 X버튼 누르거나 화면밖 클릭해서 닫을 때
+                $('.modal').on('hidden.bs.modal', function (e) {
+                  $("#resultId").html("");
+                  $(this).find('form')[0].reset()
+                });
             });
 
                 //모달 검사

@@ -160,6 +160,9 @@
 		.comment,.by-current-user{
 		    padding-top:0px;
 		}
+		.modal-backdrop {
+       		display: none;
+       	}
 </style>
 			
 <%@ include file="/WEB-INF/inc/common.jsp" %>
@@ -255,18 +258,193 @@
             </div>
            </div>
            		  <!-- 버튼 끝-->
+           		  
+           	 <form id="comment_form" method="post" 
+				      action="${pageContext.request.contextPath}/gazua/CommentInsertPlan">
+				      <!-- 글 번호 상태 유지 -->
+				      <input type='hidden' name='tourPlan_id' value='${readTourPlan.id}' />
+				      <!-- 작성자,비밀번호,이메일은 로그인하지 않은 경우만 입력한다. -->
+				      
+				      <!-- 내용입력, 저장버튼 -->
+				      <div class='form-group'>
+				         <div class="input-group">
+				            <textarea class="form-control custom-control" name='content' 
+				               style="resize:none; height: 80px"></textarea>     
+				            <span class="input-group-btn">
+				               <button type="submit" class="btn btn-success" 
+				                  style="height: 80px">저장</button>
+				            </span>
+				         </div>
+				      </div>
+				      <ul class="media-list" id="comment_list">
+				      </ul>
+				   </form>
         </div>
     </div>
 </div>
 
-
+<%@ include file="/WEB-INF/inc/footer.jsp" %>
    
 <!-- Javascript -->
         
-<script type="text/javascript">
-  
+<script id="tmpl_comment_item" type="text/x-handlebars-template">
+    <li class="media" style='border-top: 1px dotted #ccc; padding-top: 15px' id="comment_{{comment_id}}">
+        <div class="media-body" style='display: block;'>
+            <h4 class="media-heading clearfix">
+                <!-- 작성자,작성일시 -->
+                <div class='pull-left'>
+                    {{comment_user_name}}
+                    <small>
+                      
+                       {{reg_date}}
+                    </small>
+               </div>
+                <!-- 수정,삭제 버튼 -->
+                <div class='pull-right'>
+                    <a href='${pageContext.request.contextPath}/gazua/CommentEdit?comment_id={{comment_id}}' data-toggle="modal" data-target="#comment_edit_modal" class='btn btn-warning btn-xs'>
+                        <i class='glyphicon glyphicon-edit'></i>
+                    </a>
+                    <a href='${pageContext.request.contextPath}/gazua/CommentDelete.do?comment_id={{comment_id}}' data-toggle="modal" data-target="#comment_delete_modal" class='btn btn-danger btn-xs'>
+                        <i class='glyphicon glyphicon-remove'></i>
+                    </a>
+                </div>
+            </h4>
+            <!-- 내용 -->
+            <p>{{{content}}}</p>
+        </div>
+    </li>
+	</script>
+	
+	<div class="modal fade" id="comment_delete_modal">
+			  <div class="modal-dialog ">
+			    <div class="modal-content">
+			   
+			    </div>
+			  </div>
+			</div>
+			<div class="modal fade" id="comment_edit_modal">
+			  <div class="modal-dialog ">
+			    <div class="modal-content">
+			   
+			    </div>
+			  </div>
+			</div>
+	
+	
+	
+	<script type="text/javascript">
+	$(function() {
+		/** 페이지가 열리면서 동작하도록 이벤트 정의 없이 Ajax요청 */
+		$.get("${pageContext.request.contextPath}/gazua/CommentListPlan", {
+			tourPlan_id: "${readTourPlan.id}"
+		}, function(json) {
+			if (json.rt != "OK") {
+				alert(json.rt);
+				return false;
+			}
+			
+			// 템플릿 HTML을 로드한다.
+			var template = Handlebars.compile($("#tmpl_comment_item").html());
+			
+			// JSON에 포함된 '&lt;br/&gt;'을 검색에서 <br/>로 변경함.
+			// --> 정규표현식 /~~~/g는 문자열 전체의 의미.
+			for (var i=0; i<json.item.length; i++) {
+				json.item[i].content 
+					= json.item[i].content.replace(/&lt;br\/&gt;/g, "<br/>");
+				
+				// 덧글 아이템 항목 하나를 템플릿과 결합한다.
+				var html = template(json.item[i]);
+				// 결합된 결과를 덧글 목록에 추가한다.
+				$("#comment_list").append(html);
+			}
+		});
+		
+		/** 덧글 작성 폼의 submit 이벤트 Ajax 구현 */
+		// <form>요소의 method, action속성과 <input>태그를
+		// Ajax요청으로 자동 구성한다.
+		$("#comment_form").ajaxForm(function(json) {
+			// json은 API에서 표시하는 전체 데이터
+			if (json.rt != "OK") {
+				alert(json.rt);
+				return false;
+			}
+
+			// 줄 바꿈에 대한 처리
+			// --> 정규표현식 /~~~/g는 문자열 전체의 의미.
+			// --> JSON에 포함된 '&lt;br/&gt;'을 검색에서 <br/>로 변경함.
+			json.item.content = json.item.content.replace(/&lt;br\/&gt;/g, "<br/>");
+			
+			// 템플릿 HTML을 로드한다.
+			var template = Handlebars.compile($("#tmpl_comment_item").html());
+			// JSON에 포함된 작성 결과 데이터를 템플릿에 결합한다.
+			var html = template(json.item);
+			// 결합된 결과를 덧글 목록에 추가한다.
+			$("#comment_list").append(html);
+			// 폼 태그의 입력값을 초기화 하기 위해서 reset이벤트를 강제로 호출
+			$("#comment_form").trigger('reset');
+		});
+		
+		 $(document).on('submit', "#comment_delete_form", function(e) {
+             e.preventDefault();
+
+             // AjaxForm 플러그인의 강제 호출
+             $(this).ajaxSubmit(function(json) {
+                if (json.rt != "OK") {
+                   alert(json.rt);
+                   return false;
+                }
+                
+                alert("삭제되었습니다.");
+                // modal 강제로 닫기
+                $("#comment_delete_modal").modal('hide');
+                
+                // JSON 결과에 포함된 덧글일련번호를 사용하여 삭제할 <li>의 id값을 찾는다.
+                var commentId = json.comment_id;
+                $("#comment_" + commentId).remove();
+             });
+          });
+          
+          $('.modal').on('hidden.bs.modal', function (e) {
+             // 모달창 내의 내용을 강제로 지움.
+              $(this).removeData('bs.modal');
+          });
+   
+          
+          
+          
+          
+          
+          $(document).on('submit', "#comment_edit_form", function(e) {
+             e.preventDefault();
+             
+             // AjaxForm 플러그인의 강제 호출
+             $(this).ajaxSubmit(function(json) {
+                if (json.rt != "OK") {
+                   alert(json.rt);
+                   return false;
+                }
+                
+                // 줄 바꿈에 대한 처리
+                // --> 정규표현식 /~~~/g는 문자열 전체의 의미.
+                // --> JSON에 포함된 '&lt;br/&gt;'을 검색에서 <br/>로 변경함.
+                json.item.content = json.item.content.replace(/&lt;br\/&gt;/g, "<br/>");
+                
+                // 템플릿 HTML을 로드한다.
+                var template = Handlebars.compile($("#tmpl_comment_item").html());
+                // JSON에 포함된 작성 결과 데이터를 템플릿에 결합한다.
+                var html = template(json.item);
+                // 결합된 결과를 기존의 덧글 항목과 교체한다.
+                $("#comment_" + json.item.id).replaceWith(html);
+                
+                // 덧글 수정 모달 강제로 닫기
+                $("#comment_edit_modal").modal('hide');
+                history.go(0);
+             });
+          });
+	});
+	 
 </script>
-<%@ include file="/WEB-INF/inc/footer.jsp" %>
+
 </body>
 </html>
 

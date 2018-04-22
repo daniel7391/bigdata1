@@ -189,6 +189,10 @@ public class MemberServiceImpl implements MemberService {
 	      
 	      try {
 	         result = sqlSession.selectOne("MemberMapper.selectFindMemberId", member);
+	         if(result == null) {
+	            result = new Member();
+	            result.setMember_user_id("회원가입을 해 주세요");
+	         }
 	      } catch (NullPointerException e) {
 	         throw new Exception("아이디가 존재하지 않습니다.");
 	      } catch (Exception e) {

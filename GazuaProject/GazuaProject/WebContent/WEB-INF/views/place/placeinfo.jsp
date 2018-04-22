@@ -94,6 +94,10 @@
             .status p {
                 color: #888;
             }
+            .modal-backdrop {
+        		display: none;
+        	}
+            
         
         }
         

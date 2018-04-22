@@ -30,11 +30,30 @@
 		)
 	</insert>
 	
+		<insert id="insertCommentPlan" parameterType="gazua.model.Comment" 
+		useGeneratedKeys="true" keyProperty="comment_id">
+		INSERT INTO comment (
+			comment_user_name, content, reg_date, edit_date, tourPlan_id, member_id
+		) VALUES (
+			#{comment_user_name}, #{content}, now(), now(),#{tourPlan_id},#{member_id}
+			
+		)
+	</insert>
+	
 	<select id="selectCommentTour" parameterType="gazua.model.Comment" resultMap="comment">
 		SELECT comment_id, comment_user_name, content,
 			    DATE_FORMAT(reg_date, '%Y-%m-%d %H:%i:%s') as reg_date, 
 			   DATE_FORMAT(edit_date, '%Y-%m-%d %H:%i:%s') as edit_date, 
 			   member_id, tour_id
+	 	FROM   comment
+	 	WHERE  comment_id=#{comment_id}
+	</select>
+	
+	<select id="selectCommentPlan" parameterType="gazua.model.Comment" resultMap="comment">
+		SELECT comment_id, comment_user_name, content,
+			    DATE_FORMAT(reg_date, '%Y-%m-%d %H:%i:%s') as reg_date, 
+			   DATE_FORMAT(edit_date, '%Y-%m-%d %H:%i:%s') as edit_date, 
+			   member_id, tourPlan_id
 	 	FROM   comment
 	 	WHERE  comment_id=#{comment_id}
 	</select>
@@ -46,6 +65,15 @@
 			   member_id, tour_id
 	 	FROM   comment
 	 	WHERE  tour_id=#{tour_id}
+	</select>
+	
+	<select id="selectCommentListPlan" parameterType="gazua.model.Comment" resultMap="comment">
+		SELECT comment_id, comment_user_name, content,
+			    DATE_FORMAT(reg_date, '%Y-%m-%d %H:%i:%s') as reg_date, 
+			   DATE_FORMAT(edit_date, '%Y-%m-%d %H:%i:%s') as edit_date, 
+			   member_id, tourPlan_id
+	 	FROM   comment
+	 	WHERE  tourPlan_id=#{tourPlan_id}
 	</select>
 	
 	<select id="selectCommentCountByMemberId"
