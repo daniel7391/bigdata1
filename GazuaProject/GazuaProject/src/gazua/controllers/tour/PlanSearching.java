@@ -19,8 +19,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import gazua.dao.MyBatisConnectionFactory;
 import gazua.helper.WebHelper;
+import gazua.model.Photo;
 import gazua.model.TourInfo;
+import gazua.service.PhotoService;
 import gazua.service.TourInfoService;
+import gazua.service.impl.PhotoServiceImpl;
 import gazua.service.impl.TourInfoServiceImpl;
 
 /**
@@ -29,50 +32,60 @@ import gazua.service.impl.TourInfoServiceImpl;
 @WebServlet("/gazua/plan_searching.do")
 public class PlanSearching extends HttpServlet {
 
-   private static final long serialVersionUID = -8339911114449461380L;
-   
-   Logger logger;
-   SqlSession sqlSession;
-   WebHelper web;
-   
-   TourInfoService tourInfoService;
-   
-   @Override
-   public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      request.setCharacterEncoding("utf-8");
-      response.setCharacterEncoding("utf-8");
-      response.setContentType("application/json");
-      
-      logger = LogManager.getFormatterLogger(request.getRequestURI());
-      sqlSession = MyBatisConnectionFactory.getSqlSession();
-      web = WebHelper.getInstance(request, response);
-      
-      tourInfoService = new TourInfoServiceImpl(sqlSession, logger);
-      
-      TourInfo tourinfo = new TourInfo();
-      
-      List<TourInfo> item = null;
-      
-      try{
-         item = tourInfoService.selectTourInfoListSecond(tourinfo);
-      }catch(Exception e){
-         web.printJsonRt(e.getLocalizedMessage());
-         return;
-      }finally{
-         sqlSession.close();
-      }
-      
-      for(int i = 0; i<item.size(); i++){
-         TourInfo temp = item.get(i);
-         temp.setName(web.convertHtmlTag(temp.getName()));
-      }
-      
-      Map<String, Object> data = new HashMap<String, Object>();
-      data.put("rt", "OK");
-      data.put("item", item);
-      
-      ObjectMapper mapper = new ObjectMapper();
-      mapper.writeValue(response.getWriter(), data);
-      
-   }
+	private static final long serialVersionUID = -8339911114449461380L;
+	
+	Logger logger;
+	SqlSession sqlSession;
+	WebHelper web;
+	TourInfoService tourInfoService;
+	PhotoService photoService;
+	
+	@Override
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("application/json");
+		
+		logger = LogManager.getFormatterLogger(request.getRequestURI());
+		sqlSession = MyBatisConnectionFactory.getSqlSession();
+		web = WebHelper.getInstance(request, response);
+		tourInfoService = new TourInfoServiceImpl(sqlSession, logger);
+		photoService = new PhotoServiceImpl(sqlSession, logger);
+		
+		TourInfo tourinfo = new TourInfo();
+		
+		List<TourInfo> item = null;
+		Photo photo = new Photo();
+		try{
+			item = tourInfoService.selectTourInfoListSecond(tourinfo);
+			for(int i = 0; i<item.size(); i++){
+				TourInfo photoItem = item.get(i);
+				photo.setTour_id(photoItem.getId());
+				
+				Photo photoItem2 = photoService.selectOnePhotoByTourId(photo);
+				String photoDir = photoItem2.getDir();
+				
+				item.get(i).setImagePath(photoDir);
+			}
+			
+		}catch(Exception e){
+			web.printJsonRt(e.getLocalizedMessage());
+			return;
+		}finally{
+			sqlSession.close();
+		}
+		
+		for(int i = 0; i<item.size(); i++){
+			TourInfo temp = item.get(i);
+			temp.setName(web.convertHtmlTag(temp.getName()));
+		}
+		
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("rt", "OK");
+		data.put("item", item);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.writeValue(response.getWriter(), data);
+		
+	}
 }
