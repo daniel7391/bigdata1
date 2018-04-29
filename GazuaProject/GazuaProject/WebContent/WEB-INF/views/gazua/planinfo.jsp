@@ -288,7 +288,7 @@
 								<img src="${phototourinfo.dir}" style="width:785px; height:600px;"/>	
 								<!-- 사진의 제목 -->
 				            	<!-- 내용 -->
-				            	<h5>${phototourinfo.contents}</h5>						
+				            	<h5>${phototourinfo.date} : ${phototourinfo.contents}</h5>						
 							</div>
 							<br/>
 						</c:forEach>

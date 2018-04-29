@@ -92,6 +92,7 @@ public class PlaceInfo extends BaseController {
 		// 지금 읽고 있는 게시물이 저장될 객체
 		TourInfo readTourInfo = null;
 		Photo readPhoto = null;
+		List<Photo> readPhotoList = null;
 		List<Review> readReview = null;
 		List<PhotoJoin> readPhotoJoinList = null;
 		ReviewSupport reviewSupport =new ReviewSupport();
@@ -102,6 +103,7 @@ public class PlaceInfo extends BaseController {
 			readPhoto = photoService.selectOnePhotoByTourId(photo);
 			readReview = reviewService.selectReviewListByTourId(review);
 			readPhotoJoinList = photoJoinService.selectPhotoJoinList(photoJoin);
+			readPhotoList = photoService.selectPhotoListByTourId(photo);
 			
 			reviewSupport.setVerygood(reviewService.selectLikeLevel4Count(review));
 			reviewSupport.setGood(reviewService.selectLikeLevel3Count(review));
@@ -130,6 +132,7 @@ public class PlaceInfo extends BaseController {
 		request.setAttribute("readReview", readReview);
 		request.setAttribute("tourInfo", tourInfo);
 		request.setAttribute("readPhotoJoinList", readPhotoJoinList);
+		request.setAttribute("readPhotoList", readPhotoList);
 		request.setAttribute("tourInfoService", tourInfoService);
 		
 		String view = "place/placeinfo";

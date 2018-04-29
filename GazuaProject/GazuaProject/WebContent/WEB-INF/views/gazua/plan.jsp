@@ -32,6 +32,10 @@
         <div class="container">
       <form class="form-horizontal" method="post" enctype="multipart/form-data"
             action="${pageContext.request.contextPath}/plan/tourplan_write_ok.do">
+      <div style="display:none">
+			<input type="submit" onclick="return false;" />
+			<input type="text"/>
+		</div>
       <div class="btn-group">
           <button type="submit" class="btn btn-default btn-success save">저장하기</button>
           <button type="button" class="btn btn-default cancel">취소</button>
@@ -50,8 +54,8 @@
       <!-- 여행지 오른쪽 -->
       <div class="planRight pull-right">
             <div class="passData" style="width: 100%; height: 300px; background-color: #eee;">
-               <input type="text" class="first form-control" name="intro" placeholder="여행 간단 소개" style="height: 50px;">
-                <input type="text" class="second form-control" name="intro_main"  placeholder="여행 일정 소개">
+               <input type="text" id="intro" class="first form-control" name="intro" placeholder="여행 간단 소개" style="height: 50px;">
+                <textarea class="second form-control" name="intro_main"  placeholder="여행 일정 소개"></textarea>
                 <div class="form-group">
                    <label for="startDate">여행시작일</label>
                     <input type="date" class="form-control" id="startDate" name="startDate" style="width: 165px; height: 24px;">
@@ -66,10 +70,10 @@
                 </div>
                 <div class="form-group" id="theme">
                     <label for="theme" class="theme">여행테마</label> 
-                    <label><input type='radio' name='theme'  value="1">&nbsp;나홀로 여행</label>
+                    <label><input type='radio' id="solo" name='theme'  value="1">&nbsp;나홀로 여행</label>
                      <label><input type='radio' name='theme' value="2">&nbsp;친구와 함께</label>
-                    <label><input type='radio' name='theme' value="3">&nbsp;가족과 함께</label>
-                   <label><input type='radio' name='theme' value="4">&nbsp;연인과 함께</label>
+                    <label><input type='radio' name='theme' value="4">&nbsp;가족과 함께</label>
+                   <label><input type='radio' name='theme' value="3">&nbsp;연인과 함께</label>
                 </div>
                  <div class="tab">
                      <div class="tab-button clearfix form-control" style="text-align:center;">
@@ -83,7 +87,7 @@
                         
                            <!-- 여행 일정 -->
                              <div style="background:#eee; width:100%;" >
-                                <button type="button" id="addplanbtn" class="btn btn-success" style="width:100%;" >여행지추가...</button>
+                                <button type="button" id="addplanbtn" class="btn btn-success hidden" style="width:100%;" >여행지추가...</button>
                               <ul id="plan_list_start">
                               </ul>
                           </div>
@@ -115,7 +119,7 @@
          
          <div class="modal-footer">
             <button type="button" class="btn btn-warning" 
-               data-dismiss="modal">Cancle</button>
+               data-dismiss="modal">Cancel</button>
             <button type="button" class="btn btn-success"
                data-dismiss="modal" id="title_edit_ok">OK</button>
          </div>
@@ -158,9 +162,65 @@
       </div>
    </div>
 </div>
-<!-- modal_1 끝 -->
+<!-- modal_2 끝 -->
+
+<!-- modal_3 시작 -->
+<div class="modal fade" id="myModal_third">
+   <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h4 class="modal-title" id="modal-title"></h4>
+         </div>
+         
+         <div class="modal-body">
+            <input type="hidden" id="plan_list_tourinfo_id" value=""/>
+            <label>시작 날짜</label>
+            <input type="date" class="form-control" id="plan_list_date"/>
+            <br/>
+            <label>시간</label>
+            <input type="time" class="form-control" id="plan_list_time"/>
+            <br/>
+            <label>내용</label>
+            <textarea class="form-control" id="plan_list_modal" style="max-width:100%;"></textarea>
+         </div>
+         
+         <div class="modal-footer">
+            <button type="button" class="btn btn-warning" 
+               data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-success"
+               data-dismiss="modal" id="plan_list_edit_ok">OK</button>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- modal_3 시작 -->
     <script type="text/javascript">
    $(function() {
+	  
+	   $("#intro").keyup(function(d) {
+	       	if(d.keyCode == 13) {
+	       		$(".second").focus();
+	       	}
+       });
+	   
+	   $("#startDate").keyup(function(d) {
+	       	if(d.keyCode == 13) {
+	       		$("#days").focus();
+	       	}
+       });
+
+	   $("#days").keyup(function(d) {
+	       	if(d.keyCode == 13) {
+	       		$("#people").focus();
+	       	}
+       });
+
+	   $("#people").keyup(function(d) {
+	       	if(d.keyCode == 13) {
+	       		$("#solo").focus();
+	       	}
+       });
+	   
       // gmap
         /** 표시할 위치에 대한 위도,경도 */
         var lat_value = 37.500674;
@@ -196,9 +256,10 @@
             $(".tab-panel > div").not($(target)).addClass("hide");
         });
         
-        // 여행지 검색창
         
+       
         
+     	// 여행지 검색창
         $("#sidebar").ajaxForm(function(json){
         });
         // 여행지 검색창 끝
@@ -256,9 +317,47 @@
            
            $(this).addClass("active");
         });
+        
+        
+        // 리스트 수정
+        var edit_plan = {};
+        $(document).on("click", "#plan_edit", function(e){
+        	e.preventDefault();
+        	$("#myModal_third").modal('show');
+        	
+        	var edit_target_id 			= $(this).parents().attr('id');
+        	var edit_num 				= edit_target_id.substring(10, 11);
+        	var edit_plan_date			= $(this).parents().children().eq(4).val();
+        	var edit_plan_time 			= $(this).parents().children().eq(5).val();
+        	var edit_plan_title 		= $(this).parents().children().eq(6).val();
+        	var edit_plan_contents 		= $(this).parents().children().eq(7).val();
+        	var edit_plan_planInfo_id 	= $(this).parents().children().eq(8).val();
+        	
+        	var edit_ok = $(this);
+        	
+        	var temp2 = Handlebars.compile($("#tmpl_plan_edit").html());
+        	
+        	$("#myModal_third .modal-header #modal-title").html(edit_plan_title);
+        	$("#myModal_third .modal-body #plan_list_date").val(edit_plan_date);
+            $("#myModal_third .modal-body #plan_list_time").val(edit_plan_time);
+            $("#myModal_third .modal-body #plan_list_modal").val(edit_plan_contents);
+            
+            $("#plan_list_edit_ok").click(function(){
+            	$("#plan_list_edit_ok").unbind('click');
+            	
+            	edit_plan.plan_date = $("#myModal_third .modal-body #plan_list_date").val();
+            	edit_plan.plan_time = $("#myModal_third .modal-body #plan_list_time").val();
+            	edit_plan.plan_name = edit_plan_title;
+            	edit_plan.plan_contents = $("#myModal_third .modal-body #plan_list_modal").val();
+            	edit_plan.planInfo_id = edit_plan_planInfo_id
+            	edit_plan.num = edit_num;
+            	
+            	$('#' + edit_target_id).html(temp2(edit_plan));
+            	
+            });
+        });
+     
     });
-   
-   var Test ={};
    
    </script>
 
@@ -286,14 +385,31 @@
             <h4>{{plan_time}}</h4>
          </div>
          <div>{{plan_name}}</div>
-         <button type="button" id="contents_check">확인</button>
+         <button type="button" id="plan_edit" class="btn btn-warning">수정</button>
          <textarea class="form-control" id="content" style="max-width:100%">{{plan_contents}}</textarea>
-      <input type="hidden" name="plan_list_{{num}}_1" id="plan_list_{{num}}_1" value="{{plan_date}}">
-      <input type="hidden" name="plan_list_{{num}}_2" id="plan_list_{{num}}_2" value="{{plan_time}}">
-      <input type="hidden" name="plan_list_{{num}}_3" id="plan_list_{{num}}_3" value="{{plan_name}}">
-      <input type="hidden" name="plan_list_{{num}}_4" id="plan_list_{{num}}_4" value="{{plan_contents}}">
-      <input type="hidden" name="plan_list_{{num}}_5" id="plan_list_{{num}}_5" value="{{planInfo_id}}">
+      	 <input type="hidden" name="plan_list_{{num}}_1" id="plan_list_{{num}}_1" value="{{plan_date}}">
+       	 <input type="hidden" name="plan_list_{{num}}_2" id="plan_list_{{num}}_2" value="{{plan_time}}">
+      	 <input type="hidden" name="plan_list_{{num}}_3" id="plan_list_{{num}}_3" value="{{plan_name}}">
+      	 <input type="hidden" name="plan_list_{{num}}_4" id="plan_list_{{num}}_4" value="{{plan_contents}}">
+      	 <input type="hidden" name="plan_list_{{num}}_5" id="plan_list_{{num}}_5" value="{{planInfo_id}}">
       </li>
+   </script>
+   
+   <script id="tmpl_plan_edit" type="text/x-handlebars-template">
+
+         <div>
+            <h3><strong> * {{plan_date}}</strong></h3>
+            <h4>{{plan_time}}</h4>
+         </div>
+         <div>{{plan_name}}</div>
+         <button type="button" id="plan_edit" class="btn btn-warning">수정</button>
+         <textarea class="form-control" id="content" style="max-width:100%">{{plan_contents}}</textarea>
+      	 <input type="hidden" name="plan_list_{{num}}_1" id="plan_list_{{num}}_1" value="{{plan_date}}"/>
+       	 <input type="hidden" name="plan_list_{{num}}_2" id="plan_list_{{num}}_2" value="{{plan_time}}"/>
+      	 <input type="hidden" name="plan_list_{{num}}_3" id="plan_list_{{num}}_3" value="{{plan_name}}"/>
+      	 <input type="hidden" name="plan_list_{{num}}_4" id="plan_list_{{num}}_4" value="{{plan_contents}}"/>
+      	 <input type="hidden" name="plan_list_{{num}}_5" id="plan_list_{{num}}_5" value="{{planInfo_id}}"/>
+
    </script>
 </body>
 

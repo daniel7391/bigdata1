@@ -97,7 +97,6 @@
             .modal-backdrop {
         		display: none;
         	}
-            
         
         }
         
@@ -131,27 +130,59 @@
                                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                                     <!-- 현재 위치 표시 -->
                                     <ol class="carousel-indicators">
-                                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                                    	<c:if test="${fn:length(readPhotoList) > 0}">
+	                                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+	                                    </c:if>
+	                                    <c:if test="${fn:length(readPhotoList) > 1}">
+	                                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+	                                    </c:if>
+	                                    <c:if test="${fn:length(readPhotoList) > 2}">
+	                                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+	                                    </c:if>
+	                                    <c:if test="${fn:length(readPhotoList) > 3}">
+	                                        <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+	                                    </c:if>
+	                                    <c:if test="${fn:length(readPhotoList) > 4}">
+	                                        <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+	                                    </c:if>
                                     </ol>
 
                                     <!-- 내용 영역 -->
-                                    <div class="carousel-inner">
+                                    <div class="carousel-inner" style="width:700px; height: 500px;">
                                         <!-- 항목 (1) -->
-                                        <div class="item active">
-                                            <img src="${readPhoto.dir}" alt="슬라이더(1)">
-                                        </div>
-
+                                        <c:if test="${fn:length(readPhotoList) > 0}">
+	                                        <div class="item active">
+	                                            <img src="${readPhotoList.get(0).dir}" style="width:700px; height: 500px;"/>
+	                                        </div>
+                                        </c:if>
+										
                                         <!-- 항목 (2) -->
-                                        <div class="item">
-                                            <img src="${readPhoto.dir}"alt="슬라이더(2)">
-                                        </div>
+                                        <c:if test="${fn:length(readPhotoList) > 1}">
+	                                        <div class="item">
+	                                            <img src="${readPhotoList.get(1).dir}" style="width:700px; height: 500px;"/>
+	                                        </div>
+                                        </c:if>
 
                                         <!-- 항목 (3) -->
-                                        <div class="item">
-                                            <img src="${readPhoto.dir}" alt="슬라이더(3)">
-                                        </div>
+                                        <c:if test="${fn:length(readPhotoList) > 2}">
+	                                        <div class="item">
+	                                            <img src="${readPhotoList.get(2).dir}" style="width:700px; height: 500px;"/>
+	                                        </div>
+                                        </c:if>
+                                        
+                                        <!-- 항목 (4) -->
+                                        <c:if test="${fn:length(readPhotoList) > 3}">
+	                                        <div class="item">
+	                                            <img src="${readPhotoList.get(3).dir}" style="width:700px; height: 500px;"/>
+	                                        </div>
+                                        </c:if>
+
+                                        <!-- 항목 (5) -->
+                                        <c:if test="${fn:length(readPhotoList) > 4}">
+	                                        <div class="item">
+	                                            <img src="${readPhotoList.get(4).dir}" style="width:700px; height: 500px;"/>
+	                                        </div>
+                                        </c:if>
                                     </div>
                                     <!-- // 내용영역 구성 -->
 

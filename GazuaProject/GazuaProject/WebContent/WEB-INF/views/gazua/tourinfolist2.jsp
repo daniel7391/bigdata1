@@ -19,7 +19,7 @@
 							<c:param name="id" value="${tourInfo.id}" />
 						</c:url>
 						<a href="${readUrl}">
-							<img src="${tourInfo.imagePath}" class="media-object" />							
+							<img src="${tourInfo.imagePath}" class="media-object" style="height:150px; width:200px;"/>							
 						</a>
 					</div>
 					<div class="media-body">

@@ -53,7 +53,7 @@ public class PhotoServiceImpl implements PhotoService {
 				throw new NullPointerException();
 			}
 		} catch (NullPointerException e) {
-			throw new Exception("조회된 게시물이 없습니다3.");
+			throw new Exception("조회된 게시물이 없습니다4.");
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
 			throw new Exception("게시물 조회에 실패했습니다.");
