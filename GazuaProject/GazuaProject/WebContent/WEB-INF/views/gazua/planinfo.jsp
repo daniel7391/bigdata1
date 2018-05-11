@@ -299,7 +299,7 @@
 						<c:forEach var="phototourinfo" items="${readPhotoTourInfoList}">
 							<!-- 사진 배치 -->
 							<h3><strong><span class="glyphicon glyphicon-camera"></span>${phototourinfo.tourname}</strong></h3>
-								<div style="text-align:right">${phototourinfo.date}</div>
+								<div style="text-align:right">${fn:substring(phototourinfo.date, 0, 16)}</div>
 							<div class="img-box" align="center">
 				            	
 								<img src="${phototourinfo.dir}" style="width:785px; height:600px;"/>	

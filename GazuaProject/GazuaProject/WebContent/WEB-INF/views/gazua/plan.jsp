@@ -22,18 +22,15 @@
       }
       
       .media-body h5 {
-      	
       	white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-      
       }
+
       .media-body p {
-      	
       	white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-      
       }
    </style>
 </head>
@@ -139,16 +136,6 @@
       </div>
    </div>
 </div>
-<!-- modal_1 끝 -->
-
-
-<!--   -->
-<!-- // -->
-
-
-<!-- modal_2 시작 -->
-
-<!-- modal_2 끝 -->
 
 <!-- modal_3 시작 -->
 <div class="modal fade" id="myModal_third">
@@ -182,10 +169,10 @@
 <!-- modal_3 시작 -->
     <script type="text/javascript">
    $(function() {
+	   // 오류가 있을 시 타이틀 제목 input hidden 데이터를 가져온다
 	   if($("#plan_name").val()!=""){
            $("#planname").html($("#plan_name").val());
         }
-	   
 	  
 	   $("#intro").keyup(function(d) {
 	       	if(d.keyCode == 13) {
@@ -211,33 +198,6 @@
 	       	}
        });
 	   
-     
-
-        $(document).on("click", ".add", function(){
-            var item = $(this).parents('.item');
-            var clone = item.clone();
-            clone.insertAfter(item);
-        });
-
-        $(document).on("click", ".remove", function(){
-            $(this).parents(".item").remove();
-        });
-
-        $(".tab-button-item-link").click(function(e){
-            e.preventDefault();
-
-            $(".tab-button-item-link").not(this).removeClass("selected");
-
-            $(this).addClass("selected");
-
-            var target = $(this).attr('href');
-            $(target).removeClass('hide');
-            $(".tab-panel > div").not($(target)).addClass("hide");
-        });
-        
-        
-       
-        
      	// 여행지 검색창
         $("#sidebar").ajaxForm(function(json){
         });
@@ -245,19 +205,15 @@
         
         // 타이틀제목 변경
         $("#title_edit").click(function(){
-           
-           $("#myModal").modal('show');
-         $("#title_edit_ok").click(function(){
-              $("#planname").html($("#title_edit_modal").val());
-              $("#plan_name").val($("#title_edit_modal").val());
-           });
-         
+			$("#myModal").modal('show');
+         	$("#title_edit_ok").click(function(){
+            	$("#planname").html($("#title_edit_modal").val()); // 보여지는 화면의 타이틀제목 변환
+            	$("#plan_name").val($("#title_edit_modal").val()); // 숨겨진 타이틀 제목 저장 -> DB에 들어감
+            });
         });
         
         var plan_sc={};
         var num = 0;
-      
-        
         //테마 버튼 설정
         $("#theme .btn").click(function(e){
            e.preventDefault();
@@ -274,24 +230,26 @@
            e.preventDefault();
            $("#myModal_third").modal('show');
            
+           // $(this) <-- 버튼 기준
+           // $(this).parents() <-- 버튼을 감싸는 부모 : 리스트 하나
+           // 목록 데이터를 가져옴
            var edit_target_id          = $(this).parents().attr('id');
            var edit_num             = edit_target_id.substring(10, 11);
            var edit_plan_date         = $(this).parents().children().eq(8).val();
            var edit_plan_time          = $(this).parents().children().eq(9).val();
            var edit_plan_title       = $(this).parents().children().eq(10).val();
            var edit_plan_contents       = $(this).parents().children().eq(11).val();
+           var edit_plan_planInfo_id    = $(this).parents().children().eq(12).val();
            
            edit_plan_contents = edit_plan_contents.replace(/(?:\r\<br>|\r|\<br>)/g, '\n');
-
            
-           var edit_plan_planInfo_id    = $(this).parents().children().eq(12).val();
-        
+           // 다른 기능으로 들어갈때 필요
            var edit_ok = $(this);
            
            var temp2 = Handlebars.compile($("#tmpl_plan_edit").html());
            
-           $("#myModal_third .modal-header #modal-title").html(edit_plan_title);
-           $("#myModal_third .modal-body #plan_list_date").val(edit_plan_date);
+            $("#myModal_third .modal-header #modal-title").html(edit_plan_title);
+            $("#myModal_third .modal-body #plan_list_date").val(edit_plan_date);
             $("#myModal_third .modal-body #plan_list_time").val(edit_plan_time);
             $("#myModal_third .modal-body #plan_list_modal").val(edit_plan_contents);
             

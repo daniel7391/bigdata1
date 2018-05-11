@@ -57,121 +57,119 @@
 
 <script type="text/javascript">
 $(function() {
-   var json_list;
-   var json_list_second;
-   var num = 0;
-   var add_num = 0;
-   function ready(){
-      // 여행 일정 만들기 시작시 여행정보들을 JSON으로 파싱
-      $.get("${pageContext.request.contextPath}/gazua/plan_searching.do",{
-      },function(json){
-         if (json.rt != "OK") {
-            alert(json.rt);
-            return false;
-         }
-         json_list = json;
-         var totalCount = json_list.item.length;
-         console.log("totalCount >> " + totalCount);
-         var groupCount = 6;
-         for(var i = num-1; i < groupCount-1; i++){
-            var temp = Handlebars.compile($("#tmpl_tourInfo_list").html());
-            $("#tourInfo_list_test").append(temp(json_list.item[i]));
-         }
-         paging_test(totalCount, json_list, groupCount);   
-      });
+	var json_list;
+	var json_list_second;
+	var num = 0;
+	var add_num = 0;
+	function ready(){
+		// 여행 일정 만들기 시작시 여행정보들을 JSON으로 파싱
+		$.get("${pageContext.request.contextPath}/gazua/plan_searching.do",{
+		},function(json){
+			if (json.rt != "OK") {
+	            alert(json.rt);
+	            return false;
+        	}
+			json_list = json;
+         	var totalCount = json_list.item.length;
+	        var groupCount = 6;
+         	for(var i = num-1; i < groupCount-1; i++){
+            	var temp = Handlebars.compile($("#tmpl_tourInfo_list").html());
+            	$("#tourInfo_list_test").append(temp(json_list.item[i]));
+         	}
+         	paging_test(totalCount, json_list, groupCount);   
+		});
     }
    
-   $(document).ready(function(){
-      ready();   
-   });
+	$(document).ready(function(){
+		ready();   
+	});
    
-   // 페이징 처리
-   function paging_test(totalCount, json_list_input, groupCount){
-      $("#pagination").empty();
-      var pagingHelper = {};
+	// 페이징 처리
+    function paging_test(totalCount, json_list_input, groupCount){
+    	$("#pagination").empty();
+    	var pagingHelper = {};
       
-      $("#pagination").append("<li class='disabled' id='prevPagination'><a href='#'>&laquo;</a></li>");
-      for( var i = 1; i < groupCount; i++){
-         if(i > (totalCount/groupCount) + 1 ){
-            break;
-         }
-         var temp = Handlebars.compile($("#tmpl_tourInfo_paging_list").html());
-         pagingHelper.num = i;
-         $("#pagination").append(temp(pagingHelper));
-         if( i == 1){
-            $('#pageNum_1').addClass('active');
-         }
-      }
-      $("#pagination").append("<li id='nextPagination'><a href='#'>&raquo;</a></li>");
+    	$("#pagination").append("<li class='disabled' id='prevPagination'><a href='#'>&laquo;</a></li>");
+    	for( var i = 1; i < groupCount; i++){
+        	if(i > (totalCount/groupCount) + 1 ){
+            	break;
+        	}
+	        var temp = Handlebars.compile($("#tmpl_tourInfo_paging_list").html());
+	        pagingHelper.num = i;
+	        $("#pagination").append(temp(pagingHelper));
+	        if( i == 1){
+	        	$('#pageNum_1').addClass('active');
+	        }
+      	}
+      	$("#pagination").append("<li id='nextPagination'><a href='#'>&raquo;</a></li>");
       
-      // 검색시 결과가 적을때 nextPagination 비활성화
-      if( (totalCount/groupCount) <= 5){
-         $("#nextPagination").addClass('disabled');
-      }else{
-         $("#nextPagination").removeClass('disabled');
-      }
+      	// 검색시 결과가 적을때 nextPagination 비활성화
+      	if( (totalCount/groupCount) <= 5){
+        	$("#nextPagination").addClass('disabled');
+      	}else{
+        	$("#nextPagination").removeClass('disabled');
+      	}
       
-      // 다음 페이지로 이동
-      $('#pagination #nextPagination').click(function(e){
-         e.preventDefault();
-         if($('#pagination #nextPagination').hasClass('disabled')){
-            return;
-         }
+      	// 다음 페이지로 이동
+      	$('#pagination #nextPagination').click(function(e){
+        	e.preventDefault();
+        	if($('#pagination #nextPagination').hasClass('disabled')){
+            	return;
+         	}
          
-         var next_num = $("#pageNum_5").children().html();
+        	var next_num = $("#pageNum_5").children().html();
          
-         if($('#pagination #prevPagination').hasClass('disabled')){
-            $('#pagination #prevPagination').removeClass("disabled");
-         }
+			if($('#pagination #prevPagination').hasClass('disabled')){
+            	$('#pagination #prevPagination').removeClass("disabled");
+         	}
          
-         if(next_num > totalCount/(groupCount-1)+1){
-            return;
-         }
+         	if(next_num > totalCount/(groupCount-1)+1){
+            	return;
+         	}
          
-         for(var j = 1; j<6; j++){
-            $("#pageNum_"+j).children().html(++next_num);
-            if(j==1){
-               $("#pageNum_"+j).click();
-            }
-         }
+         	for(var j = 1; j<6; j++){
+            	$("#pageNum_"+j).children().html(++next_num);
+            	if(j==1){
+               		$("#pageNum_"+j).click();
+            	}
+         	}
          
-         for(var k = 1; k<6; k++){
-            if($('#pageNum_'+k).children().html() > totalCount/(groupCount-1)+1){
-               $('#pageNum_'+k).addClass('hidden');
-            };
-         }
+         	for(var k = 1; k<6; k++){
+            	if($('#pageNum_'+k).children().html() > totalCount/(groupCount-1)+1){
+               		$('#pageNum_'+k).addClass('hidden');
+            	}
+         	}
          
-         if(next_num > totalCount/(groupCount-1)){
-            $('#pagination #nextPagination').addClass("disabled");
-         }
-         
-      });
+         	if(next_num > totalCount/(groupCount-1)){
+            	$('#pagination #nextPagination').addClass("disabled");
+         	}
+		});
    
       
-      // 이전 페이지로 이동
-      $('#pagination #prevPagination').click(function(e){
-         e.preventDefault();
+		// 이전 페이지로 이동
+        $('#pagination #prevPagination').click(function(e){
+        	e.preventDefault();
          
-         if($('#pagination #prevPagination').hasClass('disabled')){
-            return;
-         }
+        	if($('#pagination #prevPagination').hasClass('disabled')){
+            	return;
+         	}
          
-         if($('#pagination #nextPagination').hasClass('disabled')){
-            $('#pagination #nextPagination').removeClass("disabled");
-         }
+         	if($('#pagination #nextPagination').hasClass('disabled')){
+            	$('#pagination #nextPagination').removeClass("disabled");
+         	}
          
-         if($("#pageNum_1").children().html() == 1){
-            return;
-         }
+         	if($("#pageNum_1").children().html() == 1){
+            	return;
+         	}
 
-         var prev_num = $("#pageNum_1").children().html();
+         	var prev_num = $("#pageNum_1").children().html();
          
-         for(var j = 5; j>0; j--){
-            $("#pageNum_"+j).children().html(--prev_num);
-            if(j==5){
-               $("#pageNum_"+j).click();
-            }
-         }
+         	for(var j = 5; j>0; j--){
+            	$("#pageNum_"+j).children().html(--prev_num);
+            	if(j==5){
+               		$("#pageNum_"+j).click();
+            	}
+         	}
          
          for(var k = 1; k<6; k++){
             if($('#pageNum_'+k).children().html() < totalCount/(groupCount-1)+1){
@@ -228,20 +226,20 @@ $(function() {
        var plan_sc ={};
        var temp = Handlebars.compile($("#tmpl_searching").html());
        
-       $("#plan_list_ok").click(function(){
-          console.log($("#modal-title").html());
-           plan_sc.plan_name = $("#modal-title").html();
-           plan_sc.plan_date = $("#plan_list_date").val();
-           plan_sc.plan_time = $("#plan_list_time").val();
-           plan_sc.num = ++add_num;
-           plan_sc.plan_contents = $("#plan_list_modal").val().replace(/(?:\r\n|\r|\n)/g, '<br>');
-           plan_sc.planInfo_id = json_list_item_id;
-           
-          $("#plan_list_start").append(temp(plan_sc));
+	       $("#plan_list_ok").click(function(){
+	           console.log($("#modal-title").html());
+	           plan_sc.plan_name = $("#modal-title").html();
+	           plan_sc.plan_date = $("#plan_list_date").val();
+	           plan_sc.plan_time = $("#plan_list_time").val();
+	           plan_sc.num = ++add_num;
+	           plan_sc.plan_contents = $("#plan_list_modal").val().replace(/(?:\r\n|\r|\n)/g, '<br>');
+	           plan_sc.planInfo_id = json_list_item_id;
+	           
+	           $("#plan_list_start").append(temp(plan_sc));
+	       });
        });
-   });
-   $('#pageNum_1').click();
-  }
+		$('#pageNum_1').click();
+	}
    
    //검색기능
     $(document).on("click","#tourInfo_list_searching_btn", function(e){
@@ -293,13 +291,12 @@ $(function() {
     	var delete_num = Number($(this).parents().attr('id').substring(10, 11));
     	var delete_last_num = $("#plan_list_start li").length;
 		
-    	var del_ok=confirm("삭제 할랭?");
+    	var del_ok=confirm("삭제 하시겠습니까?");
         
         if(del_ok){
         	$(this).parent().remove();
         }
         
-    	
     	for(var k = delete_num + 1; k < $("#plan_list_start li").length + 2; k++){
     		var list_next_id = 'plan_list_'+(k-1);
     		var list_prev_id = 'plan_list_'+k;
@@ -310,7 +307,6 @@ $(function() {
     		}
     		
     		$("#plan_list_"+k).attr("id", list_next_id);
-    		
     	}
     	
     	add_num--;

@@ -128,7 +128,7 @@ public class PlanInfo extends BaseController {
 		request.setAttribute("readPhotoTourInfoList", readPhotoTourInfoList);
 		
 		String view = "gazua/planinfo";
-
+	
 		return view;
 	}
 

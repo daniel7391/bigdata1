@@ -195,7 +195,7 @@
 
     $window.on('resize', $.proxy(this.sizeOverlay, this));
 
-    $('select, object, embed').css({
+    $('object, embed').css({
       visibility: 'hidden'
     });
 
@@ -496,7 +496,7 @@
     $(window).off('resize', this.sizeOverlay);
     this.$lightbox.fadeOut(this.options.fadeDuration);
     this.$overlay.fadeOut(this.options.fadeDuration);
-    $('select, object, embed').css({
+    $('object, embed').css({
       visibility: 'visible'
     });
     if (this.options.disableScrolling) {

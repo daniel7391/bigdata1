@@ -9406,7 +9406,7 @@ return jQuery;
 
     $window.on('resize', $.proxy(this.sizeOverlay, this));
 
-    $('select, object, embed').css({
+    $('object, embed').css({
       visibility: 'hidden'
     });
 
