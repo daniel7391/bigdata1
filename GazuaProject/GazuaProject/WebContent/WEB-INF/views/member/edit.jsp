@@ -38,7 +38,7 @@
 	            <label for='member_user_id' class="col-md-2">아이디*</label>
 	            <div class="col-md-10">
 	                <!-- 아이디는 변경할 수 없기 때문에 출력만 한다. -->
-	                <p class="form-control-static">${loginInfo.member_id}</p>
+	                <p class="form-control-static">${loginInfo.member_user_id}</p>
 	            </div>
 	        </div>
         

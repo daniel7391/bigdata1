@@ -53,7 +53,7 @@
 									<c:url var="readUrl" value="/gazua/planinfo.do">
 										<c:param name="id" value="${tourPlanJoin.id}" />
 									</c:url>
-									<a href="${readUrl}"><img src="${tourPlanJoin.imagePath}"></a>
+									<a href="${readUrl}"><img src="${tourPlanJoin.imagePath}" style="height:160px;"></a>
 									<div class="caption">
 										<a href="${readUrl}">
 											<h4>${tourPlanJoin.name}</h4>

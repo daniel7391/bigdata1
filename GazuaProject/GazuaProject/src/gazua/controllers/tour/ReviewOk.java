@@ -49,10 +49,14 @@ public class ReviewOk extends BaseController {
 		reviewService = new ReviewServiceImpl(sqlSession, logger);
 		upload = UploadHelper.getInstance();
 		
+		int like_level =0;
+		int people_level = 0;
+		int season = 0;
+		
 		int tour_id = web.getInt("tour_id");
-		int like_level = web.getInt("filterRating1");
-		int people_level = web.getInt("filterRating2");
-		int season = web.getInt("filterRating3");
+		like_level = web.getInt("filterRating1");
+		people_level = web.getInt("filterRating2");
+		season = web.getInt("filterRating3");
 		int member_id =2;
 //		Map<String, String> paramMap = upload.getParamMap();
 //		String tour_id = paramMap.get("tour_id");
@@ -63,7 +67,7 @@ public class ReviewOk extends BaseController {
 		
 		Member loginInfo = (Member) web.getSession("loginInfo");
 		if (loginInfo == null){
-			web.redirect(null, "로그인하고 해라");
+			web.redirect(null, "로그인이 필요한 서비스입니다.");
 		}
 		member_id = loginInfo.getMember_id();
 		
@@ -83,6 +87,12 @@ public class ReviewOk extends BaseController {
 		
 		int count = 0;
 		
+		if(like_level == 0 || people_level == 0 || season == 0) {
+			sqlSession.close();
+			web.redirect(null, "리뷰 정보를 확인해주세요");
+			return null;
+		}
+		
 		try {
 			count = reviewService.selectReviewCountByMemberId(review);
 		} catch (Exception e1) {
@@ -94,7 +104,7 @@ public class ReviewOk extends BaseController {
 		if(count == 0) {
 			try {
 				reviewService.insertReview(review);
-				web.redirect(web.getRootPath() + "/gazua/placeinfo.do?id="+tour_id, "리뷰가 등록되었습니당.");
+				web.redirect(web.getRootPath() + "/gazua/placeinfo.do?id="+tour_id, "리뷰가 등록되었습니다.");
 			} catch (Exception e) {
 				sqlSession.close();
 				web.redirect(null, e.getLocalizedMessage());
@@ -102,7 +112,7 @@ public class ReviewOk extends BaseController {
 			}
 		} else {
 			sqlSession.close();
-			web.redirect(null, "리뷰등록은 게시물당 한번만 해라..");
+			web.redirect(null, "리뷰 등록은 한번만 가능합니다.");
 			return null;
 		}
 		

@@ -6,106 +6,110 @@
 <!-- 이 XML의 구조대로 구현될 클래스의 이름 => Impl클래스를 대체한다. -->
 <mapper namespace="PhotoMapper">
 
-	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
-	<resultMap id="photo" type="gazua.model.Photo">
-		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
-		<result property="photo_id" column="photo_id" />
-		<result property="tour_id" column="tour_id" />
-		<result property="dir" column="dir" />
-		<result property="origin_name" column="origin_name" />
-		<result property="name" column="name" />
-		<result property="size" column="size" />
-		<result property="content_type" column="content_type" />
-		<result property="reg_date" column="reg_date" />
-		<result property="edit_date" column="edit_date" />
-		<result property="date" column="date" />		
-		<result property="contents" column="contents" />
-		<result property="tourPlan_id" column="tourPlan_id" />
-	</resultMap>
-	
-	<insert id="insertPhotoByPlan"
-		parameterType="gazua.model.Photo"
-		useGeneratedKeys="true" keyProperty="photo_id">
-		insert into photo (tour_id, name, reg_date, edit_date, date, contents, tourPlan_id) 
-		values (#{tour_id}, name, now(), now(), #{date}, #{contents}, #{tourPlan_id})
-	</insert>
-	
-	<!-- 게시물 하나에 대한 정보를 조회한다. -->
-	<select id="selectPhotoListByTourId" 
-		parameterType="gazua.model.Photo" 
-		resultMap="photo">
-		SELECT *
-		FROM   photo
-		WHERE tour_id = #{tour_id}
-	</select>
+   <!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+   <resultMap id="photo" type="gazua.model.Photo">
+      <!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+      <result property="photo_id" column="photo_id" />
+      <result property="tour_id" column="tour_id" />
+      <result property="dir" column="dir" />
+      <result property="origin_name" column="origin_name" />
+      <result property="name" column="name" />
+      <result property="size" column="size" />
+      <result property="content_type" column="content_type" />
+      <result property="reg_date" column="reg_date" />
+      <result property="edit_date" column="edit_date" />
+      <result property="date" column="date" />      
+      <result property="contents" column="contents" />
+      <result property="tourPlan_id" column="tourPlan_id" />
+   </resultMap>
+   
+   <insert id="insertPhotoByPlan"
+      parameterType="gazua.model.Photo"
+      useGeneratedKeys="true" keyProperty="photo_id">
+      insert into photo (tour_id, name, reg_date, edit_date, date, contents, tourPlan_id) 
+      values (#{tour_id}, name, now(), now(), #{date}, #{contents}, #{tourPlan_id})
+   </insert>
+   
+   <!-- 게시물 하나에 대한 정보를 조회한다. -->
+   <select id="selectPhotoListByTourId" 
+      parameterType="gazua.model.Photo" 
+      resultMap="photo">
+      SELECT *
+      FROM   photo
+      WHERE tour_id = #{tour_id}
+   </select>
 
-	<select id="selectPhotoListByTourPlanId" 
-		parameterType="gazua.model.Photo" 
-		resultMap="photo">
-		SELECT *
-		FROM   photo
-		WHERE tourPlan_id = #{tourPlan_id}
-	</select>
-	
-	<select id="selectOnePhotoByTourId" 
-		parameterType="gazua.model.Photo" 
-		resultMap="photo">
-		SELECT *
-		FROM   photo
-		WHERE tour_id = #{tour_id}
-		limit 0,1
-	</select>
+   <select id="selectPhotoListByTourPlanId" 
+      parameterType="gazua.model.Photo" 
+      resultMap="photo">
+      SELECT *
+      FROM   photo
+      WHERE tourPlan_id = #{tourPlan_id}
+   </select>
+   
+   <select id="selectOnePhotoByTourId" 
+      parameterType="gazua.model.Photo" 
+      resultMap="photo">
+      SELECT *
+      FROM   photo
+      WHERE tour_id = #{tour_id}
+      limit 0,1
+   </select>
 
-	<select id="selectOnePhotoByTourPlanId" 
-		parameterType="gazua.model.Photo" 
-		resultMap="photo">
-		SELECT *
-		FROM   photo
-		WHERE tourPlan_id = #{tourPlan_id}
-		limit 0,1
-	</select>
-	
-	<select id="selectTourIdByPlanId"
-		parameterType="gazua.model.Photo"
-		resultType="int">
-		select tour_id
-		from photo
-		where tourPlan_id = #{tourPlan_id}
-		and tour_id is not null	
-	</select>
-	
-	<select id="selectTourIdByPlanIdCount"
-		parameterType="gazua.model.Photo"
-		resultType="int">
-		SELECT COUNT(photo_id) FROM photo
-		where tourPlan_id = #{tourPlan_id}
-		and tour_id is not null
-	</select>
-	
-	<select id="selectPhotoListByTourPlanId2" 
-		parameterType="gazua.model.Photo" 
-		resultMap="photo">
-		SELECT *
-		FROM   photo
-		WHERE tourPlan_id = #{tourPlan_id}
-		ORDER BY date ASC
-	</select>
-	
-	<update id="updateDirByTourId"
-		parameterType="gazua.model.Photo">
-		update photo set dir=#{dir} where tour_id=#{tour_id}
-	</update>
-	
-	<select id="selectCountTourInfoWithTourPlan"
-		parameterType="gazua.model.Photo"
-		resultType="int">
-		select count(photo_id)
-		from photo
-		where tour_id=#{tour_id}
-		and tourPlan_id is not null
-	</select>
+   <select id="selectOnePhotoByTourPlanId" 
+      parameterType="gazua.model.Photo" 
+      resultMap="photo">
+      SELECT *
+      FROM   photo
+      WHERE tourPlan_id = #{tourPlan_id}
+      limit 0,1
+   </select>
+   
+   <select id="selectTourIdByPlanId"
+      parameterType="gazua.model.Photo"
+      resultType="int">
+      select tour_id
+      from photo
+      where tourPlan_id = #{tourPlan_id}
+      and tour_id is not null   
+   </select>
+   
+   <select id="selectTourIdByPlanIdCount"
+      parameterType="gazua.model.Photo"
+      resultType="int">
+      SELECT COUNT(photo_id) FROM photo
+      where tourPlan_id = #{tourPlan_id}
+      and tour_id is not null
+   </select>
+   
+   <select id="selectPhotoListByTourPlanId2" 
+      parameterType="gazua.model.Photo" 
+      resultMap="photo">
+      SELECT *
+      FROM   photo
+      WHERE tourPlan_id = #{tourPlan_id}
+      ORDER BY date ASC
+   </select>
+   
+   <update id="updateDirByTourId"
+      parameterType="gazua.model.Photo">
+      update photo set dir=#{dir} where tour_id=#{tour_id}
+   </update>
+   
+   <select id="selectCountTourInfoWithTourPlan"
+      parameterType="gazua.model.Photo"
+      resultType="int">
+      select count(photo_id)
+      from photo
+      where tour_id=#{tour_id}
+      and tourPlan_id is not null
+   </select>
+   
+   <delete id="deletePhotoByTourPlanId" parameterType="gazua.model.Photo">
+      DELETE FROM photo where tourPlan_id=#{tourPlan_id}
+   </delete>
+   
 </mapper>
-
 
 
 

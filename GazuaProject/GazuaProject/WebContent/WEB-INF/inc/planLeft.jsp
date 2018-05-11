@@ -3,7 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page trimDirectiveWhitespaces="true"%>
 <!doctype html>
-<div class="planLeft">
+<div class="planLeft" style="width:300px;">
 
 <span class="input-group-btn">
    <input type="text" class="form-control" id="tourInfo_list_searching"/>
@@ -19,7 +19,7 @@
    <div class="sidebar">
       <!-- 페이지 번호 시작 -->
       <nav class="text-center">
-         <ul class="pagination" id="pagination">
+         <ul class="pagination" id="pagination" style="width:350px;">
          </ul>
       </nav>
    </div>
@@ -27,7 +27,7 @@
 
 <!-- modal_2 시작 -->
 <div class="modal fade" id="myModal_second">
-   <div class="modal-dialog modal-sm">
+   <div class="modal-dialog modal-lg" style="width:800px;">
       <div class="modal-content">
          <div class="modal-header">
             <h4 class="modal-title" id="modal-title"></h4>
@@ -42,7 +42,7 @@
             <input type="time" class="form-control" id="plan_list_time"/>
             <br/>
             <label>내용</label>
-            <textarea class="form-control" id="plan_list_modal" style="max-width:100%;"></textarea>
+            <textarea class="form-control" id="plan_list_modal" cols="3" rows="10" wrap="hard"></textarea>
          </div>
          
          <div class="modal-footer">
@@ -60,7 +60,7 @@ $(function() {
    var json_list;
    var json_list_second;
    var num = 0;
-   
+   var add_num = 0;
    function ready(){
       // 여행 일정 만들기 시작시 여행정보들을 JSON으로 파싱
       $.get("${pageContext.request.contextPath}/gazua/plan_searching.do",{
@@ -203,46 +203,45 @@ $(function() {
        }
     });
    
-   // 동적 요소 on함수, 여행지 추가 기능
-    $(document).on("click", ".planbtn", function(e){
-       e.preventDefault();
-       var id = $(this).data("id");
-       ++num;
-        $("#plan_list_ok").unbind('click');
-        $("#myModal_second").modal('show');
-        $("#plan_list_date").val("");
-        $("#plan_list_time").val("");
-        $("#plan_list_modal").val("");
-        var i_num = 0;
-        var json_list_item_id = null;
-        for(var i = 0; i<json_list.item.length; i++){
-        	if(json_list.item[i].id == id){
-	        	$("#modal-title").html(json_list.item[i].name);
-	        	json_list_item_id = json_list.item[i].id;
-	        	lat_value = json_list.item[i].x;
-	        	lng_value = json_list.item[i].y;
-	        	
-	        	i_num = i;
-        	}
-        }
-        
-        var plan_sc ={};
-        var temp = Handlebars.compile($("#tmpl_searching").html());
-        
-        $("#plan_list_ok").click(function(){
-        	console.log($("#modal-title").html());
-            plan_sc.plan_name = $("#modal-title").html();
-            plan_sc.plan_date = $("#plan_list_date").val();
-            plan_sc.plan_time = $("#plan_list_time").val();
-            plan_sc.num = num;
-            plan_sc.plan_contents = $("#plan_list_modal").val();
-            plan_sc.planInfo_id = json_list_item_id;
-            
-           $("#plan_list_start").append(temp(plan_sc));
-        });
-    });
-    $('#pageNum_1').click();
-   }
+// 동적 요소 on함수, 여행지 추가 기능
+   $(document).on("click", ".planbtn", function(e){
+      e.preventDefault();
+      var id = $(this).data("id");
+       $("#plan_list_ok").unbind('click');
+       $("#myModal_second").modal('show');
+       $("#plan_list_date").val("");
+       $("#plan_list_time").val("");
+       $("#plan_list_modal").val("");
+       var i_num = 0;
+       var json_list_item_id = null;
+       for(var i = 0; i<json_list.item.length; i++){
+          if(json_list.item[i].id == id){
+             $("#modal-title").html(json_list.item[i].name);
+             json_list_item_id = json_list.item[i].id;
+             lat_value = json_list.item[i].x;
+             lng_value = json_list.item[i].y;
+             
+             i_num = i;
+          }
+       }
+       
+       var plan_sc ={};
+       var temp = Handlebars.compile($("#tmpl_searching").html());
+       
+       $("#plan_list_ok").click(function(){
+          console.log($("#modal-title").html());
+           plan_sc.plan_name = $("#modal-title").html();
+           plan_sc.plan_date = $("#plan_list_date").val();
+           plan_sc.plan_time = $("#plan_list_time").val();
+           plan_sc.num = ++add_num;
+           plan_sc.plan_contents = $("#plan_list_modal").val().replace(/(?:\r\n|\r|\n)/g, '<br>');
+           plan_sc.planInfo_id = json_list_item_id;
+           
+          $("#plan_list_start").append(temp(plan_sc));
+       });
+   });
+   $('#pageNum_1').click();
+  }
    
    //검색기능
     $(document).on("click","#tourInfo_list_searching_btn", function(e){
@@ -286,6 +285,36 @@ $(function() {
        paging_test(json_searching_list.item.length, json_searching_list, 6);
       $('#pageNum_1').click();
    });
+   
+  //삭제 버튼
+    $(document).on("click", "#plan_delete", function(e){
+    	e.preventDefault();
+    	
+    	var delete_num = Number($(this).parents().attr('id').substring(10, 11));
+    	var delete_last_num = $("#plan_list_start li").length;
+		
+    	var del_ok=confirm("삭제 할랭?");
+        
+        if(del_ok){
+        	$(this).parent().remove();
+        }
+        
+    	
+    	for(var k = delete_num + 1; k < $("#plan_list_start li").length + 2; k++){
+    		var list_next_id = 'plan_list_'+(k-1);
+    		var list_prev_id = 'plan_list_'+k;
+    		$("#plan_list_"+k).attr("class", 'plan_list_'+(k-1));
+    		for(var n = 5; n < 10; n++){
+    			$("#plan_list_"+k).children().eq(n).attr('id', 'plan_list_'+(k-1)+'_'+(n-4));
+    			$("#plan_list_"+k).children().eq(n).attr('name', 'plan_list_'+(k-1)+'_'+(n-4));
+    		}
+    		
+    		$("#plan_list_"+k).attr("id", list_next_id);
+    		
+    	}
+    	
+    	add_num--;
+    });
 });
 
 </script>
@@ -297,15 +326,15 @@ $(function() {
 <script id="tmpl_tourInfo_list" type="text/x-handlebars-template">
    <td class="pull-left" style="width:100%">
       <a class="pull-left">
-         <img src="{{imagePath}}" width="60" height="60" >
+         <img src="{{imagePath}}" width="70" height="70" >
       </a>
       <div class="media-body">
             <div class="clearfix">
-             <h5 class="media-heading pull-left" id="tourInfo_name_{{id}}">{{name}}</h5>
-            {{intro}}
+             <h5 class="media-heading pull-left" id="tourInfo_name_{{id}}" style="width:200px; text-align:left;">&nbsp;{{name}}</h5>
+            <p style="width:200px; height:40px; text-align:left;">{{{intro}}}</p>
             </div>
       </div>
-      <div class="pull-right" style="padding-top:30px;">
+      <div class="pull-right">
          <a href="#" class="btn btn-xs btn-primary planbtn" 
             data-id="{{id}}" id="planList_{{id}}">
             <i class="glyphicon glyphicon-plus"></i>

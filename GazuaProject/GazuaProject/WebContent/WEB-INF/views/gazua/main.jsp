@@ -29,8 +29,8 @@
 
         <!-- 본문 영역 -->
         <div id="back">
-            <div class="container" id="midbar">
-                <div class="content-box pull-left" id="content-box">
+            <div class="container" id="midbar" style="position:relative; left:10px;">
+                <div class="content-box pull-left" id="content-box" >
                     <div class="summary">
                         <div id="carousel-example-generic" class="carousel slide"
                                 data-ride="carousel">
@@ -166,7 +166,7 @@
                                                 <c:url var="readUrl2" value="/gazua/planinfo.do">
                                           <c:param name="id" value="${tourPlanJoin.id}" />
                                        </c:url>
-                                                 <a href="${readUrl2}"><img src="${tourPlanJoin.dir}" class="img" /></a>
+                                                 <a href="${readUrl2}"><img src="${tourPlanJoin.dir}" class="img" style="height:160px;"/></a>
                                                  
                                               
                                                  <h3 class="title">
@@ -212,7 +212,7 @@
                                                 <c:url var="readUrl3" value="/gazua/planinfo.do">
                                           <c:param name="id" value="${tourPlanJoin2.id}" />
                                        </c:url>
-                                                 <a href="${readUrl3}"><img src="${tourPlanJoin2.dir}" class="img" /></a>
+                                                 <a href="${readUrl3}"><img src="${tourPlanJoin2.dir}" class="img"  style="height:160px;"/></a>
                                                  
                                               
                                                  <h3 class="title">

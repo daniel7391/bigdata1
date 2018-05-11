@@ -15,12 +15,18 @@
    }
 </style>
 
+
 <div class="container">
    <a href="${pageContext.request.contextPath}/gazua/main.do">
       <img src="../assets/img/logo.png" />
    </a>
    <c:choose>
       <c:when test="${loginInfo != null}">
+      <c:set var="pathURL" value="${fn:split(pageContext.request.requestURI,'/')}"/>
+      <c:forEach var="selectURL" items="${pathURL}" varStatus="u">
+         <c:if test="${u.last}">
+            <c:set var="nowURL" value="${fn:substring(selectURL,0,fn:indexOf(selectURL,'.'))}"/>
+            <c:if test="${nowURL !='main'}">
          <div class="pull-right">
             <!-- 로그인 된 경우 -->
             <ul class="nav navbar-nav navbar-right">
@@ -49,6 +55,9 @@
                </li>
             </ul>
          </div>
+            </c:if>
+         </c:if>
+      </c:forEach>
       </c:when>
    </c:choose>
 </div>
@@ -68,13 +77,14 @@
             <li><a href="${pageContext.request.contextPath}/gazua/tourinfolist.do">추천여행지</a></li>
             <li><a href="${pageContext.request.contextPath}/gazua/plan.do">여행 일정 만들기</a></li>
             <li><a href="${pageContext.request.contextPath}/gazua/plan_review_list.do">여행 후기</a></li>
+            <li><a href="${pageContext.request.contextPath}/gazua/analysis.do">서울 여행자 분석</a></li>
          </ul>
       </div>
       <div class="input-group" style="width:75px; height:34px;">
          <form method="get" action="${pageContext.request.contextPath}/gazua/tourinfolist.do" style="width: 1000px">
 	        
 	            <select name="location_gu" id="header_list" class="input-group form-control" style="width:100px;">
-	               <option value="">어디에설</option>
+	               <option value="">어디에서</option>
 	            </select>
 	         
           	

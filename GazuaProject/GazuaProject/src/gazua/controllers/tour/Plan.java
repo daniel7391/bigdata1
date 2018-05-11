@@ -73,12 +73,12 @@ public class Plan extends BaseController {
       tourinfo.setName(keyword);
       tourinfo.setIntro(keyword);
       
-      Member loginInfo = (Member) web.getSession("loginInfo");
-      if (loginInfo == null){
-			web.redirect(null, "로그인 후에 이용가능한 기능입니다.");
-      }
-      
-      logger.debug("로그인 :" +loginInfo.getMember_id());
+//      Member loginInfo = (Member) web.getSession("loginInfo");
+//      if (loginInfo == null){
+//			web.redirect(null, "로그인 후에 이용가능한 기능입니다.");
+//      }
+//      
+//      logger.debug("로그인 :" +loginInfo.getMember_id());
 
       /** (4) 게시글 목록 조회 */
       List<Tour> tourList = null;

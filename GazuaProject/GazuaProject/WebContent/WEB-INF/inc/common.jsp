@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css" />
 <script src="http://code.jquery.com/jquery.min.js"></script>
+<script src="../plugins/lightbox/js/lightbox.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCF2vH4Dij1sIDQx2WhmvRCfrduXXfLMcM"></script>

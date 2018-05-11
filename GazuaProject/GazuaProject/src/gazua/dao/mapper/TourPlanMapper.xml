@@ -6,134 +6,134 @@
 <!-- 이 XML의 구조대로 구현될 클래스의 이름 => Impl클래스를 대체한다. -->
 <mapper namespace="TourPlanMapper">
 
-	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
-	<resultMap id="tourplan" type="gazua.model.TourPlan">
-		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
-		<result property="id" column="id" />
-		<result property="name" column="name" />
-		<result property="intro" column="intro" />
-		<result property="intro_main" column="intro_main" />
-		<result property="startDate" column="startDate" />
-		<result property="days" column="days" />
-		<result property="people" column="people" />
-		<result property="theme" column="theme" />
-		<result property="reg_date" column="reg_date" />
-		<result property="edit_date" column="edit_date" />
-		<result property="member_id" column="member_id" />
-		<result property="likes" column="likes" />
-	</resultMap>
-	
-	<!-- 게시물의 정보를 조회한다. -->
-	<select id="selectTourPlanListByTime" 
-		parameterType="gazua.model.TourPlan" 
-		resultMap="tourplan">
-		SELECT *
-		FROM   tourplan
-			<where>
-			<if test = "theme != 0">
-				theme=#{theme}
-			</if>
-			<if test="name != null or intro != null">
-				<if test="name != null">
-					and name LIKE concat('%', #{name}, '%')
-				</if>
-				<if test="intro != null">
-					OR intro LIKE concat('%', #{intro}, '%')
-				</if>
-			</if>
-			</where>
-		ORDER  BY reg_date DESC
-			
-		LIMIT #{limitStart}, #{listCount}
-	</select>
-	
-	<select id="selectTourPlanListByPopular" 
-		parameterType="gazua.model.TourPlan" 
-		resultMap="tourplan">
-		SELECT *
-		FROM   tourplan
-			<where>
-			<if test = "theme != 0">
-				theme=#{theme}
-			</if>
-			<if test="name != null or intro != null">
-				<if test="name != null">
-					and name LIKE concat('%', #{name}, '%')
-				</if>
-				<if test="intro != null">
-					OR intro LIKE concat('%', #{intro}, '%')
-				</if>
-			</if>
-			</where>
-		order by likes DESC
-			
-		LIMIT #{limitStart}, #{listCount}
-	</select>
-	
-	<!-- 이전글 정보를 조회한다. -->
-	<select id="selectPrevTourPlan" 
-		parameterType="gazua.model.TourPlan" 
-		resultMap="tourplan">
-		SELECT *
-		FROM   tourplan
-		WHERE  id &lt; #{id}
-		ORDER  BY name asc
-		LIMIT  0, 1
-	</select>
-	
-	<!-- 다음글 정보를 조회한다. -->
-	<select id="selectNextTourPlan" 
-		parameterType="gazua.model.TourPlan" 
-		resultMap="tourplan">
-		SELECT *
-		FROM   tourplan
-		WHERE  id &gt; #{id}
-		ORDER  BY id ASC
-		LIMIT  0, 1
-	</select>
+   <!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+   <resultMap id="tourplan" type="gazua.model.TourPlan">
+      <!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+      <result property="id" column="id" />
+      <result property="name" column="name" />
+      <result property="intro" column="intro" />
+      <result property="intro_main" column="intro_main" />
+      <result property="startDate" column="startDate" />
+      <result property="days" column="days" />
+      <result property="people" column="people" />
+      <result property="theme" column="theme" />
+      <result property="reg_date" column="reg_date" />
+      <result property="edit_date" column="edit_date" />
+      <result property="member_id" column="member_id" />
+      <result property="likes" column="likes" />
+   </resultMap>
+   
+   <!-- 게시물의 정보를 조회한다. -->
+   <select id="selectTourPlanListByTime" 
+      parameterType="gazua.model.TourPlan" 
+      resultMap="tourplan">
+      SELECT *
+      FROM   tourplan
+         <where>
+         <if test = "theme != 0">
+            theme=#{theme}
+         </if>
+         <if test="name != null or intro != null">
+            <if test="name != null">
+               and name LIKE concat('%', #{name}, '%')
+            </if>
+            <if test="intro != null">
+               OR intro LIKE concat('%', #{intro}, '%')
+            </if>
+         </if>
+         </where>
+      ORDER  BY reg_date DESC
+         
+      LIMIT #{limitStart}, #{listCount}
+   </select>
+   
+   <select id="selectTourPlanListByPopular" 
+      parameterType="gazua.model.TourPlan" 
+      resultMap="tourplan">
+      SELECT *
+      FROM   tourplan
+         <where>
+         <if test = "theme != 0">
+            theme=#{theme}
+         </if>
+         <if test="name != null or intro != null">
+            <if test="name != null">
+               and name LIKE concat('%', #{name}, '%')
+            </if>
+            <if test="intro != null">
+               OR intro LIKE concat('%', #{intro}, '%')
+            </if>
+         </if>
+         </where>
+      order by likes DESC
+         
+      LIMIT #{limitStart}, #{listCount}
+   </select>
+   
+   <!-- 이전글 정보를 조회한다. -->
+   <select id="selectPrevTourPlan" 
+      parameterType="gazua.model.TourPlan" 
+      resultMap="tourplan">
+      SELECT *
+      FROM   tourplan
+      WHERE  id &lt; #{id}
+      ORDER  BY name asc
+      LIMIT  0, 1
+   </select>
+   
+   <!-- 다음글 정보를 조회한다. -->
+   <select id="selectNextTourPlan" 
+      parameterType="gazua.model.TourPlan" 
+      resultMap="tourplan">
+      SELECT *
+      FROM   tourplan
+      WHERE  id &gt; #{id}
+      ORDER  BY id ASC
+      LIMIT  0, 1
+   </select>
 
-	
-	<!-- 전체 게시물 수를 조회한다. -->
-	<select id="selectTourPlanCount"
-		parameterType="gazua.model.TourPlan"
-		resultType="int">
-		SELECT COUNT(id) FROM tourplan
-		<where>
-			<if test="name != null or intro != null or theme != null">
-				<if test="name != null">
-					name LIKE concat('%', #{name}, '%')
-				</if>
-				<if test="intro != null">
-					OR intro LIKE concat('%', #{intro}, '%')
-				</if>
-			</if>
-			<if test = "theme != 0">
-				and theme=#{theme}
-			</if>
-		</where>
-	</select>
-	
-	<!-- 게시물 하나에 대한 정보를 조회한다. -->
-	<select id="selectTourPlan" 
-		parameterType="gazua.model.TourPlan" 
-		resultMap="tourplan">
-		SELECT *
-		FROM   tourplan
-		WHERE  id=#{id}
-	</select>
-	
-	<!-- 좋아요를 눌러한다. -->
-	<update id="updateLikes"
-		parameterType="gazua.model.TourPlan">
-		update tourplan set likes=likes+1 where id=#{id}
-	</update>
-	
-	<update id="dedateLikes"
-		parameterType="gazua.model.TourPlan">
-		update tourplan set likes=likes-1 where id=#{id}
-	</update>
-	
-	<!-- 데이터 저장을 위한 기능 정의 -->
+   
+   <!-- 전체 게시물 수를 조회한다. -->
+   <select id="selectTourPlanCount"
+      parameterType="gazua.model.TourPlan"
+      resultType="int">
+      SELECT COUNT(id) FROM tourplan
+      <where>
+         <if test="name != null or intro != null or theme != null">
+            <if test="name != null">
+               name LIKE concat('%', #{name}, '%')
+            </if>
+            <if test="intro != null">
+               OR intro LIKE concat('%', #{intro}, '%')
+            </if>
+         </if>
+         <if test = "theme != 0">
+            and theme=#{theme}
+         </if>
+      </where>
+   </select>
+   
+   <!-- 게시물 하나에 대한 정보를 조회한다. -->
+   <select id="selectTourPlan" 
+      parameterType="gazua.model.TourPlan" 
+      resultMap="tourplan">
+      SELECT *
+      FROM   tourplan
+      WHERE  id=#{id}
+   </select>
+   
+   <!-- 좋아요를 눌러한다. -->
+   <update id="updateLikes"
+      parameterType="gazua.model.TourPlan">
+      update tourplan set likes=likes+1 where id=#{id}
+   </update>
+   
+   <update id="dedateLikes"
+      parameterType="gazua.model.TourPlan">
+      update tourplan set likes=likes-1 where id=#{id}
+   </update>
+   
+   <!-- 데이터 저장을 위한 기능 정의 -->
    <insert id="insertTourPlan" parameterType="gazua.model.TourPlan"
       useGeneratedKeys="true" keyProperty="id">
       INSERT INTO tourplan (
@@ -146,9 +146,23 @@
          DATE_FORMAT(now(), '%Y-%m-%d'), #{member_id}
       )
    </insert>
+   
+   <delete id="deleteTourPlan" parameterType="gazua.model.TourPlan">
+         DELETE FROM tourplan where id=#{id}
+   </delete>
+   
+   <!-- 회원의 게시물에 대한 정보를 조회한다. -->
+   <select id="selectTourPlanByMemberId" 
+      parameterType="gazua.model.TourPlan" 
+      resultMap="tourplan">
+      SELECT *
+      FROM   tourplan
+      WHERE  member_id = #{member_id}
+   </select>
+   
+   <!-- 회원의 게시물에 대한 정보를 삭제한다. -->
+   <delete id="deleteTourPlanByMemberId" parameterType="gazua.model.TourPlan">
+         DELETE FROM tourplan WHERE member_id = #{member_id}
+    </delete>
+   
 </mapper>
-
-
-
-
-

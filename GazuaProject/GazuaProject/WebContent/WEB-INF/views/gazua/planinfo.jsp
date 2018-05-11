@@ -5,10 +5,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<style type="text/css">
-		/* btn-ttc라는 사용자 정의 버튼 만들기
-		 -------------------------------------------------- */
-		/* 버튼의 기본 텍스트 색상, 기본배경, 마우스오버, 클릭시 배경색상 정의 */
+   <style type="text/css">
+      /* btn-ttc라는 사용자 정의 버튼 만들기
+       -------------------------------------------------- */
+      /* 버튼의 기본 텍스트 색상, 기본배경, 마우스오버, 클릭시 배경색상 정의 */
           body {
          }
          
@@ -23,8 +23,8 @@
          }
          
          .box1 img {
-         	width: 1114px;
-         	height: 200px;
+            width: 1114px;
+            height: 200px;
          }
          
          /** 캐러셀 내부 내용 영역에 대한 배경 색상과 좌우 여백 확보 */
@@ -119,71 +119,76 @@
              background-color: orange;
          }
 
-		.content {
-			float:left;
-			padding-left: 15px;
-			width:80%;
-		}
+      .content {
+         float:left;
+         padding-left: 15px;
+         width:80%;
+      }
 
-		/* 방문하지 않은 링크 */
-		.tabbar .nav li a:link{
-		  color: black;
-		  background-color: white;
-		}
-		/* 방문한 링크 */
-		.tabbar .nav li a:hover{
-		  color: orange;
-		  background-color: white;
-		}
-		/* 링크를 활성화 할 때 */
-		.tabbar .nav li a:active{
-		  color: orange;
-		}
-		.comment{
+      /* 방문하지 않은 링크 */
+      .tabbar .nav li a:link{
+        color: black;
+        background-color: white;
+      }
+      /* 방문한 링크 */
+      .tabbar .nav li a:hover{
+        color: orange;
+        background-color: white;
+      }
+      /* 링크를 활성화 할 때 */
+      .tabbar .nav li a:active{
+        color: orange;
+      }
+      .comment{
            margin-left: 20px;
            padding:50px 1px 1px 1px;
            width:95%;
-		}
-		.tab-content .tab-pane img{
-			width: 95%;
-          	margin-left: 20px;
+      }
+      .tab-content .tab-pane img{
+         width: 95%;
+             margin-left: 20px;
             padding:20px 1px 1px 1px;
-		}
-		
-		.comment,.by-current-user{
-		    padding-top:0px;
-		}
-		.box2 img {
-			width: 100px;
-		}
-		.modal-backdrop {
-       		display: none;
+      }
+      
+      .comment,.by-current-user{
+          padding-top:0px;
+      }
+      .box2 img {
+         width: 100px;
+      }
+      .modal-backdrop {
+             display: none;
+          }
+          .story {
+             background : white;
+             height: 60px;
+             vertical-align: center;
+          }
+          .img-box {
+             background : white;
+          }
+          
+          .contentsform{
+       		background:white;
+       		font-size:20px;
        	}
-       	.story {
-       		background : white;
-       		height: 60px;
-       		vertical-align: center;
-       	}
-       	.img-box {
-       		background : white;
-       	}
+       	
+          
 </style>
-			
+         
 <%@ include file="/WEB-INF/inc/common.jsp" %>
 </head>
 <body>
 <header>
-	<%@ include file="/WEB-INF/inc/header.jsp" %>
+   <%@ include file="/WEB-INF/inc/header.jsp" %>
 </header>
 
 <!-- 내용물 컨테이너 시작-->
     <div class="main col-md-12">
         <div class="container">
-        	<!-- 제목 틀 시작-->
+           <!-- 제목 틀 시작-->
         <div class="box1">
          <div id="carousel-example-generic" class="titlebar">
-         
-
             <!-- 내용 영역 -->
             <div class="carousel-inner">
                 <!-- 항목 (1) -->
@@ -192,22 +197,22 @@
                     <div class="container">
                         <div class="carousel-caption">
                             <h1>${readTourPlan.name}</h1>  
-                            	${readTourPlan.people}명                          
-                            	<c:choose>
-                            		<c:when test="${readTourPlan.theme==4}">
-                            			/ 가족과 함께
-                            		</c:when>
-                            		<c:when test="${readTourPlan.theme==3}">
-                            			/ 연인과 함께
-                            		</c:when>
-                            		<c:when test="${readTourPlan.theme==2}">
-                            			/ 친구와 함께
-                            		</c:when>
-                            		<c:otherwise>
-                            			/ 혼자서
-                            		</c:otherwise>
-                            	</c:choose>
-                            	/ ${readTourPlan.days}일동안
+                               ${readTourPlan.people}명                          
+                               <c:choose>
+                                  <c:when test="${readTourPlan.theme==4}">
+                                     / 가족과 함께
+                                  </c:when>
+                                  <c:when test="${readTourPlan.theme==3}">
+                                     / 연인과 함께
+                                  </c:when>
+                                  <c:when test="${readTourPlan.theme==2}">
+                                     / 친구와 함께
+                                  </c:when>
+                                  <c:otherwise>
+                                     / 혼자서
+                                  </c:otherwise>
+                               </c:choose>
+                               / ${readTourPlan.days}일동안
                         </div>
                     </div>
                 </div>
@@ -220,41 +225,53 @@
         <!-- 프로필 시작-->
         <div class="box2">
               <div class="profile" style="text-align: center;">
-              	  <c:if test="${readMember.member_profile_img != null}">
+                   <c:if test="${readMember.member_profile_img != null}">
               <img src="${pageContext.request.contextPath}/gazua/download.do?file=${readMember.member_profile_img}" class="img-circle" style=" height:100px; margin-top:20px;" />
               </c:if>
               <c:if test="${readMember.member_profile_img == null}">
-            	<img src="${pageContext.request.contextPath}/assets/img/nullprof.png" class="img-circle" style=" height:100px; margin-top:20px;" />
-        	</c:if>
+               <img src="${pageContext.request.contextPath}/assets/img/nullprof.png" class="img-circle" style=" height:100px; margin-top:20px;" />
+           </c:if>
               </div>
               <div style="text-align: center;">
               
               <h3>${readMember.member_name2}</h3> 
               <br>
               <div style="color: orange">
-              <h5>야스오 장인</h5>
+              <h5> </h5>
             </div>
 
                </div>         
             </div>
             <!-- 프로필 끝-->
+           
+        <c:choose>
+           <c:when test="${loginInfo.member_id == readTourPlan.member_id}">
+              <form class="box3" method="post" action="${pageContext.request.contextPath}/plan/tourplan_delete_ok.do">
+                 <input type="hidden" name="plan_id" value="${readTourPlan.id}" />
+                 <button type="submit" class="btn btn-default btn-danger" style="width:100%">
+                    여행일정삭제
+                 </button>
+              </form>
+           </c:when>
+        </c:choose>    
+        
               <!-- 버튼 시작-->
         <form class="box3" method="post" action="${pageContext.request.contextPath}/gazua/likes_ok3.do">
-        	<input type="hidden" name="plan_id" value="${readTourPlan.id}" />
-	        <button type="submit" class="btn btn-ttc "><span class="glyphicon glyphicon-thumbs-up"></span><span class="goodnum">${readTourPlan.likes}</span> <div>추천</div> </button>
-	        
-	        <c:url var="readUrl" value="/gazua/tourinfolist2.do">
-				<c:param name="plan_id" value="${readTourPlan.id}" />
-			</c:url>
-	        <a href="${readUrl}" data-toggle="modal" data-target="#tourinfolist2_modal" class='btn btn-ttc'>
-	        <span class="glyphicon glyphicon-flag"></span><span class="booknum">${planIdCount}</span><br/>방문명소</a>
-       	</form>
-       	<div class="modal fade" id="tourinfolist2_modal">
-       		<div class="modal-dialog modal-lg">
-       			<div class="modal-content">
-       			</div>
-       		</div>
-       	</div>
+           <input type="hidden" name="plan_id" value="${readTourPlan.id}" />
+           <button type="submit" class="btn btn-ttc "><span class="glyphicon glyphicon-thumbs-up"></span><span class="goodnum">${readTourPlan.likes}</span> <div>추천</div> </button>
+           
+           <c:url var="readUrl" value="/gazua/tourinfolist2.do">
+            <c:param name="plan_id" value="${readTourPlan.id}" />
+         </c:url>
+           <a href="${readUrl}" data-toggle="modal" data-target="#tourinfolist2_modal" class='btn btn-ttc'>
+           <span class="glyphicon glyphicon-flag"></span><span class="booknum">${planIdCount}</span><br/>방문명소</a>
+          </form>
+          <div class="modal fade" id="tourinfolist2_modal">
+             <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                </div>
+             </div>
+          </div>
           <!-- 버튼 끝--> 
         </div>
           <!-- 사이드 바 끝-->
@@ -271,52 +288,60 @@
              </div>
                <!-- 내용 요약  끝-->
                  <!-- 메인 컨텐츠 시작(중훈이 폼 부분이라 이미지 대체했습니다)-->
-             <div class="story">
-                <h3><span class="glyphicon glyphicon-tasks "></span>스토리</h3>
-    		 </div>  
-            	    <!-- 내비 바  끝-->
+            
+                   <!-- 내비 바  끝-->
 
            
             <div class="storylist">
+              
                 <c:choose>
 					<c:when test="${fn:length(readPhotoTourInfoList) > 0}">
 						<c:forEach var="phototourinfo" items="${readPhotoTourInfoList}">
 							<!-- 사진 배치 -->
 							<h3><strong><span class="glyphicon glyphicon-camera"></span>${phototourinfo.tourname}</strong></h3>
+								<div style="text-align:right">${phototourinfo.date}</div>
 							<div class="img-box" align="center">
 				            	
 								<img src="${phototourinfo.dir}" style="width:785px; height:600px;"/>	
 								<!-- 사진의 제목 -->
 				            	<!-- 내용 -->
-				            	<h5>${phototourinfo.date} : ${phototourinfo.contents}</h5>						
-							</div>
+				            
+				            	
+				            </div>
+				            
+				            	
+				            	
+				            <div class=contentsform>
+				            	<p  style="text-align:left;" >${phototourinfo.contents}</p>				
+							</div>	
 							<br/>
 						</c:forEach>
 					</c:when>
 				</c:choose>
+				 
             </div>
             
             <form id="comment_form" method="post" 
-				      action="${pageContext.request.contextPath}/gazua/CommentInsertPlan">
-				      <!-- 글 번호 상태 유지 -->
-				      <input type='hidden' name='tourPlan_id' value='${readTourPlan.id}' />
-				      <!-- 작성자,비밀번호,이메일은 로그인하지 않은 경우만 입력한다. -->
-				      
-				      <!-- 내용입력, 저장버튼 -->
-				      <div class='form-group'>
-				         <div class="input-group">
-				            <textarea class="form-control custom-control" name='content' 
-				               style="resize:none; height: 80px"></textarea>     
-				            <span class="input-group-btn">
-				               <button type="submit" class="btn btn-success" 
-				                  style="height: 80px">저장</button>
-				            </span>
-				         </div>
-				      </div>
-				      <ul class="media-list" id="comment_list">
-				      </ul>
-				   </form>
-           		  <!-- 버튼 끝-->
+                  action="${pageContext.request.contextPath}/gazua/CommentInsertPlan">
+                  <!-- 글 번호 상태 유지 -->
+                  <input type='hidden' name='tourPlan_id' value='${readTourPlan.id}' />
+                  <!-- 작성자,비밀번호,이메일은 로그인하지 않은 경우만 입력한다. -->
+                  
+                  <!-- 내용입력, 저장버튼 -->
+                  <div class='form-group'>
+                     <div class="input-group">
+                        <textarea class="form-control custom-control" name='content' 
+                           style="resize:none; height: 80px"></textarea>     
+                        <span class="input-group-btn">
+                           <button type="submit" class="btn btn-success" 
+                              style="height: 80px">저장</button>
+                        </span>
+                     </div>
+                  </div>
+                  <ul class="media-list" id="comment_list">
+                  </ul>
+               </form>
+                   <!-- 버튼 끝-->
         </div>
     </div>
 </div>
@@ -351,78 +376,78 @@
             <p>{{{content}}}</p>
         </div>
     </li>
-	</script>
-	
-	<div class="modal fade" id="comment_delete_modal">
-			  <div class="modal-dialog ">
-			    <div class="modal-content">
-			   
-			    </div>
-			  </div>
-			</div>
-			<div class="modal fade" id="comment_edit_modal">
-			  <div class="modal-dialog ">
-			    <div class="modal-content">
-			   
-			    </div>
-			  </div>
-			</div>
-	
-	
-	
-	<script type="text/javascript">
-	$(function() {
-		/** 페이지가 열리면서 동작하도록 이벤트 정의 없이 Ajax요청 */
-		$.get("${pageContext.request.contextPath}/gazua/CommentListPlan", {
-			tourPlan_id: "${readTourPlan.id}"
-		}, function(json) {
-			if (json.rt != "OK") {
-				alert(json.rt);
-				return false;
-			}
-			
-			// 템플릿 HTML을 로드한다.
-			var template = Handlebars.compile($("#tmpl_comment_item").html());
-			
-			// JSON에 포함된 '&lt;br/&gt;'을 검색에서 <br/>로 변경함.
-			// --> 정규표현식 /~~~/g는 문자열 전체의 의미.
-			for (var i=0; i<json.item.length; i++) {
-				json.item[i].content 
-					= json.item[i].content.replace(/&lt;br\/&gt;/g, "<br/>");
-				
-				// 덧글 아이템 항목 하나를 템플릿과 결합한다.
-				var html = template(json.item[i]);
-				// 결합된 결과를 덧글 목록에 추가한다.
-				$("#comment_list").append(html);
-			}
-		});
-		
-		/** 덧글 작성 폼의 submit 이벤트 Ajax 구현 */
-		// <form>요소의 method, action속성과 <input>태그를
-		// Ajax요청으로 자동 구성한다.
-		$("#comment_form").ajaxForm(function(json) {
-			// json은 API에서 표시하는 전체 데이터
-			if (json.rt != "OK") {
-				alert(json.rt);
-				return false;
-			}
+   </script>
+   
+   <div class="modal fade" id="comment_delete_modal">
+           <div class="modal-dialog ">
+             <div class="modal-content">
+            
+             </div>
+           </div>
+         </div>
+         <div class="modal fade" id="comment_edit_modal">
+           <div class="modal-dialog ">
+             <div class="modal-content">
+            
+             </div>
+           </div>
+         </div>
+   
+   
+   
+   <script type="text/javascript">
+   $(function() {
+      /** 페이지가 열리면서 동작하도록 이벤트 정의 없이 Ajax요청 */
+      $.get("${pageContext.request.contextPath}/gazua/CommentListPlan", {
+         tourPlan_id: "${readTourPlan.id}"
+      }, function(json) {
+         if (json.rt != "OK") {
+            alert(json.rt);
+            return false;
+         }
+         
+         // 템플릿 HTML을 로드한다.
+         var template = Handlebars.compile($("#tmpl_comment_item").html());
+         
+         // JSON에 포함된 '&lt;br/&gt;'을 검색에서 <br/>로 변경함.
+         // --> 정규표현식 /~~~/g는 문자열 전체의 의미.
+         for (var i=0; i<json.item.length; i++) {
+            json.item[i].content 
+               = json.item[i].content.replace(/&lt;br\/&gt;/g, "<br/>");
+            
+            // 덧글 아이템 항목 하나를 템플릿과 결합한다.
+            var html = template(json.item[i]);
+            // 결합된 결과를 덧글 목록에 추가한다.
+            $("#comment_list").append(html);
+         }
+      });
+      
+      /** 덧글 작성 폼의 submit 이벤트 Ajax 구현 */
+      // <form>요소의 method, action속성과 <input>태그를
+      // Ajax요청으로 자동 구성한다.
+      $("#comment_form").ajaxForm(function(json) {
+         // json은 API에서 표시하는 전체 데이터
+         if (json.rt != "OK") {
+            alert(json.rt);
+            return false;
+         }
 
-			// 줄 바꿈에 대한 처리
-			// --> 정규표현식 /~~~/g는 문자열 전체의 의미.
-			// --> JSON에 포함된 '&lt;br/&gt;'을 검색에서 <br/>로 변경함.
-			json.item.content = json.item.content.replace(/&lt;br\/&gt;/g, "<br/>");
-			
-			// 템플릿 HTML을 로드한다.
-			var template = Handlebars.compile($("#tmpl_comment_item").html());
-			// JSON에 포함된 작성 결과 데이터를 템플릿에 결합한다.
-			var html = template(json.item);
-			// 결합된 결과를 덧글 목록에 추가한다.
-			$("#comment_list").append(html);
-			// 폼 태그의 입력값을 초기화 하기 위해서 reset이벤트를 강제로 호출
-			$("#comment_form").trigger('reset');
-		});
-		
-		 $(document).on('submit', "#comment_delete_form", function(e) {
+         // 줄 바꿈에 대한 처리
+         // --> 정규표현식 /~~~/g는 문자열 전체의 의미.
+         // --> JSON에 포함된 '&lt;br/&gt;'을 검색에서 <br/>로 변경함.
+         json.item.content = json.item.content.replace(/&lt;br\/&gt;/g, "<br/>");
+         
+         // 템플릿 HTML을 로드한다.
+         var template = Handlebars.compile($("#tmpl_comment_item").html());
+         // JSON에 포함된 작성 결과 데이터를 템플릿에 결합한다.
+         var html = template(json.item);
+         // 결합된 결과를 덧글 목록에 추가한다.
+         $("#comment_list").append(html);
+         // 폼 태그의 입력값을 초기화 하기 위해서 reset이벤트를 강제로 호출
+         $("#comment_form").trigger('reset');
+      });
+      
+       $(document).on('submit', "#comment_delete_form", function(e) {
              e.preventDefault();
 
              // AjaxForm 플러그인의 강제 호출
@@ -479,12 +504,11 @@
                 history.go(0);
              });
           });
-	});
-	 
+   });
+    
 </script>
 <%@ include file="/WEB-INF/inc/footer.jsp" %>
 </body>
 </html>
-
 
 

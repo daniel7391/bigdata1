@@ -86,11 +86,7 @@
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
-            p {
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
+           
             .status p {
                 color: #888;
             }
@@ -207,24 +203,28 @@
                 <div class="status pull-left">
                     <h3>&nbsp;&nbsp;<strong>기본정보</strong></h3>
                     <hr />
+                    
                     <h5>&nbsp;&nbsp;<strong>주소</strong></h5>
                     <p>&nbsp;&nbsp;${readTourInfo.addr1}<br/>&nbsp;&nbsp;${readTourInfo.addr2}</p>
                     <br />
-                    <h5>&nbsp;&nbsp;<strong>비용</strong></h5>
-                    <p>&nbsp;&nbsp;3000원(만 24세 이하, 65세 이상 무료)</p>
+                    <h5>&nbsp;&nbsp;<strong>이용가능시간</strong></h5>
+                    <p>&nbsp;&nbsp;${readTourInfo.cost}</p>
                     <br />
-                    <h5>&nbsp;&nbsp;<strong>가는 방법</strong></h5>
-                    <p>&nbsp;&nbsp;아몰랑</p>
-                    <br />
+                    
                     <h5>&nbsp;&nbsp;<strong>휴무</strong></h5>
                     <p>&nbsp;&nbsp;${readTourInfo.holiday1}</p>
                 </div>
             </form>
-
+				
             <div class="container" id="review-box">
+            	
                 <form class="review clearfix" action="${pageContext.request.contextPath}/gazua/review_ok.do">
                 	<input type="hidden" name="tour_id" value="${readTourInfo.id}" />
+                    <h3><strong>관광지 상세 설명</strong></h3>
+                    <p>&nbsp;&nbsp;${readTourInfo.intro}</p>
+                    <br />
                     <h3><strong>리 뷰</strong></h3>
+                    
                     <div class="like-review pull-left form-group" style="width:300px;">
                         <ul style="padding-left: 0px;">
                             <li class="filterItem clearfix">

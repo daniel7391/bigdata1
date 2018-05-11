@@ -64,7 +64,7 @@ public class LikeOk3 extends BaseController {
 		
 		Member loginInfo = (Member) web.getSession("loginInfo");
 		if (loginInfo == null){
-			web.redirect(null, "로그인하고 해라");
+			web.redirect(null, "로그인 후 눌러주세요!");
 		}
 		
 		Likes likes1 = new Likes();
