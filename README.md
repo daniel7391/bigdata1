@@ -16,6 +16,9 @@
 
 # 프로젝트 정보
 
+## 웹 호스팅 URL
+http://blueluby.cafe24.com/gazua/main.do
+
 ## 팀 정보
 고정환,권기현,김성제,남호형,이중훈
 
