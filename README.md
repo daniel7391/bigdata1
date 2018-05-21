@@ -27,7 +27,7 @@
 | 적용 Framework | MyBatis, jQuery, Twitter Bootstrap |
 | Web Server | Apache Tomcat 8 or 9 |
 | DBMS | MySQL Server 5.7 or higher |
-| 개발툴 | Eclipse EE, Sublime Text 3 |
+| 개발툴 | Eclipse EE, Sublime Text 3, R-Studio |
 | 운영체제 | CentOS |
 | 데이터 분석도구 | R |
 
